@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Easy.BiggestOfThree
+﻿namespace Easy.BiggestOfThree
 {
     class Program
     {
