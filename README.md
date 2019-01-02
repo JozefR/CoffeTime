@@ -11,3 +11,10 @@ Some challenges from different sources with flowcharts.
 [Description](https://www.codewars.com/kata/max-min-arrays/csharp)
 
 ![MaxMinArraysFlowChart](https://github.com/JozefR/CoffeTime/blob/master/Easy.MaxMinArrays/MaxMinArrays.png)
+
+
+## Medium
+
+#### BinarySearch
+
+![BinarySearch](https://github.com/JozefR/CoffeTime/blob/master/Medium.BinarySearch/BinarySearch.png)
