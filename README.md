@@ -15,6 +15,12 @@ Some challenges from different sources with flowcharts.
 
 ## Medium
 
-#### BinarySearch
+#### Binary Search
 
 ![BinarySearch](https://github.com/JozefR/CoffeTime/blob/master/Medium.BinarySearch/BinarySearch.png)
+
+## Sorting Challenges
+
+#### Selection Sort
+
+![SelectionSort(https://github.com/JozefR/CoffeTime/blob/master/SelectionSort/SelectionSort.png)
