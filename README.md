@@ -24,3 +24,4 @@ Some challenges from different sources with flowcharts.
 #### Selection Sort
 
 ![SelectionSort](https://github.com/JozefR/CoffeTime/blob/master/SelectionSort/SelectionSort.png)
+![SelectionSortRefactored](https://github.com/JozefR/CoffeTime/blob/master/SelectionSortRefactored/SelectionSortRefactored.png)
