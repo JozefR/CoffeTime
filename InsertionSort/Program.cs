@@ -33,7 +33,7 @@ namespace InsertionSort
         
             private static int[] insertionSortRefactored(int[] array)
             {
-                for (int sortedIndex = 0; sortedIndex < array.Length; sortedIndex++)
+                for (int sortedIndex = array.Length - 1; sortedIndex > 0; sortedIndex--)
                 {
                     var key = array[sortedIndex];
                     var leftIndex = sortedIndex - 1;
