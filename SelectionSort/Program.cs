@@ -44,7 +44,6 @@
             return array;
         }
         
-        // This function will swap element in a given array.
         private static void Swap(int[] array, int firstIndex, int indexOfMinimum)
         {
             var temp = array[firstIndex];
@@ -52,7 +51,6 @@
             array[indexOfMinimum] = temp;
         }
         
-        // This funcion will find index of minimum value
         private static int IndexOfMinimum(int[] array, int startIndex)
         {
             var minimumIndex = startIndex;
