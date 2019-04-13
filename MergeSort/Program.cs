@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MergeSort
 {
@@ -6,70 +6,79 @@ namespace MergeSort
     {
         static void Main(string[] args)
         {
-            int[] array = {1, 3, 5, 2, 10, 6, 7};
+            int[] array = {38, 27, 43, 3, 9, 82, 10};
             mergeSort(array, 0, array.Length - 1);
         }
 
-        private static void mergeSort(int[] array, int left, int right)
+        private static void mergeSort(int[] array, int p, int r)
         {
-            if (left < right)
+            // Set base case for recursion
+            if (p < r)
             {
-                int mid = (int)(left + right) / 2;
-                mergeSort(array, left, mid);
-                mergeSort(array, mid + 1, right);
-                merge(array, left, mid, right);
+                // find mid of the array because we need
+                // divide the array each time recursion is called.
+                var mid = (p + r) / 2;
+
+                // Divide arrays
+                // first sub problem
+                mergeSort(array, p, mid);
+                // second sub problem
+                mergeSort(array, mid + 1, r);
+                // Solution to subproblem merge
+                merge(array, p, mid, r);
             }
         }
 
-        private static void merge(int[] array, int left, int mid, int right)
+        private static void merge(int[] array, int p, int mid, int r)
         {
-            var n1 = mid - left + 1;
-            var n2 = right - mid;
-            var lowHalf = new int[n1];
-            var highHalf = new int[n2];
+            var leftArrLength = mid - p + 1;
+            var rightArrLength = r - mid;
 
-            var k = left;
-            var i = 0;
-            var j = 0;
-            for (i = 0; i < n1; i++) {
-                lowHalf[i] = array[left + i];
-            }
-            for (j = 0; j < n2; j++) {
-                highHalf[j] = array[mid + 1 + j];
-            }
+            var leftArr = new int [leftArrLength];
+            var rightArr = new int [rightArrLength];
 
-            k = left;
-            i = 0;
-            j = 0;
-
-            while (i < n1 && j < n2)
+            for (int x = 0; x < leftArrLength; x++)
             {
-                if (lowHalf[i] <= highHalf[j])
+                leftArr[x] = array[p + x];
+            }
+
+            for (int y = 0; y < rightArrLength; y++)
+            {
+                rightArr[y] = array[y + 1 + mid];
+            }
+
+            int i = 0;
+            int j = 0;
+            int k = p;
+
+            while (leftArrLength > i && rightArrLength > j)
+            {
+                if (leftArr[i] < rightArr[j])
                 {
-                    array[k] = lowHalf[i];
+                    array[k] = leftArr[i];
                     i++;
                 }
                 else
                 {
-                    array[k] = highHalf[j];
+                    array[k] = rightArr[j];
                     j++;
                 }
 
                 k++;
             }
 
-            while (i < n1)
+            while (leftArrLength > i)
             {
-                array[k] = lowHalf[i];
-                i++;
+                array[k] = leftArr[i];
                 k++;
+                i++;
             }
 
-            while (j < n2)
+            while (rightArrLength > j)
             {
-                array[k] = highHalf[j];
-                j++;
+                array[k] = rightArr[j];
                 k++;
+                j++;
             }
         }
     }

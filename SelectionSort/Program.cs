@@ -35,19 +35,19 @@
 
         private static int[] selectionSortRefactored(int[] array)
         {
-            for (int firstIndex = 0; firstIndex < array.Length; firstIndex++)
+            for (int sortedIndex = 0; sortedIndex < array.Length; sortedIndex++)
             {
-                int indexOfMinimum = IndexOfMinimum(array, firstIndex);                
-                Swap(array, firstIndex, indexOfMinimum);
+                int indexOfMinimum = IndexOfMinimum(array, sortedIndex);                
+                Swap(array, sortedIndex, indexOfMinimum);
             }
 
             return array;
         }
         
-        private static void Swap(int[] array, int firstIndex, int indexOfMinimum)
+        private static void Swap(int[] array, int sortedIndex, int indexOfMinimum)
         {
-            var temp = array[firstIndex];
-            array[firstIndex] = array[indexOfMinimum];
+            var temp = array[sortedIndex];
+            array[sortedIndex] = array[indexOfMinimum];
             array[indexOfMinimum] = temp;
         }
         
