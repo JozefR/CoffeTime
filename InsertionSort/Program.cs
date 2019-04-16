@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InsertionSort
+﻿namespace InsertionSort
 {
     class Program
     {
@@ -8,10 +6,33 @@ namespace InsertionSort
         {
             int[] array = {1, 3, 5, 2, 10, 6, 7};
             int[] array2 = {1, 3, 4, 5, 10, 5, 6};
-            int[] sortedArray = insertionSort(array);
 
+            int[] sortedArray = insertionSort(array);
             // doesnt work correctly!
-            int[] sortedArray2 = insertionSortRefactored(array2);
+            // var sorted = insertionSortRepeat(array2);
+        }
+
+        private static int[] insertionSortRepeat(int[] array)
+        {
+            // like sorted cards in hand.
+            // i need put every new card from dealer in correct place.
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                var key = array[i];
+                var leftIndex = i - 1;
+
+                while (leftIndex >= 0 && key < array[leftIndex])
+                {
+                    var temp = array[leftIndex];
+                    array[leftIndex] = key;
+                    array[i] = temp;
+
+                    leftIndex -= 1;
+                }
+            }
+
+            return array;
         }
 
         private static int[] insertionSort(int[] array)
@@ -20,11 +41,11 @@ namespace InsertionSort
             {
                 var key = array[i];
                 var leftIndex = i - 1;
-                
+
                 while (leftIndex > 0 && array[leftIndex] > key)
                 {
                     array[leftIndex + 1] = array[leftIndex];
-                    leftIndex = leftIndex - 1;
+                    leftIndex -= 1;
                 }
 
                 array[leftIndex + 1] = key;
@@ -32,29 +53,17 @@ namespace InsertionSort
 
             return array;
         }
-        
-            private static int[] insertionSortRefactored(int[] array)
+
+
+        private static void Insert(int[] array, int leftIndex, int key)
+        {
+            while (leftIndex > 0 && array[leftIndex] > key)
             {
-                for (int sortedIndex = array.Length - 1; sortedIndex > 0; sortedIndex--)
-                {
-                    var key = array[sortedIndex];
-                    var leftIndex = sortedIndex - 1;
-                    
-                    Insert(array, leftIndex, key);
-                }
-    
-                return array;
+                array[leftIndex + 1] = array[leftIndex];
+                leftIndex = leftIndex - 1;
             }
-    
-            private static void Insert(int[] array, int leftIndex, int key)
-            {
-                while (leftIndex > 0 && array[leftIndex] > key)
-                {
-                    array[leftIndex + 1] = array[leftIndex];
-                    leftIndex = leftIndex - 1;
-                }
-    
-                array[leftIndex + 1] = key;
-            }
+
+            array[leftIndex + 1] = key;
+        }
     }
 }

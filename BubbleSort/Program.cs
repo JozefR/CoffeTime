@@ -8,9 +8,8 @@ namespace BubbleSort
         {
             int[] array = {1, 3, 5, 2, 10, 6, 7};
             int[] array2 = {1, 3, 4, 5, 6, 7, 2};
-            /*int[] sortedArray = bubbleSort(array);
-            int[] sortedArray2 = bubbleSort(array2);*/
 
+            int[] sortedArray = bubbleSort(array);
             var sortedArray3 = bubbleSort2(array);
         }
 
@@ -49,7 +48,8 @@ namespace BubbleSort
 
                     if (a > b)
                     {
-                        Swap(array, j, j + 1);
+                        array[j] = b;
+                        array[j + 1] = a;
                     }
                 }
             }

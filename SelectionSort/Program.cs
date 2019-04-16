@@ -1,12 +1,46 @@
-﻿namespace SelectionSort
+﻿using System;
+
+namespace SelectionSort
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int[] array = new[] {1, 3, 5, 2, 10, 6, 7};
+            int[] array = new[] {-2, -10, 0, 1, 3, 5, 2, 10, 6, 7};
             //var sortedArray = selectionSort(array);
-            var sortedArray = selectionSortRefactored(array);
+            var sortedArray = selectionSortRepeat(array);
+        }
+
+        private static int[] selectionSortRepeat(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                int indexOfMinimum = indexOfMin(array, i);
+
+                if (indexOfMinimum != i)
+                {
+                    Swap(array, i, indexOfMinimum);
+                }
+            }
+
+            return array;
+        }
+
+        private static int indexOfMin(int[] array, int i)
+        {
+            var minimum = array[i];
+            var indexOfMinimum = i;
+
+            for (int j = i + 1; j < array.Length; j++)
+            {
+                if (minimum > array[j])
+                {
+                    minimum = array[j];
+                    indexOfMinimum = j;
+                }
+            }
+
+            return indexOfMinimum;
         }
 
         private static int[] selectionSort(int[] array)
