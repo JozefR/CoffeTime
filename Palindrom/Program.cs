@@ -7,7 +7,7 @@ namespace Palindrom
         static void Main(string[] args)
         {
             var nonRec = PalindromNonRec("rotor");
-            var rec = PalindromRecursion("rotor", 0);
+            var rec = PalindromRecursion("rotom", 0);
         }
 
         private static bool PalindromRecursion(string rotor, int i)
