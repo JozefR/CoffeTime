@@ -8,6 +8,7 @@ namespace Fibonacci
         {
             Console.WriteLine("Hello World!");
             var fibo = FibonacciFunc(6);
+            var fibo2 = FibonacciFunc(15);
         }
 
         private static int FibonacciFunc(int x)
