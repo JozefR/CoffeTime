@@ -12,8 +12,8 @@ namespace BinarySearch
             var target = 53;
             var nonExistingTarget = 98;
 
-            //var sln = binarySearch(primes, target);
-            var sln2 = binarySearchRecursion(primes2, 11, 0, primes2.Length);
+            var sln = binarySearch(primes, target);
+            var sln2 = binarySearchRecursion(primes, 3, 0, primes.Length);
         }
 
         private static int binarySearch(int[] array, int target)
