@@ -8,13 +8,19 @@ namespace BinarySearchTree
         {
             var tree = new Tree();
 
-            for (int i = 0; i < 20; i++)
-            {
-                var rnd = new Random();
-                tree.AddValue(rnd.Next(0,100));
-            }
+            tree.AddValue(2);
+            tree.AddValue(22);
+            tree.AddValue(12);
+            tree.AddValue(40);
+            tree.AddValue(55);
+            tree.AddValue(80);
+            tree.AddValue(1);
 
             tree.Traverse();
+
+            var find = tree.Find(12);
+            var find1 = tree.Find(21);
+            var find2 = tree.Find(80);
         }
 
         class Tree
@@ -35,6 +41,12 @@ namespace BinarySearchTree
             {
                 Root.Visit();
             }
+
+            public Node Find(int value)
+            {
+                var node = Root.SearchFor(value);
+                return node;
+            }
         }
 
         class Node
@@ -49,7 +61,7 @@ namespace BinarySearchTree
                 _value = value;
             }
 
-            public void AddNode(Node node)
+            protected internal void AddNode(Node node)
             {
                 if (_value > node._value)
                 {
@@ -68,7 +80,7 @@ namespace BinarySearchTree
                 }
             }
 
-            public void Visit()
+            protected internal void Visit()
             {
                 if (Left != null)
                     Left.Visit();
@@ -77,6 +89,21 @@ namespace BinarySearchTree
 
                 if (Right != null)
                     Right.Visit();
+            }
+
+            protected internal Node SearchFor(int val)
+            {
+                var root = this;
+
+                while (root != null && root._value != val)
+                {
+                    if (root._value > val)
+                        root = root.Left;
+                    else
+                        root = root.Right;
+                }
+
+                return root;
             }
         }
     }
