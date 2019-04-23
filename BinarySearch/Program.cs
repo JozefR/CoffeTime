@@ -50,6 +50,9 @@ namespace BinarySearch
 
             int middle = (leftIndex + rightIndex) / 2;
 
+            if (array[middle] == target)
+                return target;
+
             if (target > array[middle])
                 return binarySearchRecursion(array, target, middle + 1, rightIndex);
 

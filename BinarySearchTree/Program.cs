@@ -8,24 +8,21 @@ namespace BinarySearchTree
         {
             var tree = new Tree();
 
-            tree.AddValue(2);
-            tree.AddValue(22);
-            tree.AddValue(12);
-            tree.AddValue(40);
-            tree.AddValue(55);
-            tree.AddValue(80);
-            tree.AddValue(1);
+            tree.AddValue(15);
+            tree.AddValue(6);
+            tree.AddValue(4);
+            tree.AddValue(5);
+            tree.AddValue(23);
+            tree.AddValue(71);
+            tree.AddValue(50);
+            tree.AddValue(8);
 
             tree.Traverse();
-
-            var find = tree.Find(12);
-            var find1 = tree.Find(21);
-            var find2 = tree.Find(80);
         }
 
         class Tree
         {
-            public Node Root { get; set; }
+            private Node Root { get; set; }
 
             public void AddValue(int value)
             {
@@ -44,17 +41,16 @@ namespace BinarySearchTree
 
             public Node Find(int value)
             {
-                var node = Root.SearchFor(value);
-                return node;
+                return Root.SearchFor(value);
             }
         }
 
         class Node
         {
-            public Node Left { get; set; }
-            public Node Right { get; set; }
+            private Node Left { get; set; }
+            private Node Right { get; set; }
 
-            private int _value;
+            private readonly int _value;
 
             public Node(int value)
             {
