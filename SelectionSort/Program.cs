@@ -7,8 +7,9 @@ namespace SelectionSort
         static void Main(string[] args)
         {
             int[] array = new[] {-2, -10, 0, 1, 3, 5, 2, 10, 6, 7};
+            int[] array2 = new[] {-1, -7, -4, 0, 5, 30, 4, 3, 2, -5};
             //var sortedArray = selectionSort(array);
-            var sortedArray = selectionSortRepeat(array);
+            var sortedArray = selectionSortRepeat(array2);
         }
 
         private static int[] selectionSortRepeat(int[] array)
