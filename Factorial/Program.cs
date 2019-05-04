@@ -1,8 +1,5 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace Factorial
-{
+﻿namespace Factorial
+ {
     class Program
     {
         static void Main(string[] args)

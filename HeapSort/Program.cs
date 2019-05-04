@@ -9,19 +9,21 @@ namespace HeapSort
             int[] array = {1, 3, 5, 2, 10, 6, 7};
             int[] array2 = {1, 3, 4, 5, 6, 7, 2};
             int[] heapArray = new int[array.Length];
+
+            // TODO: sth wrong with Down method.
             var test = HeapSort(array);
         }
 
         private static int[] HeapSort(int[] array)
         {
-            Heaping(array);
+            Heaping(array);                         // Create heap array
 
             var index = array.Length - 1;
 
             while (index > 0)
             {
-                Swap(array,0, index);
-                index = index - 1;
+                Swap(array,0, index); // Take father and swap it with son, father is ,,sorted,,
+                index = index - 1;                // and we need put son in correct place, call Down method!.
                 Down(array, index);
             }
 
@@ -55,7 +57,7 @@ namespace HeapSort
         {
             for (int i = 0; i < array.Length; i++)
             {
-                Upper(array, i);
+                Upper(array, i); // set each object in correct place
             }
         }
 
@@ -64,16 +66,16 @@ namespace HeapSort
             int son = i;
             while (son > 0)
             {
-                int father = (son - 1) / 2;
+                int father = (son - 1) / 2; // each child has its own father, so find it !
 
                 if (array[father] < array[son])
                 {
-                    Swap(array ,father, son);
-                    son = father;
-                }
+                    Swap(array, father, son); // this son interrupt the structure of heap array
+                    son = father;             // we need swap son with lower father
+                }                             // and this son become new father.
                 else
                 {
-                    return;
+                    return;                   // nothing happend this object is in correct place!
                 }
             }
         }

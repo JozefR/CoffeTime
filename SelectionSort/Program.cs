@@ -8,8 +8,8 @@ namespace SelectionSort
         {
             int[] array = new[] {-2, -10, 0, 1, 3, 5, 2, 10, 6, 7};
             int[] array2 = new[] {-1, -7, -4, 0, 5, 30, 4, 3, 2, -5};
-            //var sortedArray = selectionSort(array);
-            var sortedArray = selectionSortRepeat(array2);
+            selectionSort(array);
+            selectionSortRepeat(array2);
         }
 
         private static int[] selectionSortRepeat(int[] array)
@@ -46,25 +46,21 @@ namespace SelectionSort
 
         private static int[] selectionSort(int[] array)
         {
-            for (int firstIndex = 0; firstIndex < array.Length; firstIndex++)
+            for (int i = 0; i < array.Length; i++) // (n - 1)
             {
-                int minimum = array[firstIndex];
-                int minimumIndex = firstIndex;
-                var temp = minimum;
+                int minimum = array[i];
+                int minimumIndex = i;
 
-                for (int secondIndex = minimumIndex + 1; secondIndex < array.Length; secondIndex++)
+                for (int j = minimumIndex + 1; j < array.Length; j++) // (n - i)
                 {
-                    if (minimum > array[secondIndex])
+                    if (minimum > array[j])
                     {
-                        minimum = array[secondIndex];
-                        minimumIndex = secondIndex;
+                        minimum = array[j];
+                        minimumIndex = j;
                     }
                 }
-                
-                array[minimumIndex] = temp;
-                array[firstIndex] = minimum;
+                Swap(array, i, minimumIndex); // O(1)
             }
-
             return array;
         }
 
