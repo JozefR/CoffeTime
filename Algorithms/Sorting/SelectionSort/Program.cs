@@ -7,10 +7,31 @@ namespace SelectionSort
         static void Main(string[] args)
         {
             int[] array = new[] {-2, -10, 0, 1, 3, 5, 2, 10, 6, 7};
-            int[] array2 = new[] {-1, -7, -4, 0, 5, 30, 4, 3, 2, -5};
-            selectionSort(array);
-            selectionSortRepeat(array2);
+
+            PrintResults(selectionSort(array));
         }
+
+        #region selectionSort
+        private static int[] selectionSort(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++) // (n - 1)
+            {
+                int minimum = array[i];
+                int minimumIndex = i;
+
+                for (int j = minimumIndex + 1; j < array.Length; j++) // (n - i)
+                {
+                    if (minimum > array[j])
+                    {
+                        minimum = array[j];
+                        minimumIndex = j;
+                    }
+                }
+                Swap(array, i, minimumIndex); // O(1)
+            }
+            return array;
+        }
+        #endregion
 
         private static int[] selectionSortRepeat(int[] array)
         {
@@ -42,26 +63,6 @@ namespace SelectionSort
             }
 
             return indexOfMinimum;
-        }
-
-        private static int[] selectionSort(int[] array)
-        {
-            for (int i = 0; i < array.Length; i++) // (n - 1)
-            {
-                int minimum = array[i];
-                int minimumIndex = i;
-
-                for (int j = minimumIndex + 1; j < array.Length; j++) // (n - i)
-                {
-                    if (minimum > array[j])
-                    {
-                        minimum = array[j];
-                        minimumIndex = j;
-                    }
-                }
-                Swap(array, i, minimumIndex); // O(1)
-            }
-            return array;
         }
 
         private static int[] selectionSortRefactored(int[] array)
@@ -97,6 +98,14 @@ namespace SelectionSort
             }
 
             return minimumIndex;
+        }
+
+        private static void PrintResults(int[] results)
+        {
+            foreach (var result in results)
+            {
+                Console.WriteLine(result);
+            }
         }
     }
 }

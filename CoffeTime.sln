@@ -40,6 +40,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithms", "Algorithms", "{9258D4F8-3ED5-4BC5-851A-99644165E8BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sorting", "Sorting", "{083F6D73-D8A5-4415-81B6-4D09825222E5}"
+ProjectSection(SolutionItems) = preProject
+	Algorithms\Sorting\Sorting.md = Algorithms\Sorting\Sorting.md
+EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BubbleSort", "Algorithms\Sorting\BubbleSort\BubbleSort.csproj", "{27CAE3C0-A27C-4A8A-9356-65E5845A3A3F}"
 EndProject
