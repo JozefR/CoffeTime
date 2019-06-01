@@ -4,6 +4,7 @@
 Just click the `run` icon to get started
 
 ``` cs --region selectionSort --source-file .\SelectionSort\Program.cs --project .\SelectionSort\SelectionSort.csproj 
+    Console.WriteLine(result);
 ```
 
 ### Insertion Sort
