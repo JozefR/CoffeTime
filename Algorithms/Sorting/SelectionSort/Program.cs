@@ -68,25 +68,25 @@ namespace SelectionSort
         {
             for (int sortedIndex = 0; sortedIndex < array.Length; sortedIndex++)
             {
-                int indexOfMinimum = IndexOfMinimum(array, sortedIndex);                
+                int indexOfMinimum = IndexOfMinimum(array, sortedIndex);
                 Swap(array, sortedIndex, indexOfMinimum);
             }
 
             return array;
         }
-        
+
         private static void Swap(int[] array, int sortedIndex, int indexOfMinimum)
         {
             var temp = array[sortedIndex];
             array[sortedIndex] = array[indexOfMinimum];
             array[indexOfMinimum] = temp;
         }
-        
+
         private static int IndexOfMinimum(int[] array, int startIndex)
         {
             var minimumIndex = startIndex;
             var minimumValue = array[startIndex];
-            
+
             for (int secondIndex = startIndex; secondIndex < array.Length; secondIndex++)
             {
                 if (minimumValue > array[secondIndex])

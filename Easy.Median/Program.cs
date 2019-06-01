@@ -7,8 +7,8 @@ namespace Easy.Median
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var array = new[] {1, 3, 5, 2, 3, 7, 8, 9, 10, 11};
-            FindMedian(array);
+            var array = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            var median = FindMedian(array);
         }
 
         private static int FindMedian(int[] array)
