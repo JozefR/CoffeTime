@@ -1,4 +1,4 @@
-# CoffeTime
+# CoffeeTime
 
 *Some challenges from different sources.*
 
@@ -7,3 +7,11 @@
 #### Algorithms
 - [Sorting](Algorithms/Sorting/Sorting.md)
 - [Searching](Algorithms/Searching/Searching.md)
+
+#### Challenges
+
+- [Easy]
+- [Medium]
+- [Hard]
+
+
