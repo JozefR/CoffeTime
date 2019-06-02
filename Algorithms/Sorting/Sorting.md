@@ -29,21 +29,50 @@ private static int[] selectionSort(int[] array)
 ### Insertion Sort
 
 ``` cs --region insertionSort --source-file .\InsertionSort\Program.cs --project .\InsertionSort\InsertionSort.csproj 
-for (int i = 0; i < array.Length; i++)
+private static int[] InsertionSort(int[] array)
 {
-    var key = array[i];
-    var leftIndex = i - 1;
+    for (int i = 0; i < array.Length; i++)
+    {
+        var key = array[i];
+        var leftIndex = i - 1;
 
+        while (leftIndex > 0 && array[leftIndex] > key)
+        {
+            array[leftIndex + 1] = array[leftIndex];
+            leftIndex -= 1;
+        }
+
+        array[leftIndex + 1] = key;
+    }
+
+    return array;
+}
+```
+### Insertion Sort Refactored
+
+``` cs --region insertionSortRefactored --source-file .\InsertionSort\Program.cs --project .\InsertionSort\InsertionSort.csproj 
+private static int[] InsertionSortRefactored(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        var key = array[i];
+        var leftIndex = i - 1;
+        Insert(array, leftIndex, key);
+    }
+
+    return array;
+}
+
+private static void Insert(int[] array, int leftIndex, int key)
+{
     while (leftIndex > 0 && array[leftIndex] > key)
     {
         array[leftIndex + 1] = array[leftIndex];
-        leftIndex -= 1;
+        leftIndex = leftIndex - 1;
     }
 
     array[leftIndex + 1] = key;
 }
-
-return array;
 ```
 
 ### Bubble Sort Simple

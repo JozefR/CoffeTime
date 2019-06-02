@@ -7,15 +7,14 @@ namespace InsertionSort
         static void Main(string[] args)
         {
             int[] array = {1, 3, 5, 2, 10, 6, 7};
-            int[] array2 = {1, 3, 4, 5, 10, 5, 6};
+            int[] array2 = {1, 3, 4, 5, 10, 2, 5, 6};
 
-            PrintResults(insertionSort(array));
-            // doesnt work correctly!
-            // var sorted = insertionSortRepeat(array2);
+            PrintResults(InsertionSort(array));
+            PrintResults(InsertionSortRefactored(array2));
         }
 
         #region insertionSort
-        private static int[] insertionSort(int[] array)
+        private static int[] InsertionSort(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -32,6 +31,31 @@ namespace InsertionSort
             }
 
             return array;
+        }
+        #endregion
+
+        #region insertionSortRefactored
+        private static int[] InsertionSortRefactored(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                var key = array[i];
+                var leftIndex = i - 1;
+                Insert(array, leftIndex, key);
+            }
+
+            return array;
+        }
+
+        private static void Insert(int[] array, int leftIndex, int key)
+        {
+            while (leftIndex > 0 && array[leftIndex] > key)
+            {
+                array[leftIndex + 1] = array[leftIndex];
+                leftIndex = leftIndex - 1;
+            }
+
+            array[leftIndex + 1] = key;
         }
         #endregion
 
@@ -56,17 +80,6 @@ namespace InsertionSort
             }
 
             return array;
-        }
-
-        private static void Insert(int[] array, int leftIndex, int key)
-        {
-            while (leftIndex > 0 && array[leftIndex] > key)
-            {
-                array[leftIndex + 1] = array[leftIndex];
-                leftIndex = leftIndex - 1;
-            }
-
-            array[leftIndex + 1] = key;
         }
 
         private static void PrintResults(int[] results)
