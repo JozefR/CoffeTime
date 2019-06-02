@@ -9,11 +9,12 @@ namespace BubbleSort
             int[] array = {1, 3, 5, 2, 10, 6, 7};
             int[] array2 = {1, 3, 4, 5, 6, 7, 2};
 
-            int[] sortedArray = bubbleSort(array);
-            var sortedArray3 = bubbleSort2(array);
+            int[] sortedArray = BubbleSort(array);
+            var sortedArray3 = BubbleSortSimple(array);
         }
 
-        private static int[] bubbleSort(int[] array)
+        #region bubbleSort
+        private static int[] BubbleSort(int[] array)
         {
             bool continueOrdering;
             var sortedIndex = array.Length - 1;
@@ -36,8 +37,10 @@ namespace BubbleSort
 
             return array;
         }
+        #endregion
 
-        private static int[] bubbleSort2(int[] array)
+        #region bubbleSortSimple
+        private static int[] BubbleSortSimple(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -56,12 +59,15 @@ namespace BubbleSort
 
             return array;
         }
+        #endregion
 
+        #region swapHelper
         private static void Swap(int[] array, int a, int b)
         {
             var temp = array[a];
             array[a] = array[b];
             array[b] = temp;
         }
+        #endregion
     }
 }

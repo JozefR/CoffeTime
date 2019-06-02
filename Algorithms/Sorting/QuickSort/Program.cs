@@ -11,6 +11,7 @@ namespace QuickSort
             quickSort(array, 0, array.Length - 1);
         }
 
+        #region quickSortMain
         private static void quickSort(int[] array, int left, int right)
         {
             if (left < right)
@@ -20,7 +21,9 @@ namespace QuickSort
                 quickSort(array, pivot + 1, right);
             }
         }
+        #endregion
 
+        #region partition
         private static int partition(int[] array, int left, int right)
         {
             int pivot = array[right];
@@ -44,12 +47,15 @@ namespace QuickSort
 
             return smaller + 1;
         }
+        #endregion
 
+        #region swap
         private static void swap(int[] array, int smaller, int smallerRight)
         {
             int temp = array[smaller];
             array[smaller] = array[smallerRight];
             array[smallerRight] = temp;
         }
+        #endregion
     }
 }
