@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BubbleSort
+﻿namespace BubbleSort
 {
     class Program
     {
@@ -9,8 +7,8 @@ namespace BubbleSort
             int[] array = {1, 3, 5, 2, 10, 6, 7};
             int[] array2 = {1, 3, 4, 5, 6, 7, 2};
 
-            int[] sortedArray = BubbleSort(array);
-            var sortedArray3 = BubbleSortSimple(array);
+            BubbleSort(array);
+            BubbleSortSimple(array2);
         }
 
         #region bubbleSort

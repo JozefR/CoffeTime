@@ -59,29 +59,6 @@ namespace InsertionSort
         }
         #endregion
 
-        private static int[] insertionSortRepeat(int[] array)
-        {
-            // like sorted cards in hand.
-            // i need put every new card from dealer in correct place.
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                var key = array[i];
-                var leftIndex = i - 1;
-
-                while (leftIndex >= 0 && key < array[leftIndex])
-                {
-                    var temp = array[leftIndex];
-                    array[leftIndex] = key;
-                    array[i] = temp;
-
-                    leftIndex -= 1;
-                }
-            }
-
-            return array;
-        }
-
         private static void PrintResults(int[] results)
         {
             foreach (var result in results)
