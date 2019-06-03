@@ -1,90 +1,126 @@
-﻿using System.Net;
-
-namespace HeapSort
+﻿namespace HeapSort
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            int[] array = {1, 3, 5, 2, 10, 6, 7};
-            int[] array2 = {1, 3, 4, 5, 6, 7, 2};
-            int[] heapArray = new int[array.Length];
+            int[] array = {5, 10, 1, 3, 6, 8, 2, 4, 7, 9};
 
             // TODO: sth wrong with Down method.
-            var test = HeapSort(array);
+            HeapSort(array);
         }
 
+        #region heapSortMain
         private static int[] HeapSort(int[] array)
         {
-            Heaping(array);                         // Create heap array
+            // First create heap from input array
+            Heaping(array);
 
-            var index = array.Length - 1;
+            // Start from the last index
+            var lastIndex = array.Length - 1;
 
-            while (index > 0)
+            // Take maximum which is always at index 0 after
+            // heaping and swap it with last value. This last value
+            // become lower each cycle until is equal 0 and
+            // array is sorted !
+            while (lastIndex > 0)
             {
-                Swap(array,0, index); // Take father and swap it with son, father is ,,sorted,,
-                index = index - 1;                // and we need put son in correct place, call Down method!.
-                Down(array, index);
+                // At index 0 is always maximum !
+                Swap(array,0, lastIndex);
+                // Last value becomes lower each time !
+                lastIndex -= 1;
+                // When we swap last value with maximum we
+                // need repair structure because last value
+                // can interrupt heap !
+                // It is basically as Upper method but we are
+                // going from up to down.
+                Down(array, lastIndex);
             }
 
             return array;
         }
+        #endregion
 
-        private static void Down(int[] array, int end)
+        #region heaping
+        // Create heap data structure.
+        private static void Heaping(int[] array)
         {
-            int father = 0;
-            while (father * 2 + 1 <= end)
+            for (int i = 0; i < array.Length; i++)
             {
-                int son = father * 2 + 1;
-                if (son < father && array[son] < array[son + 1])
+                Upper(array, i);
+            }
+        }
+        #endregion
+
+        #region upper
+        // The idea is check for each number if father is greater,
+        // if not move that number up and continue until father has lower value.
+        private static void Upper(int[] array, int i)
+        {
+            int childIndex = i;
+            while (childIndex > 0)
+            {
+                // father for particular child index
+                int fatherIndex = (childIndex - 1) / 2;
+
+                int child = array[childIndex];
+                int father = array[fatherIndex];
+
+                if (father < child)
                 {
-                    son = son + 1;
+                    // Father is lower then child, swap it.
+                    Swap(array, fatherIndex, childIndex);
+                    // After swapping, childIndex become fatherIndex.
+                    childIndex = fatherIndex;
+                }
+                else
+                {
+                    // nothing happend father and child are in correct places.
+                    return;
+                }
+            }
+        }
+        #endregion
+
+        #region down
+        // Check if one from both childs are lower
+        private static void Down(int[] array, int lastIndex)
+        {
+            // After swap last index become father and this can interrupt heap
+            // we need repair it.
+            int fatherIndex = 0;
+
+            while (fatherIndex * 2 + 1 < lastIndex)
+            {
+                // find childs
+                int childIndex = 2 * fatherIndex + 1;
+
+                // Find which child is greater
+                if (childIndex < lastIndex && array[childIndex] < array[childIndex + 1])
+                {
+                    childIndex += 1;
                 }
 
-                if (array[father] < array[son])
+                // swap if father has lower value.
+                if (array[fatherIndex] < array[childIndex])
                 {
-                    Swap(array, father, son);
-                    father = son;
+                    Swap(array, fatherIndex, childIndex);
+                    fatherIndex = childIndex;
                 }
+
                 else
                 {
                     return;
                 }
             }
         }
+        #endregion
 
-        private static void Heaping(int[] array)
+        private static void Swap(int[] array, int i, int j)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                Upper(array, i); // set each object in correct place
-            }
-        }
-
-        private static void Upper(int[] array, int i)
-        {
-            int son = i;
-            while (son > 0)
-            {
-                int father = (son - 1) / 2; // each child has its own father, so find it !
-
-                if (array[father] < array[son])
-                {
-                    Swap(array, father, son); // this son interrupt the structure of heap array
-                    son = father;             // we need swap son with lower father
-                }                             // and this son become new father.
-                else
-                {
-                    return;                   // nothing happend this object is in correct place!
-                }
-            }
-        }
-
-        private static void Swap(int[] array, int father, int son)
-        {
-            var temp = array[father];
-            array[father] = array[son];
-            array[son] = temp;
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
 }

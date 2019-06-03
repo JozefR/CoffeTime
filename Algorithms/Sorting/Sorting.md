@@ -3,6 +3,7 @@
 # Intro to Sorting Algorithms
 
 - [Quick Sort](./QuickSort/QuickSort.md)
+- [Heap Sort](./HeapSort/HeapSort.md)
 
 ### Selection Sort
 
