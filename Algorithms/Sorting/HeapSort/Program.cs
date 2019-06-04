@@ -6,7 +6,6 @@
         {
             int[] array = {5, 10, 1, 3, 6, 8, 2, 4, 7, 9};
 
-            // TODO: sth wrong with Down method.
             HeapSort(array);
         }
 
@@ -83,7 +82,6 @@
         #endregion
 
         #region down
-        // Check if one from both childs are lower
         private static void Down(int[] array, int lastIndex)
         {
             // After swap last index become father and this can interrupt heap

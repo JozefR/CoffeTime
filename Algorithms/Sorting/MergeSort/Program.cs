@@ -1,5 +1,3 @@
-using System;
-
 namespace MergeSort
 {
     class Program
@@ -10,6 +8,7 @@ namespace MergeSort
             mergeSort(array, 0, array.Length - 1);
         }
 
+        #region mergeSortMain
         private static void mergeSort(int[] array, int p, int r)
         {
             // Set base case for recursion
@@ -24,11 +23,13 @@ namespace MergeSort
                 mergeSort(array, p, mid);
                 // second sub problem
                 mergeSort(array, mid + 1, r);
-                // Solution to subproblem merge
+                // Solution to subproblems merge
                 merge(array, p, mid, r);
             }
         }
+        #endregion
 
+        #region merge
         private static void merge(int[] array, int p, int mid, int r)
         {
             var leftArrLength = mid - p + 1;
@@ -81,5 +82,6 @@ namespace MergeSort
                 j++;
             }
         }
+        #endregion
     }
 }

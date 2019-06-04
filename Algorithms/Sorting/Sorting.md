@@ -4,6 +4,7 @@
 
 - [Quick Sort](./QuickSort/QuickSort.md)
 - [Heap Sort](./HeapSort/HeapSort.md)
+- [Merge Sort](./MergeSort/MergeSort.md)
 
 ### Selection Sort
 
