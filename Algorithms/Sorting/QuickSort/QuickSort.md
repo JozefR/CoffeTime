@@ -1,6 +1,8 @@
+#### Previous: [Sorting &laquo;](../Sorting.md)
+
 ### Quick Sort
 
-#### Previous: [Sorting &laquo;](../Sorting.md)
+
 
 ``` cs --region quickSortMain --source-file .\Program.cs --project .\QuickSort.csproj 
 private static void quickSort(int[] array, int left, int right)

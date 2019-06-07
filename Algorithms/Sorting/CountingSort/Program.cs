@@ -10,6 +10,7 @@ namespace CountingSort
             var test = countingSort2(array);
         }
 
+        #region countingSortMain
         private static int[] countingSort(int[] array)
         {
             var max = array[0];
@@ -45,6 +46,7 @@ namespace CountingSort
 
             return sortedArray;
         }
+        #endregion
 
         private static int[] countingSort2(int[] array)
         {

@@ -2,9 +2,10 @@
 
 # Intro to Sorting Algorithms
 
-- [Quick Sort](./QuickSort/QuickSort.md)
 - [Heap Sort](./HeapSort/HeapSort.md)
 - [Merge Sort](./MergeSort/MergeSort.md)
+- [Quick Sort](./QuickSort/QuickSort.md)
+- [Counting Sort](./CountingSort/CountingSort.md)
 
 ### Selection Sort
 
@@ -20,7 +21,7 @@ private static int[] selectionSort(int[] array)
         {
             if (minimum > array[j])
             {
-                minimum = array[j];
+                minimum = array[j
                 minimumIndex = j;
             }
         }
