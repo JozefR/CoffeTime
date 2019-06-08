@@ -4,20 +4,20 @@
     {
         static void Main(string[] args)
         {
-            var recursion = FactorialFunc(3);
-            var nonRec  = WithoutRecursion(3);
+            var recursion = Factorial(6);
+            var nonRec  = FactorialWithouRecursion(3);
         }
 
         #region factorial
-        private static int FactorialFunc(int i)
+        private static int Factorial(int i)
         {
-            if (i == 1)
+            if (i == 0)
                 return 1;
 
-            return i * FactorialFunc(i - 1);
+            return i * Factorial(i - 1);
         }
 
-        private static int WithoutRecursion(int number)
+        private static int FactorialWithouRecursion(int number)
         {
             int result = number;
 

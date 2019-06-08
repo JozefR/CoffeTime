@@ -7,16 +7,20 @@ namespace Palindrom
         static void Main(string[] args)
         {
             var nonRec = PalindromNonRec("rotor");
-            var rec = PalindromRecursion("rotom", 0);
+            var rec = PalindromRecursion("rotor", 0);
         }
 
         private static bool PalindromRecursion(string rotor, int i)
         {
             if (rotor.Length <= 1)
+            {
                 return true;
+            }
 
-            if (i == rotor.Length - 1 - i)
+            if (i == rotor.Length - i - 1)
+            {
                 return true;
+            }
 
             if (rotor[i] != rotor[rotor.Length - i - 1])
                 return false;
