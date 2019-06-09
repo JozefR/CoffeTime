@@ -6,7 +6,6 @@ namespace Fibonacci
     {
         static void Main(string[] args)
         {
-            var fibo = FibonacciFunc(6);
             var fibo2 = FibonacciFunc(15);
 
             var dyna = FibonacciDynamic(6, new int [6]);

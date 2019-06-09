@@ -6,11 +6,12 @@ namespace Palindrom
     {
         static void Main(string[] args)
         {
-            var nonRec = PalindromNonRec("rotor");
-            var rec = PalindromRecursion("rotor", 0);
+            var nonRec = PalindromNonRecursion("rotor");
+            var rec = Palindrom("rotor", 0);
         }
 
-        private static bool PalindromRecursion(string rotor, int i)
+        #region palindrom
+        private static bool Palindrom(string rotor, int i)
         {
             if (rotor.Length <= 1)
             {
@@ -25,10 +26,10 @@ namespace Palindrom
             if (rotor[i] != rotor[rotor.Length - i - 1])
                 return false;
 
-            return PalindromRecursion(rotor, i + 1);
+            return Palindrom(rotor, i + 1);
         }
 
-        private static bool PalindromNonRec(string rotor)
+        private static bool PalindromNonRecursion(string rotor)
         {
             var result = "";
 
@@ -42,5 +43,6 @@ namespace Palindrom
 
             return false;
         }
+        #endregion
     }
 }

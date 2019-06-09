@@ -5,24 +5,21 @@
         static void Main(string[] args)
         {
             int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
-            int[] primes2 = {2, 3, 5, 7, 11, 97};
-
             var target = 53;
-            var nonExistingTarget = 98;
 
-            var sln = BinarySearch(primes, target);
-            var sln2 = BinarySearchRecursion(primes, 3, 0, primes.Length);
+            BinarySearch(primes, target);
+            BinarySearchRecursion(primes, 3, 0, primes.Length);
         }
 
         #region binarySearch
         private static int BinarySearch(int[] array, int target)
         {
-            int min = 0;
-            int max = array.Length - 1;
+            int left = 0;
+            int right = array.Length - 1;
 
-            while (max > min)
+            while (right > left)
             {
-                var guess = (min + max) / 2;
+                var guess = (left + right) / 2;
 
                 if (array[guess] == target)
                 {
@@ -31,11 +28,11 @@
 
                 if (array[guess] < target)
                 {
-                    min = guess + 1;
+                    left = guess + 1;
                 }
                 else
                 {
-                    max = guess - 1;
+                    right = guess - 1;
                 }
             }
 
@@ -44,12 +41,12 @@
         #endregion
 
         #region binarySearchRecursion
-        private static int BinarySearchRecursion(int[] array, int target, int leftIndex, int rightIndex)
+        private static int BinarySearchRecursion(int[] array, int target, int left, int rightIndex)
         {
-            if (leftIndex > rightIndex)
+            if (left > rightIndex)
                 return -1;
 
-            int middle = (leftIndex + rightIndex) / 2;
+            int middle = (left + rightIndex) / 2;
 
             if (array[middle] == target)
                 return target;
@@ -58,7 +55,7 @@
                 return BinarySearchRecursion(array, target, middle + 1, rightIndex);
 
             if (target < array[middle])
-                return BinarySearchRecursion(array, target, leftIndex, middle - 1);
+                return BinarySearchRecursion(array, target, left, middle - 1);
 
             return middle;
         }

@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            var tree = new BinarySearchTree();
+            var tree = new Tree();
 
             tree.Insert(2);
             tree.Insert(5);
@@ -16,11 +16,12 @@
         }
     }
 
-    class BinarySearchTree
+    #region bstTree
+    class Tree
     {
         public Vertex Root { get; set; }
 
-        public BinarySearchTree()
+        public Tree()
         {
             Root = new Vertex(this);
         }
@@ -39,8 +40,8 @@
             {
                 Vertex left = new Vertex(this);
                 Vertex right = new Vertex(this);
-                left.Interval = new[] { vertex.Interval[0], value};
-                right.Interval = new[] { value, vertex.Interval[1]};
+                left.Interval = new[] {vertex.Interval[0], value};
+                right.Interval = new[] {value, vertex.Interval[1]};
                 vertex.Interval = null;
                 vertex.Value = value;
                 vertex.Left = left;
@@ -132,7 +133,9 @@
             return vertex;
         }
     }
+    #endregion
 
+    #region vertex
     class Vertex
     {
         public Vertex Left { get; set; }
@@ -142,12 +145,13 @@
         public int? Value { get; set; }
         public int[] Interval { get; set; }
 
-        public BinarySearchTree Tree { get; set; }
+        public Tree Tree { get; set; }
 
-        public Vertex(BinarySearchTree binarySearchTree)
+        public Vertex(Tree tree)
         {
-            Tree = binarySearchTree;
+            Tree = tree;
             Interval = new int[2];
         }
     }
+    #endregion
 }

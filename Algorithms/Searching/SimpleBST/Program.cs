@@ -10,6 +10,7 @@ namespace SimpleBST
 
             tree.AddValue(15);
             tree.AddValue(6);
+            tree.Find(7);
             tree.AddValue(4);
             tree.AddValue(5);
             tree.AddValue(23);
@@ -41,16 +42,17 @@ namespace SimpleBST
 
             public Node Find(int value)
             {
-                return Root.SearchFor(value);
+                var root = Root.SearchFor(value);
+                return root;
             }
         }
 
-        class Node
+        internal class Node
         {
             private Node Left { get; set; }
             private Node Right { get; set; }
 
-            private readonly int _value;
+            internal readonly int _value;
 
             public Node(int value)
             {

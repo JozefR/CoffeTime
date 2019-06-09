@@ -63,4 +63,28 @@ private static bool PalindromNonRecursion(string rotor)
 }
 ```
 
+### Greatest common divisor
+
+``` cs --region greatestCommonDivisor --source-file .\GreatestCommonDivisor\Program.cs --project .\GreatestCommonDivisor\GreatestCommonDivisor.csproj 
+private static int GCDNonRecursion(int a, int b)
+{
+    while (b != 0)
+    {
+        int reminder = a % b;
+        a = b;
+        b = reminder;
+    }
+
+    return a;
+}
+
+private static int GCD(int a, int b)
+{
+    if (b == 0)
+        return a;
+
+    return GCD(b, a % b);
+}
+```
+
 #### Previous: [Home &laquo;](../../README.md)

@@ -6,19 +6,18 @@ namespace GreatestCommonDivisor
     {
         static void Main(string[] args)
         {
-            var gcdNon = GCDNonRecursion(24, 12);
-            var gcdNon2 = GCDNonRecursion(42, 56);
-            var gcd = GCD(24, 12);
-            var gcd2 = GCD(42, 56);
+            var gcdNon2 = GCDNonRecursion(54, 24);
+            var gcd = GCD(54, 24);
         }
 
+        #region greatestCommonDivisor
         private static int GCDNonRecursion(int a, int b)
         {
             while (b != 0)
             {
-                int rem = a % b;
+                int reminder = a % b;
                 a = b;
-                b = rem;
+                b = reminder;
             }
 
             return a;
@@ -31,5 +30,6 @@ namespace GreatestCommonDivisor
 
             return GCD(b, a % b);
         }
+        #endregion
     }
 }
