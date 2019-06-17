@@ -2,6 +2,8 @@
 
 # Intro to Recursion
 
+- [Fibonacci](./Fibonacci/Fibonacci.md)
+
 ### Factorial
 
 ``` cs --region factorial --source-file .\Factorial\Program.cs --project .\Factorial\Factorial.csproj 

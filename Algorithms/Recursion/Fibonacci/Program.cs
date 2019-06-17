@@ -6,7 +6,7 @@ namespace Fibonacci
     {
         static void Main(string[] args)
         {
-            var fibo2 = FibonacciFunc(15);
+            var fibo2 = Fibonacci(15);
 
             var dyna = FibonacciDynamic(6, new int [6]);
             var  dyna2 = FibonacciDynamic(15, new int [15]);
@@ -14,7 +14,7 @@ namespace Fibonacci
             var down = FibonacciFromDown(6);
         }
 
-        private static int FibonacciFunc(int x)
+        private static int Fibonacci(int x)
         {
             if (x == 0)
                 return 0;
@@ -22,7 +22,7 @@ namespace Fibonacci
             if (x == 1)
                 return 1;
 
-            return FibonacciFunc(x - 1) + FibonacciFunc(x - 2);
+            return Fibonacci(x - 1) + Fibonacci(x - 2);
         }
 
         private static int FibonacciDynamic(int x, int[] helpArray)
