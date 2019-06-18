@@ -64,12 +64,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easy.MaxMinArrays", "Challenges\Easy\Easy.MaxMinArrays\Easy.MaxMinArrays.csproj", "{DB67D635-200A-401B-8010-723630879209}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Medium", "Medium", "{6C68A3E5-8B21-49C3-BFC9-5A8A9CD51F28}"
+ProjectSection(SolutionItems) = preProject
+	Challenges\Medium\Medium.md = Challenges\Medium\Medium.md
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hard", "Hard", "{B2795D80-D9FE-4823-A24E-8D9ECCE435B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easy.Median", "Challenges\Easy\Easy.Median\Easy.Median.csproj", "{65E2EF42-684D-436E-8247-F739A24D5E47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Algorithms\Recursion\Fibonacci\Fibonacci.csproj", "{64A27938-02AA-4B24-AA6C-245D96A797C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPValidation", "Challenges\Medium\IPValidation\IPValidation.csproj", "{52EB903D-4549-4900-946E-2BF6BBA48A33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -360,6 +365,18 @@ Global
 		{64A27938-02AA-4B24-AA6C-245D96A797C3}.Release|x64.Build.0 = Release|Any CPU
 		{64A27938-02AA-4B24-AA6C-245D96A797C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{64A27938-02AA-4B24-AA6C-245D96A797C3}.Release|x86.Build.0 = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|x64.Build.0 = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Debug|x86.Build.0 = Debug|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|x64.ActiveCfg = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|x64.Build.0 = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|x86.ActiveCfg = Release|Any CPU
+		{52EB903D-4549-4900-946E-2BF6BBA48A33}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11A6E41E-3377-47AD-BD91-E0F043D9BCF2} = {9910F963-2307-4C34-A05A-6B4C191B0AE8}
@@ -389,5 +406,6 @@ Global
 		{B2795D80-D9FE-4823-A24E-8D9ECCE435B7} = {3E46AACE-2E7B-44FC-ACB5-9992539EE041}
 		{65E2EF42-684D-436E-8247-F739A24D5E47} = {406C80A0-7625-44E6-8E93-93A4ECE01E45}
 		{64A27938-02AA-4B24-AA6C-245D96A797C3} = {9A00EFF7-2964-492B-99B5-6994ECC29962}
+		{52EB903D-4549-4900-946E-2BF6BBA48A33} = {6C68A3E5-8B21-49C3-BFC9-5A8A9CD51F28}
 	EndGlobalSection
 EndGlobal

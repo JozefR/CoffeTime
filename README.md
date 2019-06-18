@@ -12,7 +12,7 @@
 #### Challenges
 
 - [Easy](Challenges/Easy/EasyChallenges.md) 
-- [Medium]
+- [Medium](Challenges/Medium/Medium.md)
 - [Hard]
 
 
