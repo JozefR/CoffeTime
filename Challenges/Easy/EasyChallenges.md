@@ -2,6 +2,8 @@
 
 # Easy
 
+- [PersistentBugger](././Easy.PersistentBugger/PersistentBugger.md)
+
 ### Biggest of three
 ``` cs  
 private static int BiggestOfThree(int A, int B, int C)
