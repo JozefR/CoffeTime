@@ -27,4 +27,29 @@ For example, given the following tree:
 The method should return 23, since [17,-10,16] is the route
 from root to leaf with the maximal sum.
 
+
+## Solutions
+
+``` cs  
+public static int MaxSum(TreeNode treeNode)
+{
+    if (treeNode == null) return 0;
+
+    int left = 0;
+    int right = 0;
+
+    if (treeNode.left != null)
+    {
+        left = MaxSum(treeNode.left);
+    }
+
+    if (treeNode.right != null)
+    {
+        right = MaxSum(treeNode.right);
+    }
+
+    return Math.Max(left, right) + treeNode.value;
+}
+```
+
 #### Previous: [Home &laquo;](../Medium.md)
