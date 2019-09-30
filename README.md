@@ -8,6 +8,7 @@
 - [Recursion](Algorithms/Recursion/Recursion.md)
 - [Sorting](Algorithms/Sorting/Sorting.md)
 - [Searching](Algorithms/Searching/Searching.md)
+- [Graphs](Algorithms/Graphs/Graphs.md)
 
 #### Challenges
 
