@@ -1,6 +1,6 @@
-#### Previous: [Home &laquo;](../../../README.md)
+#### Previous: [Home &laquo;](../Graphs.md)
 
-### BFS first run
+### BFS
 
 Pseudo code
       
@@ -12,32 +12,29 @@ Pseudo code
               v mark as visited
               enqueue (all adjacent unvisited vertices of v)
 
+*Solution*
+
 ``` cs 
 public static void BFS(Node graph)
 {
-    Queue queue = new Queue();
+    Queue<Node> queue = new Queue<Node>();
+    queue.Enqueue(graph);
 
-    queue.EnQueue(graph);
-    while (queue.IsEmpty() == false)
+    while (queue.Count > 0)
     {
-        if (queue.Front().Visited == false)
-        {
-            Console.WriteLine(queue.Front().Value);
-            queue.Front().Visited = true;
+        var vertex = queue.Dequeue();
 
-            foreach (var neighbour in queue.Front().Neighbours)
+        if (vertex.Visited == false)
+        {
+            Console.WriteLine(vertex.Value);
+            vertex.Visited = true;
+            foreach (var neighbour in vertex.Neighbours)
             {
-                queue.EnQueue(neighbour);
+                queue.Enqueue(neighbour);
             }
-
-            queue.DeQueue();
-        }
-        else
-        {
-            queue.DeQueue();
         }
     }
 }
 ```
 
-#### Previous: [Home &laquo;](../../../README.md)
+#### Previous: [Home &laquo;](../Graphs.md)

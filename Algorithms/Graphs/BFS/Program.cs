@@ -34,7 +34,7 @@ namespace BFS
             v4.Neighbours.Add(v5);
             v6.Neighbours.Add(v7);
 
-            BFS(v1);
+            BFS2(v1);
         }
         /* PSEUDO
          * While all vertices are not explored do:
@@ -47,6 +47,27 @@ namespace BFS
          */
 
         public static void BFS(Node graph)
+        {
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(graph);
+
+            while (queue.Count > 0)
+            {
+                var vertex = queue.Dequeue();
+
+                if (vertex.Visited == false)
+                {
+                    Console.WriteLine(vertex.Value);
+                    vertex.Visited = true;
+                    foreach (var neighbour in vertex.Neighbours)
+                    {
+                        queue.Enqueue(neighbour);
+                    }
+                }
+            }
+        }
+
+        public static void BFS2(Node graph)
         {
             Queue queue = new Queue();
 
@@ -71,6 +92,8 @@ namespace BFS
                 }
             }
         }
+
+
 
         // Helper Queue => just for demostration how could queue work
         public class Queue
