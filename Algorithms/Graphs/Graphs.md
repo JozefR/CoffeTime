@@ -3,6 +3,7 @@
 # Intro to Graphs
 
 - [BFS](./BFS/BFS.md)
+- [DFS](./DFS/DFS.md)
 
 
 
