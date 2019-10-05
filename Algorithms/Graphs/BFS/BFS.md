@@ -1,4 +1,4 @@
-#### Previous: [Home &laquo;](../Graphs.md)
+#### Previous: [Graphs &laquo;](../Graphs.md)
 
 ### BFS
 
@@ -37,4 +37,4 @@ public static void BFS(Node graph)
 }
 ```
 
-#### Previous: [Home &laquo;](../Graphs.md)
+#### Previous: [Graphs &laquo;](../Graphs.md)
