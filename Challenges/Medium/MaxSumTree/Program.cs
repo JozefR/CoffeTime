@@ -11,9 +11,18 @@ namespace MaxSumTree
     {
         static void Main(string[] args)
         {
+            /**
+            *      5
+            *    /   \
+            *  -22    11
+            *  / \    / \
+            * 9  50  9   2
+            */
             TreeNode left = TreeNode.Leaf(-22).WithLeaves(9, 50);
             TreeNode right = TreeNode.Leaf(11).WithLeaves(9, 2);
+
             TreeNode root = TreeNode.Join(5, left, right);
+
             var solution = MaxSum(root);
         }
 
@@ -74,6 +83,11 @@ namespace MaxSumTree
             var root = new TreeNode {left = left, right = right, value = v};
 
             return root;
+        }
+
+        public override string ToString()
+        {
+            return String.Format($"Root:{value} Left:{left.value} Right:{right.value}");
         }
     }
 
