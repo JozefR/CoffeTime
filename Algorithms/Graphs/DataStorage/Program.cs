@@ -67,7 +67,6 @@ namespace DataStorage
                 {
                     Console.Write(" " + matrix[i, j]);
                 }
-
                 Console.WriteLine("");
             }                
         }
