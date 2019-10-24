@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace DataStorage
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            var inputData = System.IO.File.ReadAllLines("../../../graphData.txt");
+            var inputData = System.IO.File.ReadAllLines(args[0]);
             
             Graph graphEmpty = new Graph();
 
@@ -18,8 +18,8 @@ namespace DataStorage
             
             PrintMatrix(matrix);
         }
-
-        private static Graph CreateLinkedGraph(string[] inputData, Graph graph)
+        
+        public static Graph CreateLinkedGraph(string[] inputData, Graph graph)
         {
             for (int i = 0; i < inputData.Length; i++)
             {
@@ -72,7 +72,7 @@ namespace DataStorage
         }
     }
 
-    class Graph
+    public class Graph
     {
         public Graph()
         {
@@ -91,35 +91,36 @@ namespace DataStorage
 
         public void AddEdge(int vertexNumber, int from, int to)
         {
-            Edge edge = new Edge(from, to);
+            Vertex edge = new Vertex(from, to);
             Vertices[vertexNumber - 1].AddEdge(edge);
         }
     }
 
-    class Vertex
+    public class Vertex
     {
         public Vertex()
         {
-            Edges = new List<Edge>();
+            Edges = new List<Vertex>();
         }
 
-        public List<Edge> Edges { get; }
-
-        public void AddEdge(Edge edge)
+        public Vertex(int from, int to)
         {
-            Edges.Add(edge);
-        }
-    }
-
-    class Edge
-    {
-        public Edge(int from, int to)
-        {
+            Edges = new List<Vertex>();
             From = from;
             To = to;
         }
 
-        public int From { get; }
-        public int To { get; }
+        public List<Vertex> Edges { get; }
+        
+        public bool Visited { get; set; }
+
+        public int From { get; set; }
+
+        public int  To { get; set; }
+        
+        public void AddEdge(Vertex edge)
+        {
+            Edges.Add(edge);
+        }
     }
 }
