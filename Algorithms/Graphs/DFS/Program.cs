@@ -53,7 +53,8 @@ namespace DFS
 
                     foreach (var neighbour in vertice.Edges)
                     {
-                        verticeStack.Push(neighbour);
+                        Vertex verNeighbour = graph.Vertices[neighbour.To - 1];
+                        verticeStack.Push(verNeighbour);
                     }
                 }
             }

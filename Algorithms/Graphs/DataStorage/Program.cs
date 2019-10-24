@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 namespace DataStorage
 {
@@ -8,7 +9,7 @@ namespace DataStorage
     {
         static void Main(string[] args)
         {
-            var inputData = System.IO.File.ReadAllLines(args[0]);
+            var inputData = System.IO.File.ReadAllLines("../../../graphData.txt");
             
             Graph graphEmpty = new Graph();
 
@@ -18,7 +19,7 @@ namespace DataStorage
             
             PrintMatrix(matrix);
         }
-        
+
         public static Graph CreateLinkedGraph(string[] inputData, Graph graph)
         {
             for (int i = 0; i < inputData.Length; i++)
@@ -36,7 +37,7 @@ namespace DataStorage
             return graph;
         }
 
-        private static int[,] CreateMatrix(Graph graph)
+        public static int[,] CreateMatrix(Graph graph)
         {
             // Create matrix based on graph vertexes length.
             // set matrix based on vertex edges. 
@@ -59,7 +60,7 @@ namespace DataStorage
             return matrix;
         }
 
-        private static void PrintMatrix(int[,] matrix)
+        public static void PrintMatrix(int[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -83,44 +84,51 @@ namespace DataStorage
 
         public void AddVertices(int vertices)
         {
-            for (int i = 0; i < vertices; i++)
+            for (int i = 1; i <= vertices; i++)
             {
-                Vertices.Add(new Vertex());
+                Vertices.Add(new Vertex(i));
             }
         }
 
         public void AddEdge(int vertexNumber, int from, int to)
         {
-            Vertex edge = new Vertex(from, to);
+            Edge edge = new Edge(from, to);
             Vertices[vertexNumber - 1].AddEdge(edge);
         }
     }
 
     public class Vertex
     {
-        public Vertex()
+        public Vertex(int value)
         {
-            Edges = new List<Vertex>();
+            Edges = new List<Edge>();
+            Value = value;
         }
 
-        public Vertex(int from, int to)
+        public int Value { get; set; }
+        public bool Visited { get; set; }
+        public List<Edge> Edges { get; }
+
+        public void AddEdge(Edge edge)
         {
-            Edges = new List<Vertex>();
+            Edges.Add(edge);
+        }
+
+        public override string ToString()
+        {
+            return String.Format($"V{Value}");
+        }
+    }
+
+    public class Edge
+    {
+        public Edge(int from, int to)
+        {
             From = from;
             To = to;
         }
 
-        public List<Vertex> Edges { get; }
-        
-        public bool Visited { get; set; }
-
-        public int From { get; set; }
-
-        public int  To { get; set; }
-        
-        public void AddEdge(Vertex edge)
-        {
-            Edges.Add(edge);
-        }
+        public int From { get; }
+        public int To { get; }
     }
 }
