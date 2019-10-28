@@ -15,11 +15,85 @@ namespace DataStorage
 
             Graph graph = CreateLinkedGraph(inputData, graphEmpty);
 
-            int[,] matrix = CreateMatrix(graph);
+            int[][] matrix = CreateMatrix(graph);
             
             PrintMatrix(matrix);
+
+            int[][] edges = new int[12][];
+
+            for (int i = 0; i < inputData.Length; i++)
+            {
+                var edge = inputData[i].Split(" ").Select(int.Parse).ToArray();
+                edges[i] = new []{edge[0], edge[1]};
+            } 
+            
+            var test2 = CountComponents(10, edges);
+
+        }
+        
+        public static int CountComponents(int n, int[][] edges)
+        {
+            int count = 0;
+            var visited = new bool[n];
+            var dict = new Dictionary<int, List<int>>();
+            for (int i = 1; i <= n; i++)
+            {
+                dict[i] = new List<int>();
+            }
+
+            foreach (var edge in edges)
+            {
+                var from = edge[0];
+                var to = edge[1];
+
+                dict[@from].Add(to);
+                dict[to].Add(@from);
+            }
+            
+            for (int i = 1; i <= n; i++)
+            {
+                if (!visited[i - 1])
+                {
+                    CountComponentsHelperDFS(n, dict, i, visited);
+                    count++;
+                }                
+            }
+
+            return count;
         }
 
+        private static void CountComponentsHelperDFS(int n, Dictionary<int, List<int>> dict, int cur, bool[] visited)
+        {
+            if (visited[cur - 1])
+                return;
+
+            int[][] edgesTest = new int[12][];
+
+            Stack<int> verticeStack = new Stack<int>();
+
+            foreach (var edges in dict[cur])
+            {
+                verticeStack.Push(edges);
+            }
+
+            while (verticeStack.Count > 0)
+            {
+                var vertice = verticeStack.Pop();
+
+                if (visited[vertice - 1] == false)
+                {
+                    Console.WriteLine(vertice);
+                    visited[vertice - 1] = true;
+
+                    foreach (var neighbour in dict[vertice])
+                    {
+                        verticeStack.Push(neighbour);
+                        edgesTest[vertice] = new[] {vertice, neighbour};
+                    }
+                }
+            }
+        }
+        
         public static Graph CreateLinkedGraph(string[] inputData, Graph graph)
         {
             for (int i = 0; i < inputData.Length; i++)
@@ -37,15 +111,20 @@ namespace DataStorage
             return graph;
         }
 
-        public static int[,] CreateMatrix(Graph graph)
+        public static int[][] CreateMatrix(Graph graph)
         {
             // Create matrix based on graph vertexes length.
             // set matrix based on vertex edges. 
             int rows = graph.Vertices.Count;
             int columns = graph.Vertices.Count;
             
-            int[,] matrix = new int[rows, columns];
+            int[][] matrix = new int[rows][];
 
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                matrix[i] = new int [matrix.Length];
+            }
+            
             foreach (var vertice in graph.Vertices)
             {
                 foreach (var edge in vertice.Edges)
@@ -53,20 +132,20 @@ namespace DataStorage
                     // because matrix is indexed from zero we need to decrease from, to edges
                     int matrixColumn = edge.From - 1;
                     int matrixRow = edge.To - 1;
-                    matrix[matrixRow, matrixColumn] = 1;
+                    matrix[matrixRow][matrixColumn] = 1;
                 }
             }
 
             return matrix;
         }
 
-        public static void PrintMatrix(int[,] matrix)
+        public static void PrintMatrix(int[][] matrix)
         {
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.Length; i++)
             {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                for (int j = 0; j < matrix[i].Length; j++)
                 {
-                    Console.Write(" " + matrix[i, j]);
+                    Console.Write(" " + matrix[i][j]);
                 }
                 Console.WriteLine("");
             }                
