@@ -83,6 +83,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphs", "Graphs", "{C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}"
 ProjectSection(SolutionItems) = preProject
 	Algorithms\Graphs\Graphs.md = Algorithms\Graphs\Graphs.md
+	TenVerticeGraph.txt = TenVerticeGraph.txt
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFS", "Algorithms\Graphs\BFS\BFS.csproj", "{A2B0D224-D385-4144-AE51-7EC2BFB1E499}"
@@ -98,6 +99,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFS_FindBiggestRegion", "Algorithms\Graphs\DFS_FindBiggestRegion\DFS_FindBiggestRegion.csproj", "{D2F2E13D-DDE5-4E1C-B62A-7CE9A5E4AAB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFS_FindBiggestComponent", "Algorithms\Graphs\DFS_FindBiggestComponent\DFS_FindBiggestComponent.csproj", "{3B306F36-7373-4F01-985B-D8441E9C15FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFS_Recursion", "Algorithms\Graphs\DFS_Recursion\DFS_Recursion.csproj", "{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{7F769D57-FEAF-4C5B-8215-EF90EFC1D9F0}"
+ProjectSection(SolutionItems) = preProject
+	Files\TenVerticeGraph.txt = Files\TenVerticeGraph.txt
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -508,6 +516,18 @@ Global
 		{3B306F36-7373-4F01-985B-D8441E9C15FA}.Release|x64.Build.0 = Release|Any CPU
 		{3B306F36-7373-4F01-985B-D8441E9C15FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B306F36-7373-4F01-985B-D8441E9C15FA}.Release|x86.Build.0 = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|x64.Build.0 = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Debug|x86.Build.0 = Debug|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x64.ActiveCfg = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x64.Build.0 = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x86.ActiveCfg = Release|Any CPU
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11A6E41E-3377-47AD-BD91-E0F043D9BCF2} = {9910F963-2307-4C34-A05A-6B4C191B0AE8}
@@ -546,5 +566,6 @@ Global
 		{CA22C8B3-263F-46A9-84CA-49D4501861C8} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{D2F2E13D-DDE5-4E1C-B62A-7CE9A5E4AAB8} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{3B306F36-7373-4F01-985B-D8441E9C15FA} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
+		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 	EndGlobalSection
 EndGlobal

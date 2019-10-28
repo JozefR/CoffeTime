@@ -12,86 +12,13 @@ namespace DataStorage
             var inputData = System.IO.File.ReadAllLines("../../../graphData.txt");
             
             Graph graphEmpty = new Graph();
-
+            
+            // TODO
             Graph graph = CreateLinkedGraph(inputData, graphEmpty);
 
             int[][] matrix = CreateMatrix(graph);
             
             PrintMatrix(matrix);
-
-            int[][] edges = new int[12][];
-
-            for (int i = 0; i < inputData.Length; i++)
-            {
-                var edge = inputData[i].Split(" ").Select(int.Parse).ToArray();
-                edges[i] = new []{edge[0], edge[1]};
-            } 
-            
-            var test2 = CountComponents(10, edges);
-
-        }
-        
-        public static int CountComponents(int n, int[][] edges)
-        {
-            int count = 0;
-            var visited = new bool[n];
-            var dict = new Dictionary<int, List<int>>();
-            for (int i = 1; i <= n; i++)
-            {
-                dict[i] = new List<int>();
-            }
-
-            foreach (var edge in edges)
-            {
-                var from = edge[0];
-                var to = edge[1];
-
-                dict[@from].Add(to);
-                dict[to].Add(@from);
-            }
-            
-            for (int i = 1; i <= n; i++)
-            {
-                if (!visited[i - 1])
-                {
-                    CountComponentsHelperDFS(n, dict, i, visited);
-                    count++;
-                }                
-            }
-
-            return count;
-        }
-
-        private static void CountComponentsHelperDFS(int n, Dictionary<int, List<int>> dict, int cur, bool[] visited)
-        {
-            if (visited[cur - 1])
-                return;
-
-            int[][] edgesTest = new int[12][];
-
-            Stack<int> verticeStack = new Stack<int>();
-
-            foreach (var edges in dict[cur])
-            {
-                verticeStack.Push(edges);
-            }
-
-            while (verticeStack.Count > 0)
-            {
-                var vertice = verticeStack.Pop();
-
-                if (visited[vertice - 1] == false)
-                {
-                    Console.WriteLine(vertice);
-                    visited[vertice - 1] = true;
-
-                    foreach (var neighbour in dict[vertice])
-                    {
-                        verticeStack.Push(neighbour);
-                        edgesTest[vertice] = new[] {vertice, neighbour};
-                    }
-                }
-            }
         }
         
         public static Graph CreateLinkedGraph(string[] inputData, Graph graph)
@@ -130,8 +57,8 @@ namespace DataStorage
                 foreach (var edge in vertice.Edges)
                 {
                     // because matrix is indexed from zero we need to decrease from, to edges
-                    int matrixColumn = edge.From - 1;
-                    int matrixRow = edge.To - 1;
+                    int matrixColumn = edge.From.Value - 1;
+                    int matrixRow = edge.To.Value - 1;
                     matrix[matrixRow][matrixColumn] = 1;
                 }
             }
@@ -171,7 +98,7 @@ namespace DataStorage
 
         public void AddEdge(int vertexNumber, int from, int to)
         {
-            Edge edge = new Edge(from, to);
+            Edge edge = new Edge(this.Vertices[from - 1], this.Vertices[to - 1]);
             Vertices[vertexNumber - 1].AddEdge(edge);
         }
     }
@@ -201,13 +128,13 @@ namespace DataStorage
 
     public class Edge
     {
-        public Edge(int from, int to)
+        public Edge(Vertex from, Vertex to)
         {
             From = from;
             To = to;
         }
 
-        public int From { get; }
-        public int To { get; }
+        public Vertex From { get; }
+        public Vertex To { get; }
     }
 }
