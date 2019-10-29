@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualBasic;
 
 namespace DataStorage
 {
@@ -33,6 +32,7 @@ namespace DataStorage
 
                 var edge = inputData[i].Split(" ").Select(int.Parse).ToArray();
                 graph.AddEdge(edge[0], edge[0], edge[1]);
+                graph.AddEdge(edge[1], edge[1], edge[0]);
             }
 
             return graph;
