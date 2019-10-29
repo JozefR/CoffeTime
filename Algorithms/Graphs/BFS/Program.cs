@@ -35,7 +35,8 @@ namespace BFS
             v6.Neighbours.Add(v7);
 
             BFS2(v1);
-        }
+        } 
+        
         /* PSEUDO
          * While all vertices are not explored do:
          *     enqueue(any vertex)
@@ -45,7 +46,6 @@ namespace BFS
          *         v mark as visited
          *         enqueue (all adjacent unvisited vertices of v)
          */
-
         public static void BFS(Node graph)
         {
             Queue<Node> queue = new Queue<Node>();
@@ -95,7 +95,7 @@ namespace BFS
 
 
 
-        // Helper Queue => just for demostration how could queue work
+        // Helper Queue => just for demonstration how could queue work
         public class Queue
         {
             private List<Node> _data;

@@ -18,8 +18,8 @@ namespace DFS
              *     V6-----v7
              */
 
-            var inputData = System.IO.File.ReadAllLines(args[0]);
-
+            var inputData = System.IO.File.ReadAllLines(@"../../../../Files/SevenVertice.txt");
+            
             Graph graph = new Graph();
 
             Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData, graph);
@@ -53,7 +53,7 @@ namespace DFS
 
                     foreach (var neighbour in vertice.Edges)
                     {
-                        Vertex verNeighbour = graph.Vertices[neighbour.To.Value - 1];
+                        Vertex verNeighbour = neighbour.To;
                         verticeStack.Push(verNeighbour);
                     }
                 }

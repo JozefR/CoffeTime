@@ -83,7 +83,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphs", "Graphs", "{C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}"
 ProjectSection(SolutionItems) = preProject
 	Algorithms\Graphs\Graphs.md = Algorithms\Graphs\Graphs.md
-	TenVerticeGraph.txt = TenVerticeGraph.txt
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFS", "Algorithms\Graphs\BFS\BFS.csproj", "{A2B0D224-D385-4144-AE51-7EC2BFB1E499}"
@@ -104,8 +103,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFS_Recursion", "Algorithms
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{7F769D57-FEAF-4C5B-8215-EF90EFC1D9F0}"
 ProjectSection(SolutionItems) = preProject
-	Files\TenVerticeGraph.txt = Files\TenVerticeGraph.txt
+	Algorithms\Graphs\Files\TenVerticeGraph.txt = Algorithms\Graphs\Files\TenVerticeGraph.txt
+	Algorithms\Graphs\Files\SevenVertice.txt = Algorithms\Graphs\Files\SevenVertice.txt
 EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFS_FindComponents", "Algorithms\Graphs\BFS_FindComponents\BFS_FindComponents.csproj", "{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -528,6 +530,18 @@ Global
 		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x64.Build.0 = Release|Any CPU
 		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x86.ActiveCfg = Release|Any CPU
 		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F}.Release|x86.Build.0 = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|x64.Build.0 = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11A6E41E-3377-47AD-BD91-E0F043D9BCF2} = {9910F963-2307-4C34-A05A-6B4C191B0AE8}
@@ -567,5 +581,7 @@ Global
 		{D2F2E13D-DDE5-4E1C-B62A-7CE9A5E4AAB8} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{3B306F36-7373-4F01-985B-D8441E9C15FA} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{0E00EEF8-6D5C-4409-99E3-F3F60A80181F} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
+		{7F769D57-FEAF-4C5B-8215-EF90EFC1D9F0} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
+		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 	EndGlobalSection
 EndGlobal
