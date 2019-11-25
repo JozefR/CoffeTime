@@ -13,7 +13,7 @@ namespace DFS_Recursion
             
             Graph graph = DataStorage.Program.CreateLinkedGraph(inputData, graphEmpty);
 
-            DfSrecursion(graph);
+            DfsRecursion(graph);
         }
 
         /* PSEUDO CODE
@@ -35,7 +35,8 @@ namespace DFS_Recursion
          *
          * NOTICE: We are not visiting the neighbours of the vertice, we are going still deeper
          */
-        static void DfSrecursion(Graph graph)
+
+        private static void DfsRecursion(Graph graph)
         {
             bool[] visited = new bool[graph.Vertices.Count];
             int componentIndex = -1;
