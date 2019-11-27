@@ -37,8 +37,8 @@ namespace BFS_WithLevels
         private static void BfsLevels(Vertex vertex)
         {
             // Key vertice name, value level
-            var level = new Dictionary<int, int> {[vertex.Value] = 0};
-            var parent = new Dictionary<int, int?>{[vertex.Value] = null};
+            var level = new Dictionary<int, int> {[vertex.Name] = 0};
+            var parent = new Dictionary<int, int?>{[vertex.Name] = null};
             var i = 1;
             var frontier = new List<Vertex>(){vertex};
 
@@ -50,10 +50,10 @@ namespace BFS_WithLevels
                 {
                     foreach (var edge in front.Edges)
                     {
-                        if (!level.ContainsKey(edge.To.Value))
+                        if (!level.ContainsKey(edge.To.Name))
                         {
-                            level[edge.To.Value] = i;
-                            parent[edge.To.Value] = front.Value;
+                            level[edge.To.Name] = i;
+                            parent[edge.To.Name] = front.Name;
                             next.Add(edge.To);
                         }
                     }

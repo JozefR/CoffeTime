@@ -31,7 +31,15 @@ namespace DataStorage
                 }
 
                 var edge = inputData[i].Split(" ").Select(int.Parse).ToArray();
-                graph.AddEdge(edge[0], edge[0], edge[1]);
+
+                if (edge.Length > 2)
+                {
+                    graph.AddEdge(edge[0], edge[0], edge[1], edge[2]);
+                }
+                else
+                {
+                    graph.AddEdge(edge[0], edge[0], edge[1]);
+                }
             }
 
             return graph;
@@ -56,8 +64,8 @@ namespace DataStorage
                 foreach (var edge in vertice.Edges)
                 {
                     // because matrix is indexed from zero we need to decrease from, to edges
-                    int matrixColumn = edge.From.Value - 1;
-                    int matrixRow = edge.To.Value - 1;
+                    int matrixColumn = edge.From.Name - 1;
+                    int matrixRow = edge.To.Name - 1;
                     matrix[matrixRow][matrixColumn] = 1;
                 }
             }
@@ -100,17 +108,31 @@ namespace DataStorage
             Edge edge = new Edge(this.Vertices[from - 1], this.Vertices[to - 1]);
             Vertices[vertexNumber - 1].AddEdge(edge);
         }
+        
+        public void AddEdge(int vertexNumber, int from, int to, int weight)
+        {
+            Edge edge = new Edge(this.Vertices[from - 1], this.Vertices[to - 1], weight);
+            Vertices[vertexNumber - 1].AddEdge(edge);
+        }
     }
 
     public class Vertex
     {
-        public Vertex(int value)
+        public Vertex(int name)
         {
             Edges = new List<Edge>();
-            Value = value;
+            Name = name;
         }
 
-        public int Value { get; set; }
+        /// <summary>
+        /// Name of the Vertex
+        /// </summary>
+        public int Name { get; set; }
+
+        /// <summary>
+        /// Relaxed path value for this vertex
+        /// </summary>
+        public int PathValue { get; set; }
         public bool Visited { get; set; }
         public List<Edge> Edges { get; }
 
@@ -121,7 +143,7 @@ namespace DataStorage
 
         public override string ToString()
         {
-            return String.Format($"V{Value}");
+            return String.Format($"V{Name}");
         }
     }
 
@@ -133,7 +155,16 @@ namespace DataStorage
             To = to;
         }
 
+        public Edge(Vertex from, Vertex to, int weight)
+        {
+            From = from;
+            To = to;
+            Weight = weight;
+        }
+
         public Vertex From { get; }
         public Vertex To { get; }
+
+        public int Weight { get; set; }
     }
 }

@@ -60,7 +60,7 @@ namespace BFS_FindComponents
                     if (!components.ContainsKey(componentIndex))
                         components[componentIndex] = new List<int>();
                         
-                    components[componentIndex].Add(deque.Value);
+                    components[componentIndex].Add(deque.Name);
                     deque.Visited = true;
                     
                     foreach (var edges in deque.Edges)
