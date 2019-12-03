@@ -9,9 +9,7 @@ namespace DFS_Recursion
         {
             var inputData = System.IO.File.ReadAllLines("/Users/jozefrandjak/Documents/NETCore/Projects/CoffeTime/Files/TenVerticeGraph.txt");
             
-            Graph graphEmpty = new Graph(); 
-            
-            Graph graph = DataStorage.Program.CreateLinkedGraph(inputData, graphEmpty);
+            Graph graph = DataStorage.Program.CreateLinkedGraph(inputData);
 
             DfsRecursion(graph);
         }

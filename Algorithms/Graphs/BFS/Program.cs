@@ -55,14 +55,14 @@ namespace BFS
             {
                 var vertex = queue.Dequeue();
 
-                if (vertex.Visited == false)
+                if (vertex.Visited) continue;
+                
+                Console.WriteLine(vertex.Value);
+                
+                vertex.Visited = true;
+                foreach (var neighbour in vertex.Neighbours)
                 {
-                    Console.WriteLine(vertex.Value);
-                    vertex.Visited = true;
-                    foreach (var neighbour in vertex.Neighbours)
-                    {
-                        queue.Enqueue(neighbour);
-                    }
+                    queue.Enqueue(neighbour);
                 }
             }
         }

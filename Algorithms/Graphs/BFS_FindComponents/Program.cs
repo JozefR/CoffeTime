@@ -10,30 +10,28 @@ namespace BFS_FindComponents
         {
             var inputData = System.IO.File.ReadAllLines(@"../../../../Files/SevenVertice.txt");
             
-            Graph graph = new Graph();
-
-            Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData, graph);
+            var graph = DataStorage.Program.CreateLinkedGraph(inputData);
             
-            /*
-             * PSEUDO CODE
-             * set component index to -1
-             * create components with index and vertices
-             *     iterate over graph vertices
-             *         set component index +1
-             *         call bfs visit
-             *
-             * BfsVisit
-             * Create queue and add picked vertex
-             *     iterate until queue isn't empty
-             *         pick (dequeue) vertex from queue
-             *             if vertex not visited then
-             *                 add vertex to components
-             *                 set vertex as visited
-             *                 add all edges from picked vertex to queue(enqueue)
-             */
             Dfs(graph);
         }
-
+        
+        /*
+         * PSEUDO CODE
+         * set component index to -1
+         * create components with index and vertices
+         *     iterate over graph vertices
+         *         set component index +1
+         *         call bfs visit
+         *
+         * BfsVisit
+         * Create queue and add picked vertex
+         *     iterate until queue isn't empty
+         *         pick (dequeue) vertex from queue
+         *             if vertex not visited then
+         *                 add vertex to components
+         *                 set vertex as visited
+         *                 add all edges from picked vertex to queue(enqueue)
+         */
         private static void Dfs(Graph graph)
         {
             int componentIndex = -1;

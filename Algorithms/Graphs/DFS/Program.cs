@@ -20,9 +20,7 @@ namespace DFS
 
             var inputData = System.IO.File.ReadAllLines(@"../../../../Files/SevenVertice.txt");
             
-            Graph graph = new Graph();
-
-            Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData, graph);
+            Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData);
 
             DFS(graphData);
         }

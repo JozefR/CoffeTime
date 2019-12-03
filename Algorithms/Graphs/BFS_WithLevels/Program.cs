@@ -11,9 +11,7 @@ namespace BFS_WithLevels
         {
             var inputData = System.IO.File.ReadAllLines(@"../../../../Files/EightVertice.txt");
             
-            Graph graph = new Graph();
-
-            Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData, graph);
+            Graph graphData = DataStorage.Program.CreateLinkedGraph(inputData);
 
             BfsLevels(graphData.Vertices[0]);
         }

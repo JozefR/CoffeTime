@@ -10,18 +10,17 @@ namespace DataStorage
         {
             var inputData = System.IO.File.ReadAllLines("../../../graphData.txt");
             
-            Graph graphEmpty = new Graph();
-            
-            // TODO
-            Graph graph = CreateLinkedGraph(inputData, graphEmpty);
+            Graph graph = CreateLinkedGraph(inputData);
 
             int[][] matrix = CreateMatrix(graph);
             
             PrintMatrix(matrix);
         }
         
-        public static Graph CreateLinkedGraph(string[] inputData, Graph graph)
+        public static Graph CreateLinkedGraph(string[] inputData)
         {
+            var graph = new Graph();
+            
             for (int i = 0; i < inputData.Length; i++)
             {
                 if (i == 0)

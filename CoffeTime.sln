@@ -106,11 +106,14 @@ ProjectSection(SolutionItems) = preProject
 	Algorithms\Graphs\Files\TenVerticeGraph.txt = Algorithms\Graphs\Files\TenVerticeGraph.txt
 	Algorithms\Graphs\Files\SevenVertice.txt = Algorithms\Graphs\Files\SevenVertice.txt
 	Algorithms\Graphs\Files\EightVertice.txt = Algorithms\Graphs\Files\EightVertice.txt
+	Algorithms\Graphs\Files\TenVerticeWeight.txt = Algorithms\Graphs\Files\TenVerticeWeight.txt
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFS_FindComponents", "Algorithms\Graphs\BFS_FindComponents\BFS_FindComponents.csproj", "{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFS_WithLevels", "Algorithms\Graphs\BFS_WithLevels\BFS_WithLevels.csproj", "{591F609D-63E1-40E3-81A8-913C28164579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dijkstra", "Algorithms\Graphs\Dijkstra\Dijkstra.csproj", "{371CB410-59E6-4E08-8978-907F864AF28A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -557,6 +560,18 @@ Global
 		{591F609D-63E1-40E3-81A8-913C28164579}.Release|x64.Build.0 = Release|Any CPU
 		{591F609D-63E1-40E3-81A8-913C28164579}.Release|x86.ActiveCfg = Release|Any CPU
 		{591F609D-63E1-40E3-81A8-913C28164579}.Release|x86.Build.0 = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|x64.Build.0 = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Debug|x86.Build.0 = Debug|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|x64.ActiveCfg = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|x64.Build.0 = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|x86.ActiveCfg = Release|Any CPU
+		{371CB410-59E6-4E08-8978-907F864AF28A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11A6E41E-3377-47AD-BD91-E0F043D9BCF2} = {9910F963-2307-4C34-A05A-6B4C191B0AE8}
@@ -599,5 +614,6 @@ Global
 		{7F769D57-FEAF-4C5B-8215-EF90EFC1D9F0} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{CBC840CD-144C-4E37-BAC4-A14CAC9E58AA} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 		{591F609D-63E1-40E3-81A8-913C28164579} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
+		{371CB410-59E6-4E08-8978-907F864AF28A} = {C5382CFB-8762-47FA-A8FF-E1B5978DB3F7}
 	EndGlobalSection
 EndGlobal
