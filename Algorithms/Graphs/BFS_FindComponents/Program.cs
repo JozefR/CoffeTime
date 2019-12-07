@@ -12,7 +12,7 @@ namespace BFS_FindComponents
             
             var graph = DataStorage.Program.CreateLinkedGraph(inputData);
             
-            Dfs(graph);
+            Bfs(graph);
         }
         
         /*
@@ -32,7 +32,7 @@ namespace BFS_FindComponents
          *                 set vertex as visited
          *                 add all edges from picked vertex to queue(enqueue)
          */
-        private static void Dfs(Graph graph)
+        private static void Bfs(Graph graph)
         {
             int componentIndex = -1;
             Dictionary<int, List<int>> components = new Dictionary<int, List<int>>();
@@ -40,11 +40,11 @@ namespace BFS_FindComponents
             foreach (var vertex in graph.Vertices)
             {
                 componentIndex += 1;
-                DfsVisit(vertex, components, componentIndex);
+                Visit(vertex, components, componentIndex);
             }
         }
 
-        private static void DfsVisit(Vertex vertex, Dictionary<int, List<int>> components, int componentIndex)
+        private static void Visit(Vertex vertex, Dictionary<int, List<int>> components, int componentIndex)
         {
             Queue<Vertex> queueVertexes = new Queue<Vertex>();
             queueVertexes.Enqueue(vertex);

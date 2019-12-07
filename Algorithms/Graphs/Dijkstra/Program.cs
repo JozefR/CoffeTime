@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataStorage;
 
 namespace Dijkstra
@@ -11,44 +12,56 @@ namespace Dijkstra
 
             Graph graph = DataStorage.Program.CreateLinkedGraph(inputData);
 
-            Dijkstra(graph);
+            Dijkstra(graph.Vertices, 1);
         }
 
         /*
          * PSEUDO CODE
-         * Relaxation Method
-         * d[v] Set the length of current shortest path to starting vertex and the length zero.
-         * (Through the process of relaxation d[v] should eventually become delta (s,v) which is the length of shortest path from s to v)
-         * II[v] is the predecessor of v in the shortest path from s to v (from this we can then construct the shortest path).
-         *     if d[v] is greater or equal then the predecessor weight plus current weight
-         *        then d[v] becomes the value of predecessor plus current d[v] weight vertex
-         *        set the II[v] of current vertex to predecessor.
+         * Set the distance of all the vertices as infinity and start vertex = 0
+         * Save all the vertices in minheap
+         * Do until minheap is not empty
+         *     current vertex = extract from minheap
+         *         for each neighbour of current V
+         *             if current V distance + current edge distance < neighbour distance
+         *                 update neighbour distance and parent
+         * 
          */
 
-        private static void Dijkstra(Graph graph)
+        private static void Dijkstra(List<Vertex> graph, int startVertex)
         {
-            var shortestPath = graph.Vertices[0].PathValue;
-            var predecessor = new List<Vertex>
-            {
-                graph.Vertices[0]
-            };
+            const int infinity = 99999;
 
-            foreach (var vertex in graph.Vertices)
+            List<Vertex> minHeap = new List<Vertex>();
+
+            foreach (var vertex in graph)
             {
-                foreach (var edge in vertex.Edges)
+                if (vertex.Name == startVertex)
                 {
-                    Vertex ver = edge.To;
-                    Relaxation(predecessor, shortestPath, ver, edge);
+                    vertex.PathValue = 0;
+                    minHeap.Add(vertex);
+                    continue;
                 }
+                
+                vertex.PathValue = infinity;
+                minHeap.Add(vertex);
             }
-        }
 
-        private static void Relaxation(List<Vertex> predecessor, int shortestPath, Vertex ver, Edge current)
-        {
-            if (current.Weight > current.Weight + shortestPath)
+            while (minHeap.Count > 0)
             {
-                shortestPath += current.Weight;
-                predecessor.Add(ver);
+                var currentVertex = minHeap.First();
+                minHeap.Remove(currentVertex);
+                foreach (var neighbour in currentVertex.Edges)
+                {
+                    if (currentVertex.PathValue + neighbour.Weight < neighbour.To.PathValue)
+                    {
+                        neighbour.To.PathValue = currentVertex.PathValue + neighbour.Weight;
+                        neighbour.To.Parent = currentVertex;
+                        
+                        // refresh the priority queue
+                        minHeap.Remove(neighbour.To);
+                        minHeap.Insert(0, neighbour.To);
+                    }
+                }
             }
         }
     }

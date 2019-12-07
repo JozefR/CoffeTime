@@ -132,6 +132,8 @@ namespace DataStorage
         /// Relaxed path value for this vertex
         /// </summary>
         public int PathValue { get; set; }
+
+        public Vertex Parent { get; set; }
         public bool Visited { get; set; }
         public List<Edge> Edges { get; }
 

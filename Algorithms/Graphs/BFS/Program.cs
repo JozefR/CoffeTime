@@ -46,7 +46,7 @@ namespace BFS
          *         v mark as visited
          *         enqueue (all adjacent unvisited vertices of v)
          */
-        public static void BFS(Node graph)
+        public static void Bfs(Node graph)
         {
             Queue<Node> queue = new Queue<Node>();
             queue.Enqueue(graph);
