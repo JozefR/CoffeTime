@@ -2,6 +2,8 @@
 
 # Intro to Graphs
 
+### [Dijkstra](./Dijkstra/Dijkstra.md)
+
 ### BFS
 
 Pseudo code
