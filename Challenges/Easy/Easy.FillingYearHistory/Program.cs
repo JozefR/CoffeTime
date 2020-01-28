@@ -64,6 +64,7 @@ namespace Easy.FillingYearHistory
                 new object[] {new List<int> {2015, 2016, 2017, 2018, 2019, 2020}},
                 new object[] {new List<int> {2016, 2015}},
                 new object[] {new List<int> {2020, 2018}},
+                new object[] {new List<int> {2017, 2016}},
                 new object[] {new List<int> {2020 }},   
                 new object[] {new List<int> {2019 }},   
                 new object[] {new List<int> {2018 }},   
