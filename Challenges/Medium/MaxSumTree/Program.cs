@@ -22,10 +22,10 @@ namespace MaxSumTree
             TreeNode right = TreeNode.Leaf(11).WithLeaves(9, 2);
 
             TreeNode root = TreeNode.Join(5, left, right);
-
+            
             var solution = MaxSum(root);
         }
-
+        
         public static int MaxSum(TreeNode treeNode)
         {
             if (treeNode == null) return 0;
