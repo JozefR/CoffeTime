@@ -35,9 +35,9 @@ namespace Dijkstra
 
             foreach (var vertex in graph)
             {
-                if (vertex.Name == 5)
+                if (vertex.Name == startVertex)
                 {
-                    vertex.PathValue = 5;
+                    vertex.PathValue = 0;
                     minHeap.Add(vertex);
                     continue;
                 }
