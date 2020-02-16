@@ -53,26 +53,42 @@ For your convenience the characters of each rotor are in the pre-loaded constant
 ## Solutions
 
 ``` cs  
-public static bool is_valid_IP(string ipAddress)
+public static string[] FlapDisplay(string[] lines, int[][] rotors)
 {
-    if (Regex.IsMatch(ipAddress, @"^(?:(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(\.(?!$)|$)){4}$"))
-        return true;
+    string[] result = new String[lines.Length];
 
-    return false;
-}
+    for (int i = 0; i < lines.Length; i++)
+    {
+        string rotatedResult = "";
+        int rotatedRotors = 0;
 
-public static bool is_valid_IP2(string ipAddress)
-{
-    IPAddress ip;
-    bool validIp = IPAddress.TryParse(ipAddress, out ip);
-    return validIp && ip.ToString() == ipAddress;
-}
+        for (int j = 0; j < lines[i].Length; j++)
+        {
+            rotatedRotors += rotors[i][j];
+            var characterToRotate = lines[i][j];
+            var startIndex = ALPHABET.IndexOf(characterToRotate);
+            var newIndex = startIndex + rotatedRotors;
 
-public static bool is_valid_IP3(string IpAddress)
-{
-    var octet = "([1-9][0-9]{0,2})";
-    var reg = $@"{octet}\.{octet}\.{octet}\.{octet}";
-    return new Regex(reg).IsMatch(IpAddress);
+            if (newIndex < ALPHABET.Length)
+            {
+                var newChar = ALPHABET[newIndex];
+                rotatedResult += newChar;
+                continue;
+            }
+
+            while (newIndex >= ALPHABET.Length)
+            {
+                newIndex -= ALPHABET.Length;
+            }
+
+            var newChar2 = ALPHABET[newIndex];
+            rotatedResult += newChar2;
+        }
+
+        result[i] = rotatedResult;
+    }
+
+    return result;
 }
 ```
 
