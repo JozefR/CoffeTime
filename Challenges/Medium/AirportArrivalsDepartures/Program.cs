@@ -21,35 +21,29 @@ namespace AirportArrivalsDepartures
             for (int i = 0; i < lines.Length; i++)
             {
                 string rotatedResult = "";
-                int rotatedRotors = 0;
+                int rotorsSum = 0;
 
                 for (int j = 0; j < lines[i].Length; j++)
                 {
-                    rotatedRotors += rotors[i][j];
-                    var characterToRotate = lines[i][j];
-                    var startIndex = ALPHABET.IndexOf(characterToRotate);
-                    var newIndex = startIndex + rotatedRotors;
+                    rotorsSum += rotors[i][j];
+                    var oldCharacter = lines[i][j];
 
-                    if (newIndex < ALPHABET.Length)
-                    {
-                        var newChar = ALPHABET[newIndex];
-                        rotatedResult += newChar;
-                        continue;
-                    }
+                    var newCharacter = Rotation(oldCharacter, rotorsSum);
 
-                    while (newIndex >= ALPHABET.Length)
-                    {
-                        newIndex -= ALPHABET.Length;
-                    }
-
-                    var newChar2 = ALPHABET[newIndex];
-                    rotatedResult += newChar2;
+                    rotatedResult += newCharacter;
                 }
 
                 result[i] = rotatedResult;
             }
 
             return result;
+        }
+
+        private static char Rotation(in char oldCharacter, int rotorsSum)
+        {
+            var startFromIndex = ALPHABET.IndexOf(oldCharacter);
+            var rotation = (startFromIndex + rotorsSum) % ALPHABET.Length;
+            return ALPHABET[rotation];
         }
 
         public static string[] FlapDisplay2(String[] lines, int[][] rotors)

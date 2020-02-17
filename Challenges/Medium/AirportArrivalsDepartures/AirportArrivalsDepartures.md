@@ -92,4 +92,66 @@ public static string[] FlapDisplay(string[] lines, int[][] rotors)
 }
 ```
 
+### Refactored
+
+``` cs  
+public static string[] FlapDisplay(string[] lines, int[][] rotors)
+{
+    string[] result = new String[lines.Length];
+
+    for (int i = 0; i < lines.Length; i++)
+    {
+        string rotatedResult = "";
+        int rotorsSum = 0;
+
+        for (int j = 0; j < lines[i].Length; j++)
+        {
+            rotorsSum += rotors[i][j];
+            var oldCharacter = lines[i][j];
+
+            var newCharacter = Rotation(oldCharacter, rotorsSum);
+
+            rotatedResult += newCharacter;
+        }
+
+        result[i] = rotatedResult;
+    }
+
+    return result;
+}
+
+private static char Rotation(in char oldCharacter, int rotorsSum)
+{
+    var startFromIndex = ALPHABET.IndexOf(oldCharacter);
+    var rotation = (startFromIndex + rotorsSum) % ALPHABET.Length;
+    return ALPHABET[rotation];
+}
+```
+
+### Clever
+
+``` cs
+public static string[] FlapDisplay2(String[] lines, int[][] rotors)
+{
+    for (int l = 0; l < lines.Length; l++)
+    for (int i = 0; i < lines[l].Length; i++)
+    for (int k = i; k < lines[l].Length; k++)
+        lines[l] = lines[l].Remove(k, 1).Insert(k, lines[l][k].Rotate(rotors[l][i]));
+    return lines;
+}
+
+public static class CharExtension
+{
+    private static string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ?!@#&()|<>.:=-+*/0123456789";
+
+    public static string Rotate(this char c, int rotor)
+    {
+        int position = ALPHABET.IndexOf(c) + rotor;
+        while (position >= ALPHABET.Length)
+            position -= ALPHABET.Length;
+        return "" + ALPHABET[position];
+    }
+}
+```
+
 #### Previous: [Home &laquo;](../Medium.md)
