@@ -138,8 +138,6 @@ namespace AirportArrivalsDepartures
             return "" + ALPHABET[position];
         }
     }
-
-    
     
     [TestFixture]
     public class AirportArrivalsDeparturesTests
@@ -150,7 +148,7 @@ namespace AirportArrivalsDepartures
             // CAT => DOG
             var before = new[] {"CAT"};
             var rotors = new int[][] {new[] {1, 13, 27}};
-            var after = Program.FlapDisplay(before, rotors);
+            var after = Program.FlapDisplay2(before, rotors);
             var expected = new[] {"DOG"};
             Assert.AreEqual(expected, after);
         }
