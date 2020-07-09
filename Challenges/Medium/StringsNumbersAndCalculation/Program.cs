@@ -7,63 +7,15 @@ using NUnit.Framework;
 
 namespace StringsNumbersAndCalculation
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
-
-    class OtherSolutions
-    {
-        public string calculateString(string calcIt)
-        {
-            string expression = string.Concat(Regex.Matches(calcIt, @"[\d\+\-\/\*\.]").Cast<Match>().Select(e => e.Value));
-            double result = Convert.ToDouble(new DataTable().Compute(expression, null));
-
-            return (Math.Round(result)).ToString();
-        }
-
-        public string calculateString1(string calcIt)
-        {
-            var temp = calcIt
-                .Split('*', '/', '+', '-')
-                .Select(x => String.Concat(x.ToCharArray().Where(y => Char.IsDigit(y) || y == '.')))
-                .ToArray();
-
-            double res;
-
-            if (calcIt.Contains('*'))
-                res = (double.Parse(temp[0]) * double.Parse(temp[1]));
-            else if (calcIt.Contains('/'))
-                res = (double.Parse(temp[0]) / double.Parse(temp[1]));
-            else if (calcIt.Contains('+'))
-                res = (double.Parse(temp[0]) + double.Parse(temp[1]));
-            else
-                res = (double.Parse(temp[0]) - double.Parse(temp[1]));
-
-            return Convert.ToInt64(res).ToString();
-        }
-
-        public string calculateString2(string calcIt)
-        {
-            char operation = calcIt[calcIt.IndexOfAny("+-*/".ToCharArray())];
-            var numbers = calcIt.Split(operation).Select(s=>double.Parse(string.Concat(s.Where(c=>char.IsDigit(c)||c=='.')))).ToArray();
-            return operation switch
-            {
-                '+' => Convert.ToInt64(numbers[0] + numbers[1]).ToString(),
-                '-' => Convert.ToInt64(numbers[0] - numbers[1]).ToString(),
-                '*' => Convert.ToInt64(numbers[0] * numbers[1]).ToString(),
-                '/' => Convert.ToInt64(numbers[0] / numbers[1]).ToString(),
-            };
-        }
-    }
-
     class Calculator
     {
         private static readonly List<char> _possibleOperations = new List<char> {'+', '-', '/', '*'};
         private static string _resultOperation = "";
+
+        static void Main(string[] args)
+        {
+            Calculate("test");
+        }
 
         public static string Calculate(string dirtyString)
         {
@@ -124,6 +76,72 @@ namespace StringsNumbersAndCalculation
             }
 
             return Math.Round(calculation);
+        }
+    }
+
+    class Calculator1
+    {
+        static void Main(string[] args)
+        {
+            CalculateString("test");
+        }
+
+        private static string CalculateString(string calcIt)
+        {
+            string expression = string.Concat(Regex.Matches(calcIt, @"[\d\+\-\/\*\.]").Cast<Match>().Select(e => e.Value));
+            double result = Convert.ToDouble(new DataTable().Compute(expression, null));
+
+            return (Math.Round(result)).ToString();
+        }
+    }
+
+    class Calculator2
+    {
+        static void Main(string[] args)
+        {
+            CalculateString("test");
+        }
+
+        private static string CalculateString(string calcIt)
+        {
+            var temp = calcIt
+                .Split('*', '/', '+', '-')
+                .Select(x => String.Concat(x.ToCharArray().Where(y => Char.IsDigit(y) || y == '.')))
+                .ToArray();
+
+            double res;
+
+            if (calcIt.Contains('*'))
+                res = (double.Parse(temp[0]) * double.Parse(temp[1]));
+            else if (calcIt.Contains('/'))
+                res = (double.Parse(temp[0]) / double.Parse(temp[1]));
+            else if (calcIt.Contains('+'))
+                res = (double.Parse(temp[0]) + double.Parse(temp[1]));
+            else
+                res = (double.Parse(temp[0]) - double.Parse(temp[1]));
+
+            return Convert.ToInt64(res).ToString();
+        }
+    }
+
+    class Calculator3
+    {
+        static void Main(string[] args)
+        {
+            CalculateString("test");
+        }
+
+        private static string CalculateString(string calcIt)
+        {
+            char operation = calcIt[calcIt.IndexOfAny("+-*/".ToCharArray())];
+            var numbers = calcIt.Split(operation).Select(s=>double.Parse(string.Concat(s.Where(c=>char.IsDigit(c)||c=='.')))).ToArray();
+            return operation switch
+            {
+                '+' => Convert.ToInt64(numbers[0] + numbers[1]).ToString(),
+                '-' => Convert.ToInt64(numbers[0] - numbers[1]).ToString(),
+                '*' => Convert.ToInt64(numbers[0] * numbers[1]).ToString(),
+                '/' => Convert.ToInt64(numbers[0] / numbers[1]).ToString(),
+            };
         }
     }
 
