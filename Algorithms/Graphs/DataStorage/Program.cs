@@ -167,5 +167,10 @@ namespace DataStorage
         public Vertex To { get; }
 
         public int Weight { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format($"Edge {From}{To}");
+        }
     }
 }

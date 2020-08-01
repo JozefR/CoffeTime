@@ -34,7 +34,7 @@ namespace BFS
             v4.Neighbours.Add(v5);
             v6.Neighbours.Add(v7);
 
-            BFS2(v1);
+            Bfs(v1);
         } 
         
         /* PSEUDO
@@ -67,35 +67,7 @@ namespace BFS
             }
         }
 
-        public static void BFS2(Node graph)
-        {
-            Queue queue = new Queue();
-
-            queue.EnQueue(graph);
-            while (queue.IsEmpty() == false)
-            {
-                if (queue.Front().Visited == false)
-                {
-                    Console.WriteLine(queue.Front().Value);
-                    queue.Front().Visited = true;
-
-                    foreach (var neighbour in queue.Front().Neighbours)
-                    {
-                        queue.EnQueue(neighbour);
-                    }
-
-                    queue.DeQueue();
-                }
-                else
-                {
-                    queue.DeQueue();
-                }
-            }
-        }
-
-
-
-        // Helper Queue => just for demonstration how could queue work
+        // Helper Queue => just for demonstration how can queue work
         public class Queue
         {
             private List<Node> _data;

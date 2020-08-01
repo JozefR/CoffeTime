@@ -46,12 +46,12 @@ namespace DFS_Recursion
                 {
                     componentIndex += 1;
                     components[componentIndex] = new List<int>();
-                    Visit(vertex, graph, visited, componentIndex, components);
+                    Visit(vertex, visited, componentIndex, components);
                 }
             }
         }
 
-        private static void Visit(Vertex vertex, Graph graph, bool[] visited, in int componentIndex, Dictionary<int, List<int>> components)
+        private static void Visit(Vertex vertex, bool[] visited, in int componentIndex, Dictionary<int, List<int>> components)
         {
             visited[vertex.Name - 1] = true;
             components[componentIndex].Add(vertex.Name);
@@ -61,7 +61,7 @@ namespace DFS_Recursion
                 Vertex ver = edge.To;
                 if (visited[ver.Name - 1] == false)
                 {
-                    Visit(ver, graph, visited, componentIndex, components);
+                    Visit(ver, visited, componentIndex, components);
                 }
             }
         }
