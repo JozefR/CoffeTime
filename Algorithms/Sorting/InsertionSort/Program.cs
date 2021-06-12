@@ -6,14 +6,13 @@ namespace InsertionSort
     {
         static void Main(string[] args)
         {
-            int[] array = {1, 3, 5, 2, 10, 6, 7};
-            int[] array2 = {1, 3, 4, 5, 10, 2, 5, 6};
+            int[] array = {5, 3, 5, 2, 10, 6, 7};
+            int[] array2 = {11, 3, 4, 5, 10, 2, 5, 6};
 
             PrintResults(InsertionSort(array));
             PrintResults(InsertionSortRefactored(array2));
         }
 
-        #region insertionSort
         private static int[] InsertionSort(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -32,9 +31,7 @@ namespace InsertionSort
 
             return array;
         }
-        #endregion
 
-        #region insertionSortRefactored
         private static int[] InsertionSortRefactored(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -57,7 +54,6 @@ namespace InsertionSort
 
             array[leftIndex + 1] = key;
         }
-        #endregion
 
         private static void PrintResults(int[] results)
         {

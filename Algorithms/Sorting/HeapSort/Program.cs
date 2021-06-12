@@ -5,11 +5,43 @@
         static void Main(string[] args)
         {
             int[] array = {5, 10, 1, 3, 6, 8, 2, 4, 7, 9};
-
-            HeapSort(array);
+            int[] array1 = {5, 10, 1, 3, 6, 8, 2, 4, 7, 9};
+            HeapSort(array1);
         }
 
-        #region heapSortMain
+        private static int[] CreateUpperHeap(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                UpperHeaping(array, i);
+            }
+            
+            return array;
+        }
+
+        private static void UpperHeaping(int[] array, int i)
+        {
+            var childIndex = i;
+            var childValue = array[i];
+            
+            while (childIndex > 0)
+            {
+                var fatherIndex = (childIndex - 1) / 2;
+                var fatherValue = array[fatherIndex];
+                
+                if (childValue > fatherValue)
+                {
+                    array[childIndex] = fatherValue;
+                    array[fatherIndex] = childValue;
+                    childIndex = fatherIndex;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
         private static int[] HeapSort(int[] array)
         {
             // First create heap from input array
@@ -38,9 +70,7 @@
 
             return array;
         }
-        #endregion
 
-        #region heaping
         // Create heap data structure.
         private static void Heaping(int[] array)
         {
@@ -49,9 +79,7 @@
                 Upper(array, i);
             }
         }
-        #endregion
 
-        #region upper
         // The idea is check for each number if father is greater,
         // if not move that number up and continue until father has lower value.
         private static void Upper(int[] array, int i)
@@ -79,9 +107,7 @@
                 }
             }
         }
-        #endregion
 
-        #region down
         private static void Down(int[] array, int lastIndex)
         {
             // After swap last index become father and this can interrupt heap
@@ -105,14 +131,12 @@
                     Swap(array, fatherIndex, childIndex);
                     fatherIndex = childIndex;
                 }
-
                 else
                 {
                     return;
                 }
             }
         }
-        #endregion
 
         private static void Swap(int[] array, int i, int j)
         {

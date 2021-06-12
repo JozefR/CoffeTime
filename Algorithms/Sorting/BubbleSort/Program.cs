@@ -11,7 +11,6 @@
             BubbleSortSimple(array2);
         }
 
-        #region bubbleSort
         private static int[] BubbleSort(int[] array)
         {
             bool continueOrdering;
@@ -35,9 +34,7 @@
 
             return array;
         }
-        #endregion
 
-        #region bubbleSortSimple
         private static int[] BubbleSortSimple(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -57,15 +54,12 @@
 
             return array;
         }
-        #endregion
 
-        #region swapHelper
         private static void Swap(int[] array, int a, int b)
         {
             var temp = array[a];
             array[a] = array[b];
             array[b] = temp;
         }
-        #endregion
     }
 }

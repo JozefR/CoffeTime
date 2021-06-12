@@ -8,11 +8,10 @@ namespace SelectionSort
         {
             int[] array = new[] {-2, -10, 0, 1, 3, 5, 2, 10, 6, 7};
 
-            PrintResults(selectionSort(array));
+            PrintResults(SelectionSort(array));
         }
 
-        #region selectionSort
-        private static int[] selectionSort(int[] array)
+        private static int[] SelectionSort(int[] array)
         {
             for (int i = 0; i < array.Length; i++) // (n - 1)
             {
@@ -31,13 +30,12 @@ namespace SelectionSort
             }
             return array;
         }
-        #endregion
 
-        private static int[] selectionSortRepeat(int[] array)
+        private static int[] SelectionSortRepeat(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
-                int indexOfMinimum = indexOfMin(array, i);
+                int indexOfMinimum = IndexOfMin(array, i);
 
                 if (indexOfMinimum != i)
                 {
@@ -48,7 +46,7 @@ namespace SelectionSort
             return array;
         }
 
-        private static int indexOfMin(int[] array, int i)
+        private static int IndexOfMin(int[] array, int i)
         {
             var minimum = array[i];
             var indexOfMinimum = i;
@@ -65,7 +63,7 @@ namespace SelectionSort
             return indexOfMinimum;
         }
 
-        private static int[] selectionSortRefactored(int[] array)
+        private static int[] SelectionSortRefactored(int[] array)
         {
             for (int sortedIndex = 0; sortedIndex < array.Length; sortedIndex++)
             {
