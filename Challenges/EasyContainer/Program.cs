@@ -1,12 +1,74 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace EasyContainer
 {
-    class Program
+    class TwoSum
     {
-        static void Main(string[] args)
+        /*
+        Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+        You may assume that each input would have exactly one solution, and you may not use the same element twice.
+        You can return the answer in any order.
+
+        Example 1:
+
+        Input: nums = [2,7,11,15], target = 9
+        Output: [0,1]
+        Output: Because nums[0] + nums[1] == 9, we return [0, 1].
+        Example 2:
+
+        Input: nums = [3,2,4], target = 6
+        Output: [1,2]
+        Example 3:
+
+        Input: nums = [3,3], target = 6
+        Output: [0,1]
+
+        Constraints:
+
+        2 <= nums.length <= 10 ^ 4
+        -10 ^ 9 <= nums[i] <= 10 ^ 9
+        -10 ^ 9 <= target <= 10 ^ 9
+        Only one valid answer exists.
+
+        Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
+        
+        Complexity Analysis
+
+         */
+
+        public static int[] FindTwoSum(int[] array, int target)
         {
-            Console.WriteLine("Hello World!");
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i + 1; j < array.Length; j++)
+                {
+                    if (array[i] + array[j] == target)
+                    {
+                        return new[] { array[i], array[j] };
+                    }
+                }
+            }
+
+            return null;
+        }
+        /*
+        Complexity Analysis
+        Time complexity: O(n^2). For each element, we try to find its complement by looping through the rest of the array which takes O(n) time. Therefore, the time complexity is O(n^2).
+        Space complexity: O(1). The space required does not depend on the size of the input array, so only constant space is used.
+         */
+        
+
+        [TestFixture]
+        public static class TwoSumTests
+        {
+            [Test]
+            public static void AreTwoSums()
+            {
+                Assert.AreEqual(new int[] { 0, 1 }, FindTwoSum(new []{ 2, 7, 11, 15 }, 9));
+                Assert.AreEqual(new int[] { 1, 2 }, FindTwoSum(new []{ 3, 2, 4 }, 6));
+                Assert.AreEqual(new int[] { 0, 1 }, FindTwoSum(new []{ 3 ,3 }, 6));
+            }
         }
     }
 }
