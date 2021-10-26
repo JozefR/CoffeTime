@@ -6,6 +6,7 @@ namespace EasyContainer
     class TwoSum
     {
         /*
+         https://leetcode.com/problems/two-sum/
         Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
         You may assume that each input would have exactly one solution, and you may not use the same element twice.
         You can return the answer in any order.
@@ -37,7 +38,7 @@ namespace EasyContainer
 
          */
 
-        public static int[] FindTwoSum(int[] array, int target)
+        public static int[] TwoSumBruteForce(int[] array, int target)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -45,7 +46,7 @@ namespace EasyContainer
                 {
                     if (array[i] + array[j] == target)
                     {
-                        return new[] { array[i], array[j] };
+                        return new[] { i, j };
                     }
                 }
             }
@@ -57,17 +58,40 @@ namespace EasyContainer
         Time complexity: O(n^2). For each element, we try to find its complement by looping through the rest of the array which takes O(n) time. Therefore, the time complexity is O(n^2).
         Space complexity: O(1). The space required does not depend on the size of the input array, so only constant space is used.
          */
-        
 
+        public static int[] TwoSumDictionary(int[] array, int target)
+        {
+            var dictionary = new Dictionary<int, int>();
+
+            for (var i = 0; i < array.Length; i++)
+            {
+                if (dictionary.ContainsKey(target - array[i]))
+                {
+                    return new[] { dictionary[target - array[i]], i };
+                }
+
+                if (!dictionary.ContainsKey(array[i]))
+                {
+                    dictionary.Add(array[i], i);
+                }
+            }
+
+            return null;
+        }
+        
         [TestFixture]
         public static class TwoSumTests
         {
             [Test]
             public static void AreTwoSums()
             {
-                Assert.AreEqual(new int[] { 0, 1 }, FindTwoSum(new []{ 2, 7, 11, 15 }, 9));
-                Assert.AreEqual(new int[] { 1, 2 }, FindTwoSum(new []{ 3, 2, 4 }, 6));
-                Assert.AreEqual(new int[] { 0, 1 }, FindTwoSum(new []{ 3 ,3 }, 6));
+                Assert.AreEqual(new int[] { 0, 1 }, TwoSumBruteForce(new []{ 2, 7, 11, 15 }, 9));
+                Assert.AreEqual(new int[] { 1, 2 }, TwoSumBruteForce(new []{ 3, 2, 4 }, 6));
+                Assert.AreEqual(new int[] { 0, 1 }, TwoSumBruteForce(new []{ 3 ,3 }, 6));
+                
+                Assert.AreEqual(new int[] { 0, 1 }, TwoSumDictionary(new []{ 2, 7, 11, 15 }, 9));
+                Assert.AreEqual(new int[] { 1, 2 }, TwoSumDictionary(new []{ 3, 2, 4 }, 6));
+                Assert.AreEqual(new int[] { 0, 1 }, TwoSumDictionary(new []{ 3 ,3 }, 6));
             }
         }
     }
