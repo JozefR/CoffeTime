@@ -111,6 +111,7 @@ namespace EasyContainer
     class AddTwoNumbersMedium
     {
         /*
+        https://leetcode.com/problems/add-two-numbers/
         You are given two non-empty linked lists representing two non-negative integers. 
         The digits are stored in reverse order, and each of their nodes contains a single digit. 
         Add the two numbers and return the sum as a linked list.
@@ -215,6 +216,44 @@ namespace EasyContainer
 
             return temp;
         }
+        
+        // Sum just like on the paper
+        // start from the lest significant value, which is in this case head, because of reversed digits
+        // handle carry which can be 0 or 1
+        // go on until no digits left on both linked lists
+        public static ListNode AddTwoNumbersPaper(ListNode l1, ListNode l2)
+        {
+            var p = l1;
+            var q = l2;
+            var carry = 0;
+            var dummyHead = new ListNode();
+            var curr = dummyHead;
+            
+            while (p != null || q != null)
+            {
+                var a = p != null ? p.val : 0;
+                var b = q != null ? q.val : 0;
+
+                var sum = a + b + carry;
+                carry = sum / 10;
+                curr.val = sum % 10;
+
+                if (p != null) p = p.next;
+                if (q != null) q = q.next;
+
+                if (p != null || q != null)
+                {
+                    curr.next = new ListNode();
+                    curr = curr.next;
+                }
+            }
+
+            if (carry > 0) {
+                curr.next = new ListNode(carry);
+            }
+            
+            return dummyHead;
+        }
 
         [TestFixture]
         public static class AddTwoNumbersTests
@@ -222,19 +261,29 @@ namespace EasyContainer
             [Test]
             public static void AreAddTwoNumbers()
             {
-                var l13 = new ListNode(3, null);
-                var l12 = new ListNode(4, l13);
-                var l11 = new ListNode(2, l12);
+                var l17 = new ListNode(9, null);
+                var l16 = new ListNode(9, l17);
+                var l15 = new ListNode(9, l16);
+                var l14 = new ListNode(9, l15);
+                var l13 = new ListNode(9, l14);
+                var l12 = new ListNode(9, l13);
+                var l11 = new ListNode(9, l12);
                 
-                var l23 = new ListNode(4, null);
-                var l22 = new ListNode(6, l23);
-                var l21 = new ListNode(5, l22);     
+                var l24 = new ListNode(9, null);
+                var l23 = new ListNode(9, l24);
+                var l22 = new ListNode(9, l23);
+                var l21 = new ListNode(9, l22);
                 
-                var l33 = new ListNode(8, null);
+                var l38 = new ListNode(8, null);
+                var l37 = new ListNode(9, l38);
+                var l36 = new ListNode(9, l37);
+                var l35 = new ListNode(9, l36);
+                var l34 = new ListNode(0, l35);
+                var l33 = new ListNode(0, l34);
                 var l32 = new ListNode(0, l33);
-                var l31 = new ListNode(7, l32);
+                var l31 = new ListNode(1, l32);
                 
-                Assert.AreEqual(l31, AddTwoNumbers(l11, l21));
+                Assert.AreEqual(l31, AddTwoNumbersPaper(l11, l22));
             }
         }
     }
