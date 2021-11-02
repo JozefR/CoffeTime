@@ -108,182 +108,62 @@ namespace EasyContainer
         }
     } 
     
-    class AddTwoNumbersMedium
+    class PalindromNumber
     {
         /*
-        https://leetcode.com/problems/add-two-numbers/
-        You are given two non-empty linked lists representing two non-negative integers. 
-        The digits are stored in reverse order, and each of their nodes contains a single digit. 
-        Add the two numbers and return the sum as a linked list.
-        
+        Given an integer x, return true if x is palindrome integer.
+
+        An integer is a palindrome when it reads the same backward as forward. For example, 121 is palindrome while 123 is not.
+
         Example 1:
 
-        2 -> 4 -> 3
-        5 -> 6 -> 4
-        -----------
-        7 -> 0 -> 8
-
-        You may assume the two numbers do not contain any leading zero, except the number 0 itself.
-        
-        Input: l1 = [2,4,3], l2 = [5,6,4]
-        Output: [7,0,8]
-        Explanation: 342 + 465 = 807.
-        
+        Input: x = 121
+        Output: true
         Example 2:
 
-        Input: l1 = [0], l2 = [0]
-        Output: [0]
+        Input: x = -121
+        Output: false
+        Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
         Example 3:
 
-        Example 3:
-        
-        Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-        Output: [8,9,9,9,0,0,0,1]
-        
+        Input: x = 10
+        Output: false
+        Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+        Example 4:
+
+        Input: x = -101
+        Output: false
+
+
         Constraints:
+        -231 <= x <= 231 - 1
 
-        The number of nodes in each linked list is in the range [1, 100].   
-        0 <= Node.val <= 9
-        It is guaranteed that the list represents a number that does not have leading zeros.
+        Follow up: Could you solve it without converting the integer to a string?
          */
 
-        /**
-         * Definition for singly-linked list.
-         * public class ListNode {
-         *     public int val;
-         *     public ListNode next;
-         *     public ListNode(int val=0, ListNode next=null) {
-         *         this.val = val;
-         *         this.next = next;
-         *     }
-         * }
-         */
-        public class ListNode
+        public static bool IsPalindrom(int x)
         {
-            public int val;
-            public ListNode next;
+            var a = x.ToString();
 
-            public ListNode(int val = 0, ListNode next = null)
+            for (int i = 0; i < a.Length; i++)
             {
-                this.val = val;
-                this.next = next;
-            }
-        }
-        
-        // reverse the lists, also the result
-        // append the numbers to string
-        // sum both strings
-        // return result as a reversed linked list
-        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
-        {
-            var l1String = string.Empty;
-            var iterate = l1;
-
-            while (iterate != null)
-            {
-                l1String += iterate.val;
-
-                iterate = iterate.next;
-            }
-            
-            char[] l1ReversedChar = l1String.ToCharArray();
-            Array.Reverse(l1ReversedChar);
-            string l1Reversed = new string(l1ReversedChar);
-
-            var l2string = string.Empty;
-            var iterate2 = l2;
-            
-            while (iterate2 != null)
-            {
-                l2string += iterate2.val;
-
-                iterate2 = iterate2.next;
-            }
-
-            char[] l2ReversedChar = l2string.ToCharArray();
-            Array.Reverse(l2ReversedChar);
-            string l2Reversed = new string(l2ReversedChar);
-
-            var sum = (BigInteger.Parse(l1Reversed.ToString()) + BigInteger.Parse(l2Reversed.ToString())).ToString().ToList();
-
-            ListNode temp = new ListNode(int.Parse(sum[0].ToString()), null);
-            ListNode result = null;
-            for (int i = 1; i < sum.Count; i++)
-            { 
-                var second = new ListNode(int.Parse(sum[i].ToString()), temp);
-                temp = second;
-            }
-
-            return temp;
-        }
-        
-        // Sum just like on the paper
-        // start from the lest significant value, which is in this case head, because of reversed digits
-        // handle carry which can be 0 or 1
-        // go on until no digits left on both linked lists
-        public static ListNode AddTwoNumbersPaper(ListNode l1, ListNode l2)
-        {
-            var p = l1;
-            var q = l2;
-            var carry = 0;
-            var dummyHead = new ListNode();
-            var curr = dummyHead;
-            
-            while (p != null || q != null)
-            {
-                var a = p != null ? p.val : 0;
-                var b = q != null ? q.val : 0;
-
-                var sum = a + b + carry;
-                carry = sum / 10;
-                curr.val = sum % 10;
-
-                if (p != null) p = p.next;
-                if (q != null) q = q.next;
-
-                if (p != null || q != null)
+                if (a[i] != a[a.Length - 1 - i])
                 {
-                    curr.next = new ListNode();
-                    curr = curr.next;
+                    return false;
                 }
             }
 
-            if (carry > 0) {
-                curr.next = new ListNode(carry);
-            }
-            
-            return dummyHead;
+            return true;
         }
 
         [TestFixture]
-        public static class AddTwoNumbersTests
+        public static class PalindromTests
         {
             [Test]
-            public static void AreAddTwoNumbers()
+            public static void TestCases()
             {
-                var l17 = new ListNode(9, null);
-                var l16 = new ListNode(9, l17);
-                var l15 = new ListNode(9, l16);
-                var l14 = new ListNode(9, l15);
-                var l13 = new ListNode(9, l14);
-                var l12 = new ListNode(9, l13);
-                var l11 = new ListNode(9, l12);
-                
-                var l24 = new ListNode(9, null);
-                var l23 = new ListNode(9, l24);
-                var l22 = new ListNode(9, l23);
-                var l21 = new ListNode(9, l22);
-                
-                var l38 = new ListNode(8, null);
-                var l37 = new ListNode(9, l38);
-                var l36 = new ListNode(9, l37);
-                var l35 = new ListNode(9, l36);
-                var l34 = new ListNode(0, l35);
-                var l33 = new ListNode(0, l34);
-                var l32 = new ListNode(0, l33);
-                var l31 = new ListNode(1, l32);
-                
-                Assert.AreEqual(l31, AddTwoNumbersPaper(l11, l22));
+                Assert.AreEqual(true, IsPalindrom(121));
+                Assert.AreEqual(false, IsPalindrom(123));
             }
         }
     }
