@@ -180,13 +180,8 @@ namespace EasyContainer
         C             100
         D             500
         M             1000
-                        Assert.AreEqual(9, RomanToInt("IX"));
-                Assert.AreEqual(40, RomanToInt("XL"));
-                Assert.AreEqual(90, RomanToInt("XC"));
-                Assert.AreEqual(400, RomanToInt("CD"));
-                Assert.AreEqual(900, RomanToInt("CM"));
          */
-        public static int RomanToInt(string s)
+        public static int RomanToInt2(string s)
         {
             var romans = new Dictionary<string, int>
             {
@@ -241,6 +236,39 @@ namespace EasyContainer
             
             return result;
         }
+        
+        public static int RomanToInt(string s)
+        {
+            var romans = new Dictionary<char, int>
+            {
+                { 'I', 1},
+                { 'V', 5},
+                { 'X', 10},
+                { 'L', 50},
+                { 'C', 100},
+                { 'D', 500},
+                { 'M', 1000},
+            };
+
+            var result = 0;
+            var stringLength = s.Length;
+            for (int i = 0; i < stringLength; i++)
+            {
+                var value = romans[s[i]];
+                var valueNext = i + 1 < stringLength ? romans[s[i + 1]] : 0;
+
+                if (value >= valueNext)
+                {
+                    result += value;
+                }
+                else
+                {
+                    result -= value;
+                }
+            }
+            
+            return result;
+        }
 
         [TestFixture]
         public static class RomanToIntegerTests
@@ -248,13 +276,13 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
+                Assert.AreEqual(58, RomanToInt("LVIII"));
                 Assert.AreEqual(4, RomanToInt("IV"));
                 Assert.AreEqual(9, RomanToInt("IX"));
                 Assert.AreEqual(40, RomanToInt("XL"));
                 Assert.AreEqual(90, RomanToInt("XC"));
                 Assert.AreEqual(400, RomanToInt("CD"));
                 Assert.AreEqual(900, RomanToInt("CM"));
-                Assert.AreEqual(58, RomanToInt("LVIII"));
                 Assert.AreEqual(1476, RomanToInt("MCDLXXVI"));
                 Assert.AreEqual(1994, RomanToInt("MCMXCIV"));
             }
