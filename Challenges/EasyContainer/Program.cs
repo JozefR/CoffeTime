@@ -166,5 +166,98 @@ namespace EasyContainer
                 Assert.AreEqual(false, IsPalindrom(123));
             }
         }
+    }    
+    
+    class RomanToInteger
+    {
+        /*
+        https://leetcode.com/problems/roman-to-integer/
+        Symbol       Value
+        I             1
+        V             5
+        X             10
+        L             50
+        C             100
+        D             500
+        M             1000
+                        Assert.AreEqual(9, RomanToInt("IX"));
+                Assert.AreEqual(40, RomanToInt("XL"));
+                Assert.AreEqual(90, RomanToInt("XC"));
+                Assert.AreEqual(400, RomanToInt("CD"));
+                Assert.AreEqual(900, RomanToInt("CM"));
+         */
+        public static int RomanToInt(string s)
+        {
+            var romans = new Dictionary<string, int>
+            {
+                { "I", 1},
+                { "V", 5},
+                { "X", 10},
+                { "L", 50},
+                { "C", 100},
+                { "D", 500},
+                { "M", 1000},
+                { "IV", 4},
+                { "IX", 9},
+                { "XL", 40},
+                { "XC", 90},
+                { "CD", 400},
+                { "CM", 900},
+            };
+
+            var result = 0;
+            for (int i = 0; i < s.ToString().Length; i++)
+            {
+                var firstChars = s[i].ToString();
+                var secondChars = "";
+                var thirdChars = "";
+
+                if (i + 1 < s.ToString().Length)
+                {
+                    secondChars = s.Substring(i, 2);
+                }
+
+                if (i + 2 < s.ToString().Length)
+                {
+                    thirdChars = s.Substring(i, 3);
+                }
+
+                if (romans.ContainsKey(thirdChars))
+                {
+                    result += romans[thirdChars];
+                    result += romans[firstChars];
+                    i += 2;
+                }
+                else if (romans.ContainsKey(secondChars))
+                {
+                    result += romans[secondChars];
+                    i += 1;
+                }
+                else
+                {
+                    result += romans[firstChars];
+                }
+            }
+            
+            return result;
+        }
+
+        [TestFixture]
+        public static class RomanToIntegerTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(4, RomanToInt("IV"));
+                Assert.AreEqual(9, RomanToInt("IX"));
+                Assert.AreEqual(40, RomanToInt("XL"));
+                Assert.AreEqual(90, RomanToInt("XC"));
+                Assert.AreEqual(400, RomanToInt("CD"));
+                Assert.AreEqual(900, RomanToInt("CM"));
+                Assert.AreEqual(58, RomanToInt("LVIII"));
+                Assert.AreEqual(1476, RomanToInt("MCDLXXVI"));
+                Assert.AreEqual(1994, RomanToInt("MCMXCIV"));
+            }
+        }
     }
 }
