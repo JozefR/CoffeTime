@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using NUnit.Framework;
 
 namespace EasyContainer
@@ -285,6 +286,74 @@ namespace EasyContainer
                 Assert.AreEqual(900, RomanToInt("CM"));
                 Assert.AreEqual(1476, RomanToInt("MCDLXXVI"));
                 Assert.AreEqual(1994, RomanToInt("MCMXCIV"));
+            }
+        }
+    }
+    
+    class LongestCommonPrefixSolution
+    {
+        /*
+        https://leetcode.com/problems/longest-common-prefix/
+         */
+        
+        public static string LongestCommonPrefix(string[] strings)
+        {
+            if (strings.Length == 0)
+            {
+                return string.Empty;
+            }
+            
+            string commonPrefix = strings[0];
+            bool noCommonPrefix = false;
+
+            for (int i = 1; i < strings.Length; i++)
+            {
+                var word = strings[i];
+
+                for (int j = 0; j < commonPrefix.Length; j++)
+                {
+                    if (word.Length - 1 < j)
+                    {
+                        var startIndex = j;
+                        var numberOfRestChars = commonPrefix.Length - j;
+                        commonPrefix = commonPrefix.Remove(startIndex, numberOfRestChars);
+                        break;
+                    }
+                    
+                    var prefixDoesntEqual = commonPrefix[j] != word[j];
+
+                    if (prefixDoesntEqual && j == 0)
+                    {
+                        noCommonPrefix = true;
+                        break;
+                    }
+
+                    if (prefixDoesntEqual)
+                    {
+                        commonPrefix = commonPrefix.Remove(j, commonPrefix.Length - j);
+                    }
+                }
+
+                if (noCommonPrefix == true)
+                {
+                    return string.Empty;
+                }
+            }
+
+            return commonPrefix;
+        }
+        
+
+        [TestFixture]
+        public static class LongestCommonPrefixTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual("", LongestCommonPrefix(new [] {"","b"}));
+                Assert.AreEqual("C", LongestCommonPrefix(new [] {"CIR","CAR"}));
+                Assert.AreEqual("fl", LongestCommonPrefix(new [] {"flower","flow","flight"}));
+                Assert.AreEqual("", LongestCommonPrefix(new [] {"dog","racecar","car"}));
             }
         }
     }
