@@ -343,6 +343,37 @@ namespace EasyContainer
             return commonPrefix;
         }
         
+        public static string LongestCommonPrefix1(string[] strings)
+        {
+            if (strings.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            var commonPrefix = new StringBuilder(strings[0]);
+
+            for (int i = 1; i < strings.Length; i++)
+            {
+                var minimumLength = commonPrefix.Length < strings[i].Length ? commonPrefix.Length : strings[i].Length;
+                var wordPrefixToCheck = strings[i];
+
+                if (minimumLength < commonPrefix.Length)
+                {
+                    commonPrefix.Remove(minimumLength, commonPrefix.Length - minimumLength);
+                }
+
+                for (int j = 0; j < minimumLength; j++)
+                {
+                    if (commonPrefix[j] != wordPrefixToCheck[j])
+                    {
+                        commonPrefix.Remove(j, commonPrefix.Length - j);
+                        break;
+                    }
+                }
+            }
+
+            return commonPrefix.ToString();
+        }
 
         [TestFixture]
         public static class LongestCommonPrefixTests
@@ -350,10 +381,11 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual("", LongestCommonPrefix(new [] {"","b"}));
-                Assert.AreEqual("C", LongestCommonPrefix(new [] {"CIR","CAR"}));
-                Assert.AreEqual("fl", LongestCommonPrefix(new [] {"flower","flow","flight"}));
-                Assert.AreEqual("", LongestCommonPrefix(new [] {"dog","racecar","car"}));
+                Assert.AreEqual("", LongestCommonPrefix1(new [] {"","b"}));
+                Assert.AreEqual("a", LongestCommonPrefix1(new [] {"ab","a"}));
+                Assert.AreEqual("C", LongestCommonPrefix1(new [] {"CIR","CAR"}));
+                Assert.AreEqual("fl", LongestCommonPrefix1(new [] {"flower","flow","flight"}));
+                Assert.AreEqual("", LongestCommonPrefix1(new [] {"dog","racecar","car"}));
             }
         }
     }
