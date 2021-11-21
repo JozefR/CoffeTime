@@ -522,4 +522,89 @@ namespace EasyContainer
             }
         }
     }
+
+    class MergeTwoSortedListSolution
+    {
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+
+        private static ListNode MergeTwoSortedList(ListNode l1, ListNode l2)
+        {
+            var merged = l1 != null || l2 != null ? new ListNode() : null;
+
+            var l1Next = l1;
+            var l2Next = l2;
+            var head = merged;
+
+            while (l1Next != null || l2Next != null)
+            {
+                if (l1Next != null && l2Next != null)
+                {
+                    if (l1Next.val <= l2Next.val)
+                    {
+                        merged.val = l1Next.val;
+                        l1Next = l1Next.next;
+                        merged.next = new ListNode();
+                        merged = merged.next;
+                        continue;
+                    }
+                    else
+                    {
+                        merged.val = l2Next.val;
+                        l2Next = l2Next.next;
+                        merged.next = new ListNode();
+                        merged = merged.next;
+                        continue;
+                    }
+                }
+
+                if (l1Next != null)
+                {
+                    merged.val = l1Next.val;
+                    l1Next = l1Next.next;
+
+                    if (l1Next != null)
+                    {
+                        merged.next = new ListNode();
+                        merged = merged.next;
+                    }
+                    continue;
+                }
+                
+                if (l2Next != null)
+                {
+                    merged.val = l2Next.val;
+                    l2Next = l2Next.next;
+                    if (l2Next != null)
+                    {
+                        merged.next = new ListNode();
+                        merged = merged.next;
+                    }
+                    continue;
+                }
+            }
+            
+            return head;
+        }
+        
+        [TestFixture]
+        public static class MergedTwoLinkedListTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4)))))), 
+                    MergeTwoSortedList(new ListNode(1, new ListNode(2, new ListNode(4))), new ListNode(1, new ListNode(3, new ListNode(4)))));
+            }
+        }
+    }
 }
