@@ -525,6 +525,8 @@ namespace EasyContainer
 
     class MergeTwoSortedListSolution
     {
+        // https://leetcode.com/problems/merge-two-sorted-lists/
+        
         public class ListNode
         {
             public int val;
@@ -541,38 +543,36 @@ namespace EasyContainer
         {
             var merged = l1 != null || l2 != null ? new ListNode() : null;
 
-            var l1Next = l1;
-            var l2Next = l2;
             var head = merged;
 
-            while (l1Next != null || l2Next != null)
+            while (l1 != null || l2 != null)
             {
-                if (l1Next != null && l2Next != null)
+                if (l1 != null && l2 != null)
                 {
-                    if (l1Next.val <= l2Next.val)
+                    if (l1.val <= l2.val)
                     {
-                        merged.val = l1Next.val;
-                        l1Next = l1Next.next;
+                        merged.val = l1.val;
+                        l1 = l1.next;
                         merged.next = new ListNode();
                         merged = merged.next;
                         continue;
                     }
                     else
                     {
-                        merged.val = l2Next.val;
-                        l2Next = l2Next.next;
+                        merged.val = l2.val;
+                        l2 = l2.next;
                         merged.next = new ListNode();
                         merged = merged.next;
                         continue;
                     }
                 }
 
-                if (l1Next != null)
+                if (l1 != null)
                 {
-                    merged.val = l1Next.val;
-                    l1Next = l1Next.next;
+                    merged.val = l1.val;
+                    l1 = l1.next;
 
-                    if (l1Next != null)
+                    if (l1 != null)
                     {
                         merged.next = new ListNode();
                         merged = merged.next;
@@ -580,11 +580,11 @@ namespace EasyContainer
                     continue;
                 }
                 
-                if (l2Next != null)
+                if (l2 != null)
                 {
-                    merged.val = l2Next.val;
-                    l2Next = l2Next.next;
-                    if (l2Next != null)
+                    merged.val = l2.val;
+                    l2 = l2.next;
+                    if (l2 != null)
                     {
                         merged.next = new ListNode();
                         merged = merged.next;
@@ -595,6 +595,17 @@ namespace EasyContainer
             
             return head;
         }
+
+        private void SetCurrent(ListNode current, ListNode merged)
+        {
+            merged.val = current.val;
+            current = current.next;
+            if (current != null)
+            {
+                merged.next = new ListNode();
+                merged = merged.next;
+            }
+        }
         
         [TestFixture]
         public static class MergedTwoLinkedListTests
@@ -604,6 +615,141 @@ namespace EasyContainer
             {
                 Assert.AreEqual(new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4)))))), 
                     MergeTwoSortedList(new ListNode(1, new ListNode(2, new ListNode(4))), new ListNode(1, new ListNode(3, new ListNode(4)))));
+            }
+        }
+    }
+
+    class CountLetterForGivenNStrings
+    {
+        /*
+         * Given string aacbea, count how many letters "a" appear in this string.
+         * Consider parameter n which is the length of the string for which we need count letter "a"
+         * if the string is not big enought we need to extend it to the parameter n
+         * if the string is greater then n we need to cut it to the parameter n
+         */
+
+        static void Main()
+        {
+            
+        }
+
+        static int CountLetter(string inputString, int lengthOfTheString)
+        {
+            if (lengthOfTheString == 0)
+            {
+                return 0;
+            }
+            
+            if (lengthOfTheString == 1)
+            {
+                if (inputString.Length >= 1 && inputString[0] == 'a')
+                {
+                    return 1;
+                }
+            }
+            
+            while (inputString.Length < lengthOfTheString)
+            {
+                inputString += inputString;
+            }
+
+            inputString = inputString.Substring(0, lengthOfTheString);
+            
+            var result = 0;
+            
+            for (int i = 0; i < inputString.Length; i++)
+            {
+                if (inputString[i] == 'a')
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
+        static int CountLetter1(string inputString, int lengthOfTheString)
+        {
+            if (lengthOfTheString == 0)
+            {
+                return 0;
+            }
+            
+            if (lengthOfTheString == 1)
+            {
+                if (inputString.Length >= 1 && inputString[0] == 'a')
+                {
+                    return 1;
+                }
+            }
+
+            var result = 0;
+            if (inputString.Length > lengthOfTheString)
+            {
+                for (int i = 0; i < lengthOfTheString; i++)
+                {
+                    if (inputString[i] == 'a')
+                    {
+                        result++;
+                    }
+                }
+
+                return result;
+            }
+            
+            for (int i = 0; i < inputString.Length; i++)
+            {
+                if (inputString[i] == 'a')
+                {
+                    result++;
+                }
+            }
+
+            var multiply = lengthOfTheString / inputString.Length;
+
+            if (multiply != 0)
+            {
+                result = result * multiply;
+            }
+
+            var remind = inputString.Length % lengthOfTheString;
+
+            if (remind > 0)
+            {
+                if (remind >= inputString.Length)
+                {
+                    remind = lengthOfTheString - remind;
+                }
+                
+                for (int i = 0; i < inputString.Length - remind; i++)
+                {
+                    if (inputString[i] == 'a')
+                    {
+                        result++;
+                    }
+                }
+            }
+            
+            return result;
+        }
+        
+        [TestFixture]
+        public static class CountLetterForGivenNStringsTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(3, CountLetter("aacbea", 6));
+                Assert.AreEqual(2, CountLetter("aacbea", 5));
+                Assert.AreEqual(5, CountLetter("aacbea", 9));
+                Assert.AreEqual(5, CountLetter("aacbea", 10));
+                Assert.AreEqual(6, CountLetter("aacbea", 12));
+                
+                Assert.AreEqual(3, CountLetter1("aacbea", 6));
+                Assert.AreEqual(2, CountLetter1("aacbea", 5));
+                Assert.AreEqual(5, CountLetter1("aacbea", 9));
+                Assert.AreEqual(5, CountLetter1("aacbea", 10));
+                Assert.AreEqual(6, CountLetter1("aacbea", 12));
             }
         }
     }
