@@ -668,14 +668,14 @@ namespace EasyContainer
             return result;
         }
 
-        static int CountLetter1(string inputString, int lengthOfTheString)
+        static int CountLetter1(string inputString, int givenLength)
         {
-            if (lengthOfTheString == 0)
+            if (givenLength == 0)
             {
                 return 0;
             }
             
-            if (lengthOfTheString == 1)
+            if (givenLength == 1)
             {
                 if (inputString.Length >= 1 && inputString[0] == 'a')
                 {
@@ -684,9 +684,9 @@ namespace EasyContainer
             }
 
             var result = 0;
-            if (inputString.Length > lengthOfTheString)
+            if (inputString.Length > givenLength)
             {
-                for (int i = 0; i < lengthOfTheString; i++)
+                for (int i = 0; i < givenLength; i++)
                 {
                     if (inputString[i] == 'a')
                     {
@@ -705,22 +705,17 @@ namespace EasyContainer
                 }
             }
 
-            var multiply = lengthOfTheString / inputString.Length;
+            var multiply = givenLength / inputString.Length;
 
             if (multiply != 0)
             {
                 result = result * multiply;
             }
 
-            var remind = inputString.Length % lengthOfTheString;
+            var remind = givenLength % inputString.Length;
 
             if (remind > 0)
             {
-                if (remind >= inputString.Length)
-                {
-                    remind = lengthOfTheString - remind;
-                }
-                
                 for (int i = 0; i < inputString.Length - remind; i++)
                 {
                     if (inputString[i] == 'a')
