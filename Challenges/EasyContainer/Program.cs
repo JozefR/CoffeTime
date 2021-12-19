@@ -748,4 +748,42 @@ namespace EasyContainer
             }
         }
     }
+
+    class RemoveDuplicatesSolution
+    {        
+        //https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+        
+        static void Main()
+        {
+            RemoveDuplicates(new[] { 1, 2 });
+        }
+        
+        public static int RemoveDuplicates(int[] nums)
+        {
+            var k = 0;
+
+            if (nums.Length == 0)
+            {
+                return 0;
+            }
+
+            if (nums.Length == 1)
+            {
+                return 1;
+            }
+
+            k += 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                var previousIndex = k - 1;
+                if (nums[previousIndex] != nums[i])
+                {
+                    nums[k] = nums[i];
+                    k++;
+                }
+            }
+            
+            return k;
+        }
+    }
 }
