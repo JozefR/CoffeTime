@@ -786,4 +786,41 @@ namespace EasyContainer
             return k;
         }
     }
+    
+    class RemoveElementSolution
+    {        
+        // https://leetcode.com/problems/remove-element/
+        
+        static void Main()
+        {
+            RemoveElement(new[] { 0,1,2,2,3,0,4,2 }, 2);
+        }
+        
+        public static int RemoveElement(int[] nums, int val)
+        {
+            if (nums.Length == 0)
+            {
+                return 0;
+            }
+
+            int removedLength = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == -1)
+                {
+                    break;
+                }
+                
+                if (nums[i] == val)
+                {
+                    removedLength += 1;
+                    nums[i] = nums[nums.Length - removedLength];
+                    nums[nums.Length - removedLength] = -1;
+                    i -= 1;
+                }
+            }
+
+            return removedLength;
+        }
+    }
 }
