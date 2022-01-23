@@ -727,24 +727,60 @@ namespace EasyContainer
             
             return result;
         }
-        
+
+        static int CountLetter2(string input, int n)
+        {
+            if (input.Length == 0)
+            {
+                return 0;
+            }
+
+            if (n == 0)
+            {
+                return 0;
+            }
+            
+            if (input.Length > n)
+            {
+                return CountLetterA(input, n);
+            }
+
+            var result = CountLetterA(input, input.Length);
+
+            var multiplier = n / input.Length;
+            result = result * multiplier;
+
+            var reminder = n % input.Length;
+            result += CountLetterA(input, reminder);
+
+            return result;
+        }
+
+        private static int CountLetterA(string input, int countToIndex)
+        {
+            var result = 0;
+            for (var i = 0; i < countToIndex; i++)
+            {
+                if (input[i] == 'a')
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
         [TestFixture]
         public static class CountLetterForGivenNStringsTests
         {
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual(3, CountLetter("aacbea", 6));
-                Assert.AreEqual(2, CountLetter("aacbea", 5));
-                Assert.AreEqual(5, CountLetter("aacbea", 9));
-                Assert.AreEqual(5, CountLetter("aacbea", 10));
-                Assert.AreEqual(6, CountLetter("aacbea", 12));
-                
-                Assert.AreEqual(3, CountLetter1("aacbea", 6));
-                Assert.AreEqual(2, CountLetter1("aacbea", 5));
-                Assert.AreEqual(5, CountLetter1("aacbea", 9));
-                Assert.AreEqual(5, CountLetter1("aacbea", 10));
-                Assert.AreEqual(6, CountLetter1("aacbea", 12));
+                Assert.AreEqual(3, CountLetter2("aacbea", 6));
+                Assert.AreEqual(2, CountLetter2("aacbea", 5));
+                Assert.AreEqual(5, CountLetter2("aacbea", 9));
+                Assert.AreEqual(5, CountLetter2("aacbea", 10));
+                Assert.AreEqual(6, CountLetter2("aacbea", 12));
             }
         }
     }
