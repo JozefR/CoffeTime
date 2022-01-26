@@ -858,5 +858,56 @@ namespace EasyContainer
 
             return removedLength;
         }
+    }    
+    
+    class ValidParenthesesSolution
+    {        
+        // https://leetcode.com/problems/valid-parentheses/
+
+        static void Main()
+        {
+            IsValid("(()()[][]{[()]}");
+        }
+        
+        private static bool IsValid(string s)
+        {
+            if (s.Length == 0)
+            {
+                return true;
+            }
+
+            int index = 0;
+            while (s.Length > 0)
+            {
+                if (index >= s.Length - 1)
+                {
+                    return false;
+                }
+
+                int nextIndex = index + 1;
+                if (s[index] == '(' && s[nextIndex] == ')')
+                {
+                    s = s.Remove(index, 2);
+                    index = 0;
+                    continue;
+                }
+                if (s[index] == '[' && s[nextIndex] == ']')
+                {
+                    s = s.Remove(index, 2);
+                    index = 0;
+                    continue;
+                }
+                if (s[index] == '{' && s[nextIndex] == '}')
+                {
+                    s = s.Remove(index, 2);
+                    index = 0;
+                    continue;
+                }
+
+                index++;
+            }
+
+            return true;
+        }
     }
 }
