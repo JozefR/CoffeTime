@@ -908,6 +908,49 @@ namespace EasyContainer
             }
 
             return true;
+        } 
+        
+        private static bool IsValid2(string s)
+        {
+            if (s.Length == 0)
+            {
+                return true;
+            }
+
+            var stack = new Stack<char>();
+            for (var i = 0; i < s.Length; i++)
+            {
+                switch (s[i])
+                {
+                    case '(':
+                    case '{':
+                    case '[':
+                        stack.Push(s[i]);
+                        break; 
+                    case ')' :
+                        if (stack.Count == 0 || stack.Pop() != '(')
+                        {
+                            return false;
+                        };
+                        break;
+                    case '}' :
+                        if (stack.Count == 0 || stack.Pop() != '{')
+                        {
+                            return false;
+                        };
+                        break;
+                    case ']' :
+                        if (stack.Count == 0 || stack.Pop() != '[')
+                        {
+                            return false;
+                        };
+                        break;
+                    default:
+                        return false;
+                }
+            }
+
+            return stack.Count == 0;
         }
     }
 }
