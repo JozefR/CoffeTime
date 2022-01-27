@@ -953,4 +953,46 @@ namespace EasyContainer
             return stack.Count == 0;
         }
     }
+    
+    class SearchInsertPositionSolution
+    {        
+        // https://leetcode.com/problems/search-insert-position/
+
+        static void Main()
+        {
+            SearchInsert(new int[] {1, 3}, 2);
+            SearchInsert(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, 10);
+        }
+        
+        public static int SearchInsert(int[] nums, int target)
+        {
+            int left = 0;
+            int right = nums.Length;
+
+            while (right >= left)
+            {
+                var half = (left + right) / 2;
+                if (half >= nums.Length)
+                {
+                    break;
+                }
+                
+                if (nums[half] == target)
+                {
+                    return half;
+                }
+
+                if (nums[half] > target)
+                {
+                    right = half - 1;
+                }
+                else
+                {
+                    left = half + 1;
+                }
+            }
+
+            return -1;
+        }
+    }
 }
