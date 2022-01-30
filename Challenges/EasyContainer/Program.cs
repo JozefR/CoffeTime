@@ -969,20 +969,17 @@ namespace EasyContainer
             int left = 0;
             int right = nums.Length;
 
-            while (right >= left)
+            while (right > left)
             {
                 var half = (left + right) / 2;
-                if (half >= nums.Length)
-                {
-                    break;
-                }
-                
-                if (nums[half] == target)
+                var guess = nums[half];
+
+                if (guess == target)
                 {
                     return half;
                 }
 
-                if (nums[half] > target)
+                if (guess > target)
                 {
                     right = half - 1;
                 }
@@ -992,7 +989,50 @@ namespace EasyContainer
                 }
             }
 
-            return -1;
+            if (nums[left] == target)
+            {
+                return left;
+            }
+
+            return left == right ? left + 1 : right;
+        }
+    }
+    
+    class FirstBadVersionSolution
+    {        
+        // https://leetcode.com/problems/search-insert-position/
+
+        static void Main()
+        {
+            FirstBadVersion(5); // 3 is bad
+        }
+        
+        public static int FirstBadVersion(int n)
+        {
+            int left = 1;
+            int right = n;
+
+            while (left < right)
+            {
+                var mid = left + (right - left) / 2;
+
+                if (IsBadVersion(mid))
+                {
+                    right = mid;
+                }
+                else
+                {
+                    left = mid + 1;
+                }
+            }
+
+            return left;
+        }
+
+        public static bool IsBadVersion(int version)
+        {
+            // implemented in leetCode;
+            return version == 3;
         }
     }
 }
