@@ -1000,7 +1000,7 @@ namespace EasyContainer
     
     class FirstBadVersionSolution
     {        
-        // https://leetcode.com/problems/search-insert-position/
+        // https://leetcode.com/problems/first-bad-version/
 
         static void Main()
         {
@@ -1033,6 +1033,77 @@ namespace EasyContainer
         {
             // implemented in leetCode;
             return version == 3;
+        }
+    }
+    
+    class StrStrSolution
+    {        
+        // https://leetcode.com/problems/implement-strstr/
+        static void Main()
+        {
+        }
+        
+        public static int StrStr(string haystack, string needle)
+        {
+            var index = haystack.IndexOf(needle);
+            return index;
+        }        
+        
+        public static int StrStr1(string haystack, string needle)
+        {
+            if (string.IsNullOrEmpty(needle))
+            {
+                return 0;
+            }
+
+            if (string.IsNullOrEmpty(haystack))
+            {
+                return -1;
+            }
+
+            for (var i = 0; i < haystack.Length; i++)
+            {
+                if (haystack[i] == needle[0])
+                {
+                    var x = i + 1;
+                    bool found = true;
+                    for (var j = 1; j < needle.Length; j++)
+                    {
+                        if (x >= haystack.Length)
+                        {
+                            return -1;
+                        }
+                        
+                        if (haystack[x] != needle[j])
+                        {
+                            found = false;
+                            break;
+                        }
+
+                        x++;
+                    }
+
+                    if (found)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
+        
+        [TestFixture]
+        public static class StrStrSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(4, StrStr1("mississippi", "issip"));
+                Assert.AreEqual(2, StrStr1("hello", "ll"));
+                Assert.AreEqual(-1, StrStr1("aaaaa", "baa"));
+                Assert.AreEqual(0, StrStr1("", ""));
+            }
         }
     }
 }
