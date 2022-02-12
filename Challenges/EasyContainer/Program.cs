@@ -1106,4 +1106,56 @@ namespace EasyContainer
             }
         }
     }
+
+    class IsPalindromSolution
+    {
+        public static bool IsPalindrom(string s)
+        {
+            int i = 0;
+            int j = s.Length - 1;
+
+            while (i < j)
+            {
+                if (!char.IsLetterOrDigit(s[i]))
+                {
+                    i++;
+                    continue;
+                }
+
+                if (!char.IsLetterOrDigit(s[j]))
+                {
+                    j--;
+                    continue;
+                }
+
+                if (s[i].ToString().ToLower() != s[j].ToString().ToLower())
+                {
+                    break;
+                }
+
+                i++;
+                j--;
+            }
+
+            if (i >= j)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        [TestFixture]
+        public static class IsPalindromTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(true, IsPalindrom("aa"));
+                Assert.AreEqual(true, IsPalindrom("A man, a plan, a canal: Panama"));
+                Assert.AreEqual(false, IsPalindrom("race a car"));
+                Assert.AreEqual(true, IsPalindrom(" "));
+            }
+        }
+    }
 }
