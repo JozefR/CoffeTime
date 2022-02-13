@@ -1111,33 +1111,36 @@ namespace EasyContainer
     {
         public static bool IsPalindrom(string s)
         {
-            int i = 0;
-            int j = s.Length - 1;
+            int left = 0;
+            int right = s.Length - 1;
 
-            while (i < j)
+            while (left < right)
             {
-                if (!char.IsLetterOrDigit(s[i]))
+                char leftLetter = s[left];
+                char rightLetter = s[right];
+                
+                if (!char.IsLetterOrDigit(leftLetter))
                 {
-                    i++;
+                    left++;
                     continue;
                 }
 
-                if (!char.IsLetterOrDigit(s[j]))
+                if (!char.IsLetterOrDigit(rightLetter))
                 {
-                    j--;
+                    right--;
                     continue;
                 }
 
-                if (s[i].ToString().ToLower() != s[j].ToString().ToLower())
+                if (!char.ToLower(leftLetter).Equals(char.ToLower(rightLetter)))
                 {
                     break;
                 }
 
-                i++;
-                j--;
+                left++;
+                right--;
             }
 
-            if (i >= j)
+            if (left >= right)
             {
                 return true;
             }
@@ -1155,6 +1158,124 @@ namespace EasyContainer
                 Assert.AreEqual(true, IsPalindrom("A man, a plan, a canal: Panama"));
                 Assert.AreEqual(false, IsPalindrom("race a car"));
                 Assert.AreEqual(true, IsPalindrom(" "));
+            }
+        }
+    }
+
+    class SingleNumberSolution
+    {
+        // https://leetcode.com/problems/single-number/
+        public static int SingleNumber(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    if (nums[i] == nums[j])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found == false)
+                {
+                    return nums[i];
+                }
+            }
+
+            return -1;
+        }
+        
+        public static int SingleNumber1(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                bool found = false;
+
+                if (nums[i] == -1)
+                {
+                    continue;
+                }
+                
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (nums[j] == -1) continue;
+                    if (i == j) continue;
+
+                    if (nums[i] == nums[j])
+                    {
+                        found = true;
+                        nums[i] = -1;
+                        nums[j] = -1;
+                    }
+                }
+
+                if (found == false)
+                {
+                    return nums[i];
+                }
+            }
+
+            return -1;
+        }
+        
+        public static int SingleNumber2(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            var dictionary = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!dictionary.ContainsKey(nums[i]))
+                {
+                    dictionary[nums[i]] = 1;
+                }
+                else
+                {
+                    dictionary[nums[i]] += 1;
+                }
+            }
+
+            foreach (var single in dictionary)
+            {
+                if (single.Value == 1)
+                {
+                    return single.Key;
+                }
+            }
+
+            return -1;
+        }
+        
+        [TestFixture]
+        class SingleNumberTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
             }
         }
     }
