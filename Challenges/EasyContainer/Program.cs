@@ -1279,4 +1279,50 @@ namespace EasyContainer
             }
         }
     }
+    
+    class MaxSubArraySolution
+    {
+        // https://leetcode.com/problems/maximum-subarray/
+        public static int MaxSubArray(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            var maxSubArray = nums[0];
+            var tempMaxSubArray = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                var currentNum = nums[i];
+                
+                tempMaxSubArray += currentNum;
+                if (tempMaxSubArray < currentNum)
+                {
+                    tempMaxSubArray = currentNum;
+                }
+                
+                if (tempMaxSubArray > maxSubArray)
+                {
+                    maxSubArray = tempMaxSubArray;
+                }
+            }
+
+            return maxSubArray;
+        }
+        
+        [TestFixture]
+        class MaxSubArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(-1, MaxSubArray(new []{-1, -2}));
+                Assert.AreEqual(5, MaxSubArray(new []{1, -4, 2, 3}));
+                Assert.AreEqual(23, MaxSubArray(new[]{5, 4, -1, 7, 8}));
+                Assert.AreEqual(6, MaxSubArray(new []{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+            }
+        }
+    }
 }
