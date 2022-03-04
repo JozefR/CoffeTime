@@ -1324,5 +1324,143 @@ namespace EasyContainer
                 Assert.AreEqual(6, MaxSubArray(new []{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
             }
         }
+
+        class HistoryOfFourSolution
+        {
+            private static List<int> HistoryOfLastFour(List<int> latestHistoryList)
+            {
+                var orderedHistoryList = latestHistoryList.OrderByDescending(x => x).Take(4).ToList();
+                var lastFourYears = Enumerable.Range(DateTime.Now.Year - 3, 4).Reverse().ToList();
+
+                for (int i = 0; i < lastFourYears.Count; i++)
+                {
+                    if (CheckEmptyOrNotFourHistory(i, lastFourYears, orderedHistoryList))
+                    {
+                        AddMissingYear(i, lastFourYears, orderedHistoryList);
+                    }
+                }
+
+                return orderedHistoryList.Take(4).ToList();
+            }
+
+            private static bool CheckEmptyOrNotFourHistory(int i, List<int> lastFourYears, List<int> latestHistoryList)
+            {
+                if (latestHistoryList.Count == 0 || i == latestHistoryList.Count)
+                {
+                    return true;
+                }
+
+                var year = latestHistoryList[i];
+
+                if (year != lastFourYears[i])
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            private static void AddMissingYear(int i, List<int> lastFourYears, List<int> latestHistoryList)
+            {
+                var missingYear = lastFourYears[i];
+            
+                latestHistoryList.Insert(i, missingYear);
+            }
+            
+            [TestFixture]
+            public class HistoryOfFourTests
+            {
+                private static readonly object[] _years = 
+                {
+                    new object[] {new List<int>()},   
+                    new object[] {new List<int> {2020, 2019, 2018, 2017}},
+                    new object[] {new List<int> {2017, 2018, 2019, 2020}},
+                    new object[] {new List<int> {2020, 2019, 2018, 2017, 2016, 2015}},
+                    new object[] {new List<int> {2015, 2016, 2017, 2018, 2019, 2020}},
+                    new object[] {new List<int> {2016, 2015}},
+                    new object[] {new List<int> {2020, 2018}},
+                    new object[] {new List<int> {2017, 2016}},
+                    new object[] {new List<int> {2020 }},   
+                    new object[] {new List<int> {2019 }},   
+                    new object[] {new List<int> {2018 }},   
+                    new object[] {new List<int> {2017 }},   
+                    new object[] {new List<int> {2016 }},   
+                    new object[] {new List<int> {2015 }},   
+                };
+            
+                [TestCaseSource(nameof(_years))]
+                public void CheckYears(List<int> list)
+                {
+                    var expected = new List<int> { 2020, 2019, 2018, 2017 };
+                
+                    Assert.AreEqual(expected, HistoryOfLastFour(list));
+                }
+            }
+        }
+
+        // https://www.codewars.com/kata/persistent-bugger
+        class PersistentBuggerSolution
+        {
+            
+        }
+
+        class HopCrossSolution
+        {
+            /*
+            You are trying to cross a river by jumping along stones.
+            Every time you land on a stone, you hop forwards by the value
+            of that stone. If you skip over a stone then its value doesn't
+            affect you in any way. Eg:
+                
+                x--x-----x-->
+                [1]
+                [2]
+                [5]
+                [1]
+
+            Of course, crossing from the other side might give you a different answer:
+
+                ,--------x--x
+                [1][2][5][1]
+                
+            Given an array of positive integers, return the total number of steps
+            it would take to go all the way across the river(and past the end 
+            of the array) and then all the way back.All arrays will contain at
+            least one element, and may contain up to 100 elements.
+
+            ### Examples
+
+                x--x-----x-->
+                [1][2][1][2]
+                ----x-----x
+                therefore hop_across([1, 2, 1, 2]) = 3 + 2 = 5
+                x-----x--------x------>
+                [2][2][3][1][1][2][1]
+                --------x--x-----x--x
+                therefore hop_across([2, 2, 3, 1, 1, 2, 1]) = 3 + 4 = 7 
+
+             */
+            public static int HopAcross(List<int> input)
+            {
+                return 0;
+            }
+            
+            [TestFixture]
+            public class HopTest
+            {
+                [Test]
+                public void HopAcrossTest()
+                {
+                    Assert.That(HopAcross(new List<int> {1}), Is.EqualTo(2));
+                    Assert.That(HopAcross(new List<int> {2}), Is.EqualTo(2));
+                    Assert.That(HopAcross(new List<int> {1, 1}), Is.EqualTo(4));
+                    Assert.That(HopAcross(new List<int> {2, 1}), Is.EqualTo(3));
+                    Assert.That(HopAcross(new List<int> {2, 1, 1}), Is.EqualTo(5));
+                    Assert.That(HopAcross(new List<int> {1, 2, 1, 2}), Is.EqualTo(5));
+                    Assert.That(HopAcross(new List<int> {1, 2, 5, 1}), Is.EqualTo(5));
+                    Assert.That(HopAcross(new List<int> {2, 2, 3, 1, 1, 2, 1}), Is.EqualTo(7));
+                }
+            }
+        }
     }
 }
