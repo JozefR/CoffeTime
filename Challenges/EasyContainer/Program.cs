@@ -1401,7 +1401,42 @@ namespace EasyContainer
         // https://www.codewars.com/kata/persistent-bugger
         class PersistentBuggerSolution
         {
+            public static int Persistence(long n)
+            {
+                if (n < 10)
+                {
+                    return 0;
+                }
+             
+                var result = 0;
+                var multiplicativePersistence = n.ToString();
+                while (multiplicativePersistence.Length > 1)
+                {
+                    var tempPersistence = 1;
+                    for (int i = 0; i < multiplicativePersistence.Length; i++)
+                    {
+                        tempPersistence *= int.Parse(multiplicativePersistence[i].ToString());
+                    }
+
+                    multiplicativePersistence = tempPersistence.ToString();
+                    result++;
+                }
+                
+                return result;
+            }
             
+            [TestFixture]
+            class PersistentBuggerTests
+            {
+                [Test]
+                public static void TestCases()
+                {
+                    Assert.AreEqual(0, Persistence(4));
+                    Assert.AreEqual(3, Persistence(39));
+                    Assert.AreEqual(2, Persistence(25));
+                    Assert.AreEqual(4, Persistence(999));
+                }
+            }
         }
 
         class HopCrossSolution
