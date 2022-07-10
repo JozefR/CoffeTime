@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Challenges", "Challenges", "{3E46AACE-2E7B-44FC-ACB5-9992539EE041}"
+	ProjectSection(SolutionItems) = preProject
+		Challenges\EasyContainer.js = Challenges\EasyContainer.js
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithms", "Algorithms", "{9258D4F8-3ED5-4BC5-851A-99644165E8BC}"
 EndProject

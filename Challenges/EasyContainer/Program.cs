@@ -624,7 +624,7 @@ namespace EasyContainer
         /*
          * Given string aacbea, count how many letters "a" appear in this string.
          * Consider parameter n which is the length of the string for which we need count letter "a"
-         * if the string is not big enought we need to extend it to the parameter n
+         * if the string is not big enough we need to extend it to the parameter n
          * if the string is greater then n we need to cut it to the parameter n
          */
 
@@ -1495,6 +1495,112 @@ namespace EasyContainer
                     Assert.That(HopAcross(new List<int> {1, 2, 5, 1}), Is.EqualTo(5));
                     Assert.That(HopAcross(new List<int> {2, 2, 3, 1, 1, 2, 1}), Is.EqualTo(7));
                 }
+            }
+        }
+    }
+    
+    class AnagramSolution
+    {
+        // https://leetcode.com/problems/valid-anagram/
+        public static bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+            {
+                return false;
+            }
+            
+            for (int i = 0; i < s.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < t.Length; j++)
+                {
+                    if (found)
+                    {
+                        continue;
+                    }
+                    
+                    if (s[i] == t[j])
+                    {
+                        t = t.Remove(j, 1);
+                        found = true;
+                    }
+                }
+
+                if (found == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool IsAnagram2(string s, string t)
+        {
+            if (s.Length != t.Length)
+            {
+                return false;
+            }
+
+            var sOrdered = new string(s.OrderBy(x => x).ToArray());
+            var tOrdered = new string(t.OrderBy(x => x).ToArray());
+
+            if (sOrdered == tOrdered)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public static bool IsAnagram3(string s, string t)
+        {
+            if (s.Length != t.Length)
+            {
+                return false;
+            }
+
+            var tDic = new Dictionary<char, int>();
+            for (int i = 0; i < t.Length; i++)
+            {
+                var value = t[i];
+                if (!tDic.ContainsKey(value))
+                {
+                    tDic[value] = 1;
+                }
+                else
+                {
+                    tDic[value] += 1;
+                }
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                var value = s[i];
+                if (!tDic.ContainsKey(value))
+                {
+                    return false;
+                }
+
+                tDic[value] -= 1;
+                var tdicValue = tDic[value];
+                if (tdicValue < 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
+        [TestFixture]
+        class MaxSubArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.IsTrue(IsAnagram3("anagram", "nagaram"));
+                Assert.IsFalse(IsAnagram3("rat", "car"));
             }
         }
     }
