@@ -1604,4 +1604,67 @@ namespace EasyContainer
             }
         }
     }
+
+    class SameTreeSolution
+    { 
+        // https://leetcode.com/problems/same-tree/
+        public class TreeNode 
+        { 
+            public int val; 
+            public TreeNode left; 
+            public TreeNode right; 
+        
+            public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) 
+            {
+                 this.val = val;
+                 this.left = left;
+                 this.right = right;
+             } 
+        }
+
+        public static bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            if (p == null && q == null)
+            {
+                return true;
+            }
+
+            if (p == null || q == null)
+            {
+                return false;
+            }
+
+            if (p.val != q.val)
+            {
+                return false;
+            }
+
+            return IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right);
+        }
+
+        [TestFixture]
+        class MaxSubArraySolutionTests
+        {
+            // Input: p = [1,2,3], q = [1,2,3] Output: true
+            // Input: p = [1,2], q = [1,null,2] Output: false
+            // Input: p = [1,2,1], q = [1,1,2] Output: false
+
+            static TreeNode b1 = new TreeNode(1, new TreeNode(2));
+            static TreeNode b2 = new TreeNode(1, null, new TreeNode(2));
+            
+            static TreeNode a1 = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+            static TreeNode a2 = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+
+            static TreeNode c1 = new TreeNode(1, new TreeNode(2), new TreeNode(1));
+            static TreeNode c2 = new TreeNode(1, new TreeNode(1), new TreeNode(2));
+            
+            [Test]
+            public static void TestCases()
+            {
+                Assert.IsFalse(IsSameTree(b1, b2));
+                Assert.IsTrue(IsSameTree(a1, a2));
+                Assert.IsFalse(IsSameTree(c1, c2));
+            }
+        }
+    }
 }
