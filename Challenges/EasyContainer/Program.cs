@@ -1667,4 +1667,33 @@ namespace EasyContainer
             }
         }
     }
+
+    class LengthOfTheLastWordSolution
+    {
+        static void Main(string[] args)
+        {
+            var s = "   fly me   to   the moon  ";
+            var s1 = "a";
+
+            LengthOfLastWord(s);
+        }
+        
+        static int LengthOfLastWord(string sentence)
+        {
+            var trimedSentence = sentence;
+            var lastWord = string.Empty;
+            for (int i = trimedSentence.Length - 1; i >= 0; i--)
+            {
+                var character = trimedSentence[i];
+                if (Char.IsWhiteSpace(character))
+                {
+                    break;
+                }
+
+                lastWord += character;
+            }
+
+            return lastWord.Length;
+        }
+    }
 }
