@@ -77,3 +77,24 @@ function SameTree() {
     }
 }
 
+// https://leetcode.com/problems/length-of-last-word/
+LengthOfTheLastWordSolution();
+
+function LengthOfTheLastWordSolution(){
+    
+    LengthOfTheLastWord("a");
+    LengthOfTheLastWord("  fly to the moon   ");
+    
+    function LengthOfTheLastWord(sentence){
+        let lastWordLength = 0;
+        sentence = sentence.trimEnd();
+        for (let i = sentence.length - 1; i >= 0; i--){
+            const character = sentence[i];
+            if (character === " "){
+                return lastWordLength;
+            }
+            lastWordLength++;
+        }
+    }
+}
+

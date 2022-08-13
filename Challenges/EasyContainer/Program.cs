@@ -1670,6 +1670,7 @@ namespace EasyContainer
 
     class LengthOfTheLastWordSolution
     {
+        // https://leetcode.com/problems/length-of-last-word/
         static void Main(string[] args)
         {
             var s = "   fly me   to   the moon  ";
