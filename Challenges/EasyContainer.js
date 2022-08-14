@@ -1,5 +1,4 @@
 // https://leetcode.com/problems/valid-anagram/
-
 isAnagram();
 
 function isAnagram() {
@@ -40,7 +39,6 @@ function isAnagram() {
 }
 
 // https://leetcode.com/problems/same-tree/
-
 SameTree();
 
 function SameTree() {
@@ -80,7 +78,7 @@ function SameTree() {
 // https://leetcode.com/problems/length-of-last-word/
 LengthOfTheLastWordSolution();
 
-function LengthOfTheLastWordSolution(){
+function LengthOfTheLastWordSolution() {
     
     LengthOfTheLastWord("a");
     LengthOfTheLastWord("  fly to the moon   ");
@@ -98,3 +96,25 @@ function LengthOfTheLastWordSolution(){
     }
 }
 
+PlusOneSolution();
+
+function PlusOneSolution(){
+    
+    PlusOne([1,2,3]);
+    PlusOne([9]);
+    
+    function PlusOne(digits){
+        for (let i = digits.length; i >= 0; i--){
+            if (digits[i] < 9){
+                digits[i] += 1;
+                return digits;
+            }
+            
+            digits[i] = 0;
+        }
+        
+        let newArray = new Array(digits.length + 1).fill(0);
+        return newArray[0] = 1;
+        return newArray;
+    }
+}

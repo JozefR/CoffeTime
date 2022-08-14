@@ -1697,4 +1697,45 @@ namespace EasyContainer
             return lastWord.Length;
         }
     }
+
+    class PlusOneSolution
+    {
+        public static int[] PlusOne(int[] digits)
+        {
+            var digitsString = string.Join("", digits);
+            var number = BigInteger.Parse(digitsString);
+            var incrementedNumber = number + 1;
+            return incrementedNumber.ToString().Select(x => int.Parse(x.ToString())).ToArray();
+        }
+
+        public static int[] PlusOne1(int[] digits)
+        {
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                if (digits[i] < 9)
+                {
+                    digits[i] += 1;
+                    return digits;
+                }
+
+                digits[i] = 0;
+            }
+
+            var newDigs = new int [digits.Length + 1];
+            newDigs[0] = 1;
+            return newDigs;
+        }
+
+        [TestFixture]
+        public static class StrStrSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new int [] {1,2,4}, PlusOne1(new int [] {1, 2, 3}));
+                Assert.AreEqual(new int [] {4,3,2,2}, PlusOne1(new int [] {4, 3, 2, 1}));
+                Assert.AreEqual(new int [] {1, 0}, PlusOne1(new int [] {9}));
+            }
+        }
+    }
 }
