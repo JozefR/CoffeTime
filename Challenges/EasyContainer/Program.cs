@@ -1779,7 +1779,6 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual("10101", AddBinary("100", "110010"));
                 Assert.AreEqual("100", AddBinary("11", "1"));
                 Assert.AreEqual("10101", AddBinary("1010", "1011"));
             }
