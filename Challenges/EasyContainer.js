@@ -96,6 +96,7 @@ function LengthOfTheLastWordSolution() {
     }
 }
 
+// https://leetcode.com/problems/plus-one/submissions/
 PlusOneSolution();
 
 function PlusOneSolution(){

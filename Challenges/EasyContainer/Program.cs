@@ -1700,6 +1700,7 @@ namespace EasyContainer
 
     class PlusOneSolution
     {
+        // https://leetcode.com/problems/plus-one/submissions/
         public static int[] PlusOne(int[] digits)
         {
             var digitsString = string.Join("", digits);
@@ -1735,6 +1736,49 @@ namespace EasyContainer
                 Assert.AreEqual(new int [] {1,2,4}, PlusOne1(new int [] {1, 2, 3}));
                 Assert.AreEqual(new int [] {4,3,2,2}, PlusOne1(new int [] {4, 3, 2, 1}));
                 Assert.AreEqual(new int [] {1, 0}, PlusOne1(new int [] {9}));
+            }
+        }
+    }
+    
+    // https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/727/
+    class RemoveDuplicatesFromSortedArraySolution
+    {
+        public static int RemoveDuplicates(int[] nums) 
+        {
+            if (nums.Length == 1)
+            {
+                return 1;
+            }
+
+            int k = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                var currentNum = nums[i];
+                var lastOkNum = nums[k - 1];
+                
+                if (lastOkNum != currentNum)
+                {
+                    nums[i] = -111;
+                    nums[k] = currentNum;
+                    k++;
+                    continue;
+                }
+
+                nums[i] = -111;
+            }
+
+            return k;
+        }
+
+        [TestFixture]
+        public static class RemoveDuplicatesFromSortedArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(5, RemoveDuplicates(new int [] {1, 2, 3, 3, 4, 5}));
+                Assert.AreEqual(5, RemoveDuplicates(new int [] {0,0,1,1,1,2,2,3,3,4}));
+                Assert.AreEqual(2, RemoveDuplicates(new int [] {1, 1, 2}));
             }
         }
     }
