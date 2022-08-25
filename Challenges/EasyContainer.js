@@ -1,6 +1,5 @@
 // https://leetcode.com/problems/valid-anagram/
 isAnagram();
-
 function isAnagram() {
     const [a, b] = ["rat", "car"]
     
@@ -40,7 +39,6 @@ function isAnagram() {
 
 // https://leetcode.com/problems/same-tree/
 SameTree();
-
 function SameTree() {
 
     function Node(val, left, right) {
@@ -98,7 +96,6 @@ function LengthOfTheLastWordSolution() {
 
 // https://leetcode.com/problems/plus-one/submissions/
 PlusOneSolution();
-
 function PlusOneSolution(){
     
     PlusOne([1,2,3]);
@@ -117,5 +114,50 @@ function PlusOneSolution(){
         let newArray = new Array(digits.length + 1).fill(0);
         return newArray[0] = 1;
         return newArray;
+    }
+}
+
+
+// https://leetcode.com/problems/add-binary/
+AddBinarySolution();
+function AddBinarySolution(){
+
+    AddBinary("1010", "1011");
+    AddBinary("11", "1");
+    
+    function AddBinary(a, b) {
+
+        let aLength = a.length - 1;
+        let bLength = b.length - 1;
+        let result = "";
+        
+        let carry = 0;
+        while (aLength >= 0 || bLength >= 0){
+            let aNumber = 0;
+            let bNumber = 0;
+            
+            if (aLength >= 0){
+                aNumber = a[aLength] !== undefined ? parseInt(a[aLength]) : 0
+            }
+
+            if (bLength >= 0){
+                bNumber = b[bLength] !== undefined ? parseInt(b[bLength]) : 0;
+            }
+
+            const sum = aNumber + bNumber + carry;
+            const res = sum % 2;
+            carry = Math.floor(sum/2);
+
+            result = res + result;
+            
+            bLength--;
+            aLength--;
+        }
+        
+        if (carry !== 0){
+            result = carry + result;
+        }
+        
+        return result;
     }
 }

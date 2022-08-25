@@ -1738,6 +1738,52 @@ namespace EasyContainer
                 Assert.AreEqual(new int [] {1, 0}, PlusOne1(new int [] {9}));
             }
         }
+    }    
+    
+    // https://leetcode.com/problems/add-binary/
+    class AddBinarySolution
+    {
+        static string AddBinary(string a, string b)
+        {
+            if (a.Length > b.Length)
+            {
+                b = new string('0', a.Length - b.Length) + b;
+            }
+            else if (b.Length > a.Length)
+            {
+                a = new string('0', b.Length - a.Length) + a;
+            }
+
+            var result = new StringBuilder();
+            var carry = 0;
+            for (int i = a.Length - 1; i >= 0; i--)
+            {
+                var aNumber = int.Parse(a[i].ToString());
+                var bNumber = int.Parse(b[i].ToString());
+                var sum = aNumber + bNumber + carry;
+                var res = sum % 2;
+                carry = sum / 2;
+                result.Insert(0, res);
+            }
+
+            if (carry != 0)
+            {
+                result.Insert(0, carry);
+            }
+
+            return result.ToString();
+        }
+
+        [TestFixture]
+        public static class StrStrSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual("100", AddBinary("11", "1"));
+                Assert.AreEqual("10101", AddBinary("1010", "1011"));
+            }
+        }
     }
     
     // https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/727/
