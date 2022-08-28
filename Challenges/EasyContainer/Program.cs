@@ -1871,8 +1871,22 @@ namespace EasyContainer
                 return totalProfit;
             }
 
+            public static int MaxProfit2(int[] prices)
+            {
+                int maxProfit = 0;
+                for (int i = 0; i < prices.Length - 1; i++)
+                {
+                    if (prices[i] < prices[i + 1])
+                    {
+                        maxProfit += prices[i + 1] - prices[i];
+                    }
+                }
+
+                return maxProfit;
+            }
+
             [TestFixture]
-            public static class RemoveDuplicatesFromSortedArraySolutionTests
+            public static class TheBestTimeToBuyAndSellStockSolutionTests
             {
                 [Test]
                 public static void TestCases()
@@ -1880,7 +1894,12 @@ namespace EasyContainer
                     Assert.AreEqual(7, MaxProfit(new int[] {7,1,5,3,6,4}));
                     Assert.AreEqual(6, MaxProfit(new int[] {7,1,5,7,6,4}));
                     Assert.AreEqual(4, MaxProfit(new int[] {1,2,3,4,5}));
-                    Assert.AreEqual(0, MaxProfit(new int[] {7,6,4,3,1}));
+                    Assert.AreEqual(0, MaxProfit(new int[] {7,6,4,3,1}));   
+                    
+                    Assert.AreEqual(7, MaxProfit2(new int[] {7,1,5,3,6,4}));
+                    Assert.AreEqual(6, MaxProfit2(new int[] {7,1,5,7,6,4}));
+                    Assert.AreEqual(4, MaxProfit2(new int[] {1,2,3,4,5}));
+                    Assert.AreEqual(0, MaxProfit2(new int[] {7,6,4,3,1}));
                 }
             }
         }
