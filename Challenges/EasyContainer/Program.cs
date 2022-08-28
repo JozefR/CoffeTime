@@ -1827,5 +1827,62 @@ namespace EasyContainer
                 Assert.AreEqual(2, RemoveDuplicates(new int [] {1, 1, 2}));
             }
         }
+        
+        // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
+        class TheBestTimeToBuyAndSellStockSolution
+        {
+            public static int MaxProfit(int[] prices)
+            {
+                if (prices.Length == 1)
+                {
+                    return 0;
+                }
+                
+                var totalProfit = 0;
+                int? bought = null;
+                for (int i = 0; i < prices.Length - 1; i++)
+                {
+                    var current = prices[i];
+                    var nextDay = prices[i + 1];
+
+                    if (current > nextDay)
+                    {
+                        continue;
+                    }
+
+                    if (bought == null)
+                    {
+                        bought = prices[i];
+                    }
+
+                    if (i < prices.Length - 2)
+                    {
+                        var dayAfterNext = prices[i + 2];
+                        if (dayAfterNext > nextDay)
+                        {
+                            continue;
+                        }
+                    }
+
+                    totalProfit += nextDay - bought.Value;
+                    bought = null;
+                }
+
+                return totalProfit;
+            }
+
+            [TestFixture]
+            public static class RemoveDuplicatesFromSortedArraySolutionTests
+            {
+                [Test]
+                public static void TestCases()
+                {
+                    Assert.AreEqual(7, MaxProfit(new int[] {7,1,5,3,6,4}));
+                    Assert.AreEqual(6, MaxProfit(new int[] {7,1,5,7,6,4}));
+                    Assert.AreEqual(4, MaxProfit(new int[] {1,2,3,4,5}));
+                    Assert.AreEqual(0, MaxProfit(new int[] {7,6,4,3,1}));
+                }
+            }
+        }
     }
 }
