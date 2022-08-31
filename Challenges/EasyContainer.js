@@ -94,6 +94,7 @@ function LengthOfTheLastWordSolution() {
     }
 }
 
+// https://leetcode.com/problems/plus-one/submissions/
 PlusOneSolution();
 function PlusOneSolution(){
     
@@ -159,4 +160,33 @@ function AddBinarySolution(){
         
         return result;
     }
+}
+
+// https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/727/
+RemoveDuplicatesSolution();
+function RemoveDuplicatesSolution(){
+    
+    removeDuplicates([1,1,2]);
+    removeDuplicates([0,0,1,1,1,2,2,3,3,4]);
+    
+    function removeDuplicates(nums) {
+        if (nums.length == 1){
+            return 1;
+        }
+
+        let k = 1;
+        for (let i = 1; i < nums.length; i++) {
+            const number = nums[i];
+            if (nums[k - 1] != number){
+                nums[k] = number;
+                k++;
+            }
+            
+            if (nums[k - 1] != number){
+                nums[i] = "_";
+            }
+        }
+        
+        return k;
+    };
 }

@@ -1700,6 +1700,7 @@ namespace EasyContainer
 
     class PlusOneSolution
     {
+        // https://leetcode.com/problems/plus-one/submissions/
         public static int[] PlusOne(int[] digits)
         {
             var digitsString = string.Join("", digits);
@@ -1781,6 +1782,125 @@ namespace EasyContainer
             {
                 Assert.AreEqual("100", AddBinary("11", "1"));
                 Assert.AreEqual("10101", AddBinary("1010", "1011"));
+            }
+        }
+    }
+    
+    // https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/727/
+    class RemoveDuplicatesFromSortedArraySolution
+    {
+        public static int RemoveDuplicates(int[] nums) 
+        {
+            if (nums.Length == 1)
+            {
+                return 1;
+            }
+
+            int k = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                var currentNum = nums[i];
+                var lastOkNum = nums[k - 1];
+                
+                if (lastOkNum != currentNum)
+                {
+                    nums[i] = -111;
+                    nums[k] = currentNum;
+                    k++;
+                    continue;
+                }
+
+                nums[i] = -111;
+            }
+
+            return k;
+        }
+
+        [TestFixture]
+        public static class RemoveDuplicatesFromSortedArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(5, RemoveDuplicates(new int [] {1, 2, 3, 3, 4, 5}));
+                Assert.AreEqual(5, RemoveDuplicates(new int [] {0,0,1,1,1,2,2,3,3,4}));
+                Assert.AreEqual(2, RemoveDuplicates(new int [] {1, 1, 2}));
+            }
+        }
+        
+        // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
+        class TheBestTimeToBuyAndSellStockSolution
+        {
+            public static int MaxProfit(int[] prices)
+            {
+                if (prices.Length == 1)
+                {
+                    return 0;
+                }
+                
+                var totalProfit = 0;
+                int? bought = null;
+                for (int i = 0; i < prices.Length - 1; i++)
+                {
+                    var current = prices[i];
+                    var nextDay = prices[i + 1];
+
+                    if (current > nextDay)
+                    {
+                        continue;
+                    }
+
+                    if (bought == null)
+                    {
+                        bought = prices[i];
+                    }
+
+                    if (i < prices.Length - 2)
+                    {
+                        var dayAfterNext = prices[i + 2];
+                        if (dayAfterNext > nextDay)
+                        {
+                            continue;
+                        }
+                    }
+
+                    totalProfit += nextDay - bought.Value;
+                    bought = null;
+                }
+
+                return totalProfit;
+            }
+
+            public static int MaxProfit2(int[] prices)
+            {
+                int maxProfit = 0;
+                for (int i = 0; i < prices.Length - 1; i++)
+                {
+                    if (prices[i] < prices[i + 1])
+                    {
+                        maxProfit += prices[i + 1] - prices[i];
+                    }
+                }
+
+                return maxProfit;
+            }
+
+            [TestFixture]
+            public static class TheBestTimeToBuyAndSellStockSolutionTests
+            {
+                [Test]
+                public static void TestCases()
+                {
+                    Assert.AreEqual(7, MaxProfit(new int[] {7,1,5,3,6,4}));
+                    Assert.AreEqual(6, MaxProfit(new int[] {7,1,5,7,6,4}));
+                    Assert.AreEqual(4, MaxProfit(new int[] {1,2,3,4,5}));
+                    Assert.AreEqual(0, MaxProfit(new int[] {7,6,4,3,1}));   
+                    
+                    Assert.AreEqual(7, MaxProfit2(new int[] {7,1,5,3,6,4}));
+                    Assert.AreEqual(6, MaxProfit2(new int[] {7,1,5,7,6,4}));
+                    Assert.AreEqual(4, MaxProfit2(new int[] {1,2,3,4,5}));
+                    Assert.AreEqual(0, MaxProfit2(new int[] {7,6,4,3,1}));
+                }
             }
         }
     }
