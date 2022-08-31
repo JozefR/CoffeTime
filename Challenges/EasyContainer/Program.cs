@@ -1784,4 +1784,30 @@ namespace EasyContainer
             }
         }
     }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+    class RotateArraySolution
+    {
+        public static int[] Rotate(int[] nums, int k)
+        {
+            for (int i = 0; i < k; i++)
+            {
+                for (int j = 0; j < nums.Length + i; j++)
+                {
+                }
+            }
+
+            return nums;
+        }
+        
+        [TestFixture]
+        public static class RotateArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new int []{5,6,7,1,2,3,4}, Rotate(new int[] {1,2,3,4,5,6,7}, 3));
+            }
+        }
+    }
 }

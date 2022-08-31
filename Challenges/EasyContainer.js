@@ -129,8 +129,8 @@ function AddBinarySolution(){
         let aLength = a.length - 1;
         let bLength = b.length - 1;
         let result = "";
-        
         let carry = 0;
+        
         while (aLength >= 0 || bLength >= 0){
             let aNumber = 0;
             let bNumber = 0;
