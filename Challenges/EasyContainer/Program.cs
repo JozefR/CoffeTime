@@ -1912,8 +1912,19 @@ namespace EasyContainer
         {
             for (int i = 0; i < k; i++)
             {
-                for (int j = 0; j < nums.Length + i; j++)
+                int rotatedNumber = nums[0];
+                for (int j = 0; j < nums.Length; j++)
                 {
+                    int rotatedIndex = (j + 1) % (nums.Length);
+                    if (nums.Length <= j + 1)
+                    {
+                        nums[rotatedIndex] = rotatedNumber;
+                        continue;
+                    }
+
+                    int nextNumber = nums[j + 1];
+                    nums[rotatedIndex] = rotatedNumber;
+                    rotatedNumber = nextNumber;
                 }
             }
 
