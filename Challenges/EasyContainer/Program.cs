@@ -1931,12 +1931,71 @@ namespace EasyContainer
             return nums;
         }
         
+        public static int[] Rotate1(int[] nums, int k)
+        {
+            if (nums.Length <= k)
+            {
+                k = k % nums.Length; 
+            }
+
+            if (k == 0)
+            {
+                return nums;
+            }
+            
+            if (nums.Length <= 1)
+            {
+                return nums;
+            }
+            
+            if (nums.Length == k)
+            {
+                return nums;
+            }
+
+            int j = 0;
+            for (int i = nums.Length - 1; i > j; i--)
+            {
+                Swap(nums, j, i);
+                j++;
+            }
+
+            int l = k;
+            for (int i = nums.Length - 1; i > l; i--)
+            { 
+                Swap(nums, l , i);
+                l++;
+            }
+
+            int m = 0;
+            for (int i = k - 1; i > m; i--)
+            { 
+                Swap(nums, m , i);
+                m++;
+            }
+
+            return nums;
+        }
+
+        public static void Swap(int[] nums, int a, int b)
+        {
+            var temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+        
         [TestFixture]
         public static class RotateArraySolutionTests
         {
             [Test]
             public static void TestCases()
             {
+                // 99 3 -100 -1
+                // 3 99 -100 -1
+                // 3 99 -1 -100
+                Assert.AreEqual(new int []{3,99,-1,-100}, Rotate1(new int[] {1,2,3 ,4}, 5));
+                Assert.AreEqual(new int []{3,99,-1,-100}, Rotate1(new int[] {-1,-100,3,99}, 2));
+                Assert.AreEqual(new int []{5,6,7,1,2,3,4}, Rotate1(new int[] {1,2,3,4,5,6,7}, 3));
                 Assert.AreEqual(new int []{5,6,7,1,2,3,4}, Rotate(new int[] {1,2,3,4,5,6,7}, 3));
             }
         }
