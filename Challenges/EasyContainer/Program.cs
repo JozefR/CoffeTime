@@ -2000,4 +2000,77 @@ namespace EasyContainer
             }
         }
     }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+    class ContainsDuplicateSolution
+    {
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (j == i)
+                    {
+                        continue;
+                    }
+
+                    if (nums[i] == nums[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+        
+        public static bool ContainsDuplicateWithDic(int[] nums)
+        {
+            var dictionary = new Dictionary<int, int>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!dictionary.ContainsKey(nums[i]))
+                {
+                    dictionary.Add(nums[i], 1);
+                    continue;
+                }
+
+                return true;
+            }
+            
+            return false;
+        }        
+        
+        public static bool ContainsDuplicateWithHashSet(int[] nums)
+        {
+            var hashSet = new HashSet<int>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!hashSet.Contains(nums[i]))
+                {
+                    hashSet.Add(nums[i]);
+                    continue;
+                }
+
+                return true;
+            }
+            
+            return false;
+        }
+        
+        [TestFixture]
+        public static class RotateArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(true, ContainsDuplicate(new int[] { 1, 2, 3, 1 }));
+                Assert.AreEqual(false, ContainsDuplicate(new int[] { 1, 2, 3, 4 }));
+                Assert.AreEqual(true, ContainsDuplicate(new int[] { 1,1,1,3,3,4,3,2,4,2 }));
+            }
+        }
+    }
 }
