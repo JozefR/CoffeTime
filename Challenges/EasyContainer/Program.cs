@@ -1273,6 +1273,7 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
+                Assert.AreEqual(4, SingleNumber(new []{ 4, 1, 2, 1, 2}));
                 Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
                 Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
                 Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
@@ -2025,6 +2026,8 @@ namespace EasyContainer
             return false;
         }
         
+        //time - O(n)
+        //space - O(n) where n = nums.Length
         public static bool ContainsDuplicateWithDic(int[] nums)
         {
             var dictionary = new Dictionary<int, int>();
@@ -2056,6 +2059,21 @@ namespace EasyContainer
                 }
 
                 return true;
+            }
+            
+            return false;
+        }        
+        
+        public static bool ContainsDuplicateWithSort(int[] nums)
+        {
+            Array.Sort(nums);
+            
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                if (nums[i] == nums[i + 1])
+                {
+                    return true;
+                }
             }
             
             return false;
