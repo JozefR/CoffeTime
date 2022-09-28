@@ -1162,125 +1162,6 @@ namespace EasyContainer
         }
     }
 
-    class SingleNumberSolution
-    {
-        // https://leetcode.com/problems/single-number/
-        public static int SingleNumber(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                bool found = false;
-                for (int j = 0; j < nums.Length; j++)
-                {
-                    if (i == j)
-                    {
-                        continue;
-                    }
-
-                    if (nums[i] == nums[j])
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found == false)
-                {
-                    return nums[i];
-                }
-            }
-
-            return -1;
-        }
-        
-        public static int SingleNumber1(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                bool found = false;
-
-                if (nums[i] == -1)
-                {
-                    continue;
-                }
-                
-                for (int j = 0; j < nums.Length; j++)
-                {
-                    if (nums[j] == -1) continue;
-                    if (i == j) continue;
-
-                    if (nums[i] == nums[j])
-                    {
-                        found = true;
-                        nums[i] = -1;
-                        nums[j] = -1;
-                    }
-                }
-
-                if (found == false)
-                {
-                    return nums[i];
-                }
-            }
-
-            return -1;
-        }
-        
-        public static int SingleNumber2(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            var dictionary = new Dictionary<int, int>();
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (!dictionary.ContainsKey(nums[i]))
-                {
-                    dictionary[nums[i]] = 1;
-                }
-                else
-                {
-                    dictionary[nums[i]] += 1;
-                }
-            }
-
-            foreach (var single in dictionary)
-            {
-                if (single.Value == 1)
-                {
-                    return single.Key;
-                }
-            }
-
-            return -1;
-        }
-        
-        [TestFixture]
-        class SingleNumberTests
-        {
-            [Test]
-            public static void TestCases()
-            {
-                Assert.AreEqual(4, SingleNumber(new []{ 4, 1, 2, 1, 2}));
-                Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
-                Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
-                Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
-            }
-        }
-    }
-    
     class MaxSubArraySolution
     {
         // https://leetcode.com/problems/maximum-subarray/
@@ -2088,6 +1969,63 @@ namespace EasyContainer
                 Assert.AreEqual(true, ContainsDuplicate(new int[] { 1, 2, 3, 1 }));
                 Assert.AreEqual(false, ContainsDuplicate(new int[] { 1, 2, 3, 4 }));
                 Assert.AreEqual(true, ContainsDuplicate(new int[] { 1,1,1,3,3,4,3,2,4,2 }));
+            }
+        }
+    }
+
+    class SingleNumberSolution
+    {
+        // https://leetcode.com/problems/single-number/
+        static void Main()
+        {
+        }
+
+        static int SingleNumber(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            int unique = 0;
+            bool duplicate = false;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    if (nums[i] == nums[j])
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+
+                if (duplicate == false)
+                {
+                    unique = nums[i];
+                }
+                
+                duplicate = false;
+            }
+
+            return unique;
+        }
+        
+        [TestFixture]
+        class SingleNumberTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(4, SingleNumber(new []{ 4, 1, 2, 1, 2}));
+                Assert.AreEqual(4, SingleNumber(new []{ 2, 3, 2, 3, 4}));
+                Assert.AreEqual(1, SingleNumber(new []{ 1 }));
+                Assert.AreEqual(1, SingleNumber(new []{ 1, 2, 3, 2, 3}));
             }
         }
     }
