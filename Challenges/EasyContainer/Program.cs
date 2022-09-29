@@ -2015,6 +2015,24 @@ namespace EasyContainer
 
             return unique;
         }
+
+        static int SingleNumber2(int[] nums)
+        {
+            var unique = new HashSet<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!unique.Contains(nums[i]))
+                {
+                    unique.Add(nums[i]);
+                }
+                else
+                {
+                    unique.Remove(nums[i]);
+                }
+            }
+
+            return unique.First();
+        }
         
         [TestFixture]
         class SingleNumberTests
@@ -2022,10 +2040,10 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual(4, SingleNumber(new []{ 4, 1, 2, 1, 2}));
-                Assert.AreEqual(4, SingleNumber(new []{ 2, 3, 2, 3, 4}));
-                Assert.AreEqual(1, SingleNumber(new []{ 1 }));
-                Assert.AreEqual(1, SingleNumber(new []{ 1, 2, 3, 2, 3}));
+                Assert.AreEqual(4, SingleNumber2(new []{ 4, 1, 2, 1, 2}));
+                Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
             }
         }
     }
