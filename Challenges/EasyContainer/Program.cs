@@ -2047,4 +2047,101 @@ namespace EasyContainer
             }
         }
     }
+
+    class IntersectionOfTwoArraysSolution
+    {
+        // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/674/
+
+        void Main(string[] args)
+        {
+            
+        }
+        
+        public static int[] Intersect(int[] nums1, int[] nums2)
+        {
+            var result = new List<int>();
+
+            if (nums1.Length == 1 && nums2.Length == 1)
+            {
+                return nums1[0] == nums2[0] ? new int[] {nums1[0]} : new int[0] { };
+            }
+            
+            Array.Sort(nums1);
+            Array.Sort(nums2);
+
+            int intersected = 0;
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                for (int j = intersected; j < nums2.Length; j++)
+                {
+                    if (nums1[i] < nums2[j])
+                    {
+                        break;
+                    }
+                    
+                    if (nums1[i] == nums2[j])
+                    {
+                        result.Add(nums1[i]);
+                        nums2[j] = -1;
+                        intersected++;
+                        break;
+                    }
+                }
+            }
+
+            return result.ToArray();
+        }        
+        
+        public static int[] Intersect1(int[] nums1, int[] nums2)
+        {
+            var dic = new Dictionary<int, int>();
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                if (!dic.ContainsKey(nums1[i]))
+                {
+                    dic.Add(nums1[i], 1);
+                }
+                else
+                {
+                    dic[nums1[i]] += 1;
+                }
+            }
+
+            var result = new List<int>();
+            for (int i = 0; i < nums2.Length; i++)
+            {
+                var num = nums2[i];
+                if (dic.ContainsKey(num))
+                {
+                    var occurrences = dic[num];
+                    if (occurrences == 0)
+                    {
+                        dic.Remove(num);
+                        continue;
+                    }
+                    
+                    result.Add(num);
+                    dic[num] -= 1;
+                }
+            }
+
+            return result.ToArray();
+        }
+        
+        [TestFixture]
+        public static class IntersectionOfTwoArraysSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new int []{2, 2}, Intersect(new int[] {1,2,2 ,1}, new int[]{2, 2} ));
+                Assert.AreEqual(new int []{4, 9}, Intersect(new int[] {4, 9 ,5}, new int[]{9, 4, 9, 8, 4} ));
+                Assert.AreEqual(new int []{4, 5}, Intersect(new int[] {4, 5, 5, 6, 9}, new int[]{4, 4, 5, 8} ));
+                
+                Assert.AreEqual(new int []{2, 2}, Intersect1(new int[] {1,2,2 ,1}, new int[]{2, 2} ));
+                Assert.AreEqual(new int []{4, 9}, Intersect1(new int[] {4, 9 ,5}, new int[]{9, 4, 9, 8, 4} ));
+                Assert.AreEqual(new int []{4, 5}, Intersect1(new int[] {4, 5, 5, 6, 9}, new int[]{4, 4, 5, 8} ));
+            }
+        }
+    }
 }
