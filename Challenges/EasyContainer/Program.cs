@@ -2078,14 +2078,15 @@ namespace EasyContainer
                     {
                         break;
                     }
-                    
-                    if (nums1[i] == nums2[j])
+
+                    if (nums1[i] > nums2[j])
                     {
-                        result.Add(nums1[i]);
-                        nums2[j] = -1;
                         intersected++;
-                        break;
+                        continue;
                     }
+                    
+                    result.Add(nums1[i]);
+                    intersected++;
                 }
             }
 
