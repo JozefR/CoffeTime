@@ -1162,124 +1162,6 @@ namespace EasyContainer
         }
     }
 
-    class SingleNumberSolution
-    {
-        // https://leetcode.com/problems/single-number/
-        public static int SingleNumber(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                bool found = false;
-                for (int j = 0; j < nums.Length; j++)
-                {
-                    if (i == j)
-                    {
-                        continue;
-                    }
-
-                    if (nums[i] == nums[j])
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found == false)
-                {
-                    return nums[i];
-                }
-            }
-
-            return -1;
-        }
-        
-        public static int SingleNumber1(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                bool found = false;
-
-                if (nums[i] == -1)
-                {
-                    continue;
-                }
-                
-                for (int j = 0; j < nums.Length; j++)
-                {
-                    if (nums[j] == -1) continue;
-                    if (i == j) continue;
-
-                    if (nums[i] == nums[j])
-                    {
-                        found = true;
-                        nums[i] = -1;
-                        nums[j] = -1;
-                    }
-                }
-
-                if (found == false)
-                {
-                    return nums[i];
-                }
-            }
-
-            return -1;
-        }
-        
-        public static int SingleNumber2(int[] nums)
-        {
-            if (nums.Length == 1)
-            {
-                return nums[0];
-            }
-
-            var dictionary = new Dictionary<int, int>();
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (!dictionary.ContainsKey(nums[i]))
-                {
-                    dictionary[nums[i]] = 1;
-                }
-                else
-                {
-                    dictionary[nums[i]] += 1;
-                }
-            }
-
-            foreach (var single in dictionary)
-            {
-                if (single.Value == 1)
-                {
-                    return single.Key;
-                }
-            }
-
-            return -1;
-        }
-        
-        [TestFixture]
-        class SingleNumberTests
-        {
-            [Test]
-            public static void TestCases()
-            {
-                Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
-                Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
-                Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
-            }
-        }
-    }
-    
     class MaxSubArraySolution
     {
         // https://leetcode.com/problems/maximum-subarray/
@@ -1931,13 +1813,335 @@ namespace EasyContainer
             return nums;
         }
         
+        public static int[] Rotate1(int[] nums, int k)
+        {
+            if (nums.Length <= k)
+            {
+                k = k % nums.Length; 
+            }
+
+            if (k == 0)
+            {
+                return nums;
+            }
+            
+            if (nums.Length <= 1)
+            {
+                return nums;
+            }
+            
+            if (nums.Length == k)
+            {
+                return nums;
+            }
+
+            int j = 0;
+            for (int i = nums.Length - 1; i > j; i--)
+            {
+                Swap(nums, j, i);
+                j++;
+            }
+
+            int l = k;
+            for (int i = nums.Length - 1; i > l; i--)
+            { 
+                Swap(nums, l , i);
+                l++;
+            }
+
+            int m = 0;
+            for (int i = k - 1; i > m; i--)
+            { 
+                Swap(nums, m , i);
+                m++;
+            }
+
+            return nums;
+        }
+
+        public static void Swap(int[] nums, int a, int b)
+        {
+            var temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+        
         [TestFixture]
         public static class RotateArraySolutionTests
         {
             [Test]
             public static void TestCases()
             {
+                // 99 3 -100 -1
+                // 3 99 -100 -1
+                // 3 99 -1 -100
+                Assert.AreEqual(new int []{3,99,-1,-100}, Rotate1(new int[] {1,2,3 ,4}, 5));
+                Assert.AreEqual(new int []{3,99,-1,-100}, Rotate1(new int[] {-1,-100,3,99}, 2));
+                Assert.AreEqual(new int []{5,6,7,1,2,3,4}, Rotate1(new int[] {1,2,3,4,5,6,7}, 3));
                 Assert.AreEqual(new int []{5,6,7,1,2,3,4}, Rotate(new int[] {1,2,3,4,5,6,7}, 3));
+            }
+        }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+    class ContainsDuplicateSolution
+    {
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (j == i)
+                    {
+                        continue;
+                    }
+
+                    if (nums[i] == nums[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        }
+        
+        //time - O(n)
+        //space - O(n) where n = nums.Length
+        public static bool ContainsDuplicateWithDic(int[] nums)
+        {
+            var dictionary = new Dictionary<int, int>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!dictionary.ContainsKey(nums[i]))
+                {
+                    dictionary.Add(nums[i], 1);
+                    continue;
+                }
+
+                return true;
+            }
+            
+            return false;
+        }        
+        
+        public static bool ContainsDuplicateWithHashSet(int[] nums)
+        {
+            var hashSet = new HashSet<int>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!hashSet.Contains(nums[i]))
+                {
+                    hashSet.Add(nums[i]);
+                    continue;
+                }
+
+                return true;
+            }
+            
+            return false;
+        }        
+        
+        public static bool ContainsDuplicateWithSort(int[] nums)
+        {
+            Array.Sort(nums);
+            
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                if (nums[i] == nums[i + 1])
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        [TestFixture]
+        public static class RotateArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(true, ContainsDuplicate(new int[] { 1, 2, 3, 1 }));
+                Assert.AreEqual(false, ContainsDuplicate(new int[] { 1, 2, 3, 4 }));
+                Assert.AreEqual(true, ContainsDuplicate(new int[] { 1,1,1,3,3,4,3,2,4,2 }));
+            }
+        }
+    }
+
+    class SingleNumberSolution
+    {
+        // https://leetcode.com/problems/single-number/
+        static void Main()
+        {
+        }
+
+        static int SingleNumber(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            int unique = 0;
+            bool duplicate = false;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    if (nums[i] == nums[j])
+                    {
+                        duplicate = true;
+                        break;
+                    }
+                }
+
+                if (duplicate == false)
+                {
+                    unique = nums[i];
+                }
+                
+                duplicate = false;
+            }
+
+            return unique;
+        }
+
+        static int SingleNumber2(int[] nums)
+        {
+            var unique = new HashSet<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!unique.Contains(nums[i]))
+                {
+                    unique.Add(nums[i]);
+                }
+                else
+                {
+                    unique.Remove(nums[i]);
+                }
+            }
+
+            return unique.First();
+        }
+        
+        [TestFixture]
+        class SingleNumberTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(4, SingleNumber2(new []{ 4, 1, 2, 1, 2}));
+                Assert.AreEqual(4, SingleNumber2(new []{ 2, 3, 2, 3, 4}));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1 }));
+                Assert.AreEqual(1, SingleNumber2(new []{ 1, 2, 3, 2, 3}));
+            }
+        }
+    }
+
+    class IntersectionOfTwoArraysSolution
+    {
+        // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/674/
+
+        void Main(string[] args)
+        {
+            
+        }
+        
+        public static int[] Intersect(int[] nums1, int[] nums2)
+        {
+            var result = new List<int>();
+
+            if (nums1.Length == 1 && nums2.Length == 1)
+            {
+                return nums1[0] == nums2[0] ? new int[] {nums1[0]} : new int[0] { };
+            }
+            
+            Array.Sort(nums1);
+            Array.Sort(nums2);
+
+            int intersected = 0;
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                for (int j = intersected; j < nums2.Length; j++)
+                {
+                    if (nums1[i] < nums2[j])
+                    {
+                        break;
+                    }
+
+                    if (nums1[i] > nums2[j])
+                    {
+                        intersected++;
+                        continue;
+                    }
+                    
+                    result.Add(nums1[i]);
+                    intersected++;
+                }
+            }
+
+            return result.ToArray();
+        }        
+        
+        public static int[] Intersect1(int[] nums1, int[] nums2)
+        {
+            var dic = new Dictionary<int, int>();
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                if (!dic.ContainsKey(nums1[i]))
+                {
+                    dic.Add(nums1[i], 1);
+                }
+                else
+                {
+                    dic[nums1[i]] += 1;
+                }
+            }
+
+            var result = new List<int>();
+            for (int i = 0; i < nums2.Length; i++)
+            {
+                var num = nums2[i];
+                if (dic.ContainsKey(num))
+                {
+                    var occurrences = dic[num];
+                    if (occurrences == 0)
+                    {
+                        dic.Remove(num);
+                        continue;
+                    }
+                    
+                    result.Add(num);
+                    dic[num] -= 1;
+                }
+            }
+
+            return result.ToArray();
+        }
+        
+        [TestFixture]
+        public static class IntersectionOfTwoArraysSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new int []{2, 2}, Intersect(new int[] {1,2,2 ,1}, new int[]{2, 2} ));
+                Assert.AreEqual(new int []{4, 9}, Intersect(new int[] {4, 9 ,5}, new int[]{9, 4, 9, 8, 4} ));
+                Assert.AreEqual(new int []{4, 5}, Intersect(new int[] {4, 5, 5, 6, 9}, new int[]{4, 4, 5, 8} ));
+                
+                Assert.AreEqual(new int []{2, 2}, Intersect1(new int[] {1,2,2 ,1}, new int[]{2, 2} ));
+                Assert.AreEqual(new int []{4, 9}, Intersect1(new int[] {4, 9 ,5}, new int[]{9, 4, 9, 8, 4} ));
+                Assert.AreEqual(new int []{4, 5}, Intersect1(new int[] {4, 5, 5, 6, 9}, new int[]{4, 4, 5, 8} ));
             }
         }
     }
