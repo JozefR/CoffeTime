@@ -190,3 +190,27 @@ function RemoveDuplicatesSolution(){
         return k;
     };
 }
+
+// https://leetcode.com/problems/move-zeroes/
+MoveZeroesSolution();
+function MoveZeroesSolution(){
+
+    MoveZeroes([0,1,0,3,12]);
+    MoveZeroes([1,1,2]);
+    MoveZeroes([0,0,1,1,1,2,2,3,3,4]);
+
+    function MoveZeroes(nums) {
+        
+        let nonZeroes = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] !== 0) {
+                nums[nonZeroes] = nums[i];
+                nonZeroes++;
+            }
+        }
+        
+        for (let i = nonZeroes; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    };
+}
