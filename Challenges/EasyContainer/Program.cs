@@ -2145,4 +2145,50 @@ namespace EasyContainer
             }
         }
     }
+    
+        
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
+    class MoveZerosSolution
+    {
+        public static int[] MoveZeroes(int[] nums)
+        {
+            int movedZero = nums.Length - 1;
+            int movedCorrect = 0;
+
+            while (movedCorrect != movedZero)
+            {
+                if (nums[movedCorrect] == 0)
+                {
+                    MoveToTheLeft(nums, movedCorrect, movedZero);
+                    movedZero--;
+                    continue;
+                }
+
+                movedCorrect++;
+            }
+
+            return nums;
+        }
+
+        public static void MoveToTheLeft(int[] nums, int fromIndex, int toIndex)
+        {
+            for (int i = fromIndex + 1; i <= toIndex; i++)
+            {
+                nums[i - 1] = nums[i];
+            }
+
+            nums[toIndex] = 0;
+        }
+        
+        [TestFixture]
+        public static class RotateArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new int []{1,3,12,0,0}, MoveZeroes(new int[] {0,1,0,3,12}));
+                Assert.AreEqual(new int []{0}, MoveZeroes(new int[] {0}));
+            }
+        }
+    }
 }
