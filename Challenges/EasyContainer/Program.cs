@@ -2264,17 +2264,6 @@ namespace EasyContainer
             {
                 for (int j = startFromColumn; j < startFromColumn + 3; j++)
                 {
-                    // board[0][0];
-                    // board[0][1];
-                    // board[0][2];
-                    
-                    // board[1][0];
-                    // board[1][1];
-                    // board[1][2];
-                    
-                    // board[2][0];
-                    // board[2][1];
-                    // board[2][2];
                     var squareOfThree = array[i][j];
                     if (!char.IsDigit(squareOfThree))
                     {
@@ -2297,13 +2286,40 @@ namespace EasyContainer
             return true;
         }
 
+        public static bool IsValidSudoku2(char[][] board)
+        {
+            var validationSet = new HashSet<string>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    char currentVal = board[i][j];
+                    if (currentVal == '.') continue;
+
+                    if (validationSet.Contains($"value {currentVal} at row {i}") ||
+                        validationSet.Contains($"value {currentVal} at column {j}") ||
+                        validationSet.Contains($"value {currentVal} at block {i / 3} - {j / 3}"))
+                    {
+                        return false;
+                    }
+
+                    validationSet.Add($"value {currentVal} at row {i}");
+                    validationSet.Add($"value {currentVal} at column {j}");
+                    validationSet.Add($"value {currentVal} at block {i / 3} - {j / 3}");
+                }
+            }
+
+            return true;
+        }
+
         [TestFixture]
         public static class RotateArraySolutionTests
         {
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual(true, IsValidSudoku(new char[][] { 
+                Assert.AreEqual(false, IsValidSudoku2(new char[][] { 
                     new char[]{'5','3','.','.','7','.','.','.','.'},
                     new char[]{'6','2','.','1','9','5','.','.','.'},
                     new char[]{'.','9','8','.','.','.','.','6','.'},
