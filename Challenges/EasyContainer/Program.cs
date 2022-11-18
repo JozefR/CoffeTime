@@ -2179,6 +2179,29 @@ namespace EasyContainer
 
             nums[toIndex] = 0;
         }
+
+        public static int[] MoveZeroes1(int[] nums)
+        {
+            int count = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 0)
+                {
+                    count++;
+                }
+                else
+                {
+                    nums[i - count] = nums[i];
+                }
+            }
+
+            for (int i = nums.Length - count; i < nums.Length; i++)
+            {
+                nums[i] = 0;
+            }
+
+            return nums;
+        }
         
         [TestFixture]
         public static class RotateArraySolutionTests
@@ -2186,9 +2209,38 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual(new int []{1,3,12,0,0}, MoveZeroes(new int[] {0,1,0,3,12}));
-                Assert.AreEqual(new int []{0}, MoveZeroes(new int[] {0}));
+                Assert.AreEqual(new int []{1,3,12,0,0}, MoveZeroes1(new int[] {0,1,0,3,12}));
+                Assert.AreEqual(new int []{0}, MoveZeroes1(new int[] {0}));
             }
         }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/879/
+    class ReverseStringSolution
+    {
+        public static string[] ReverseString(string[] s) {
+            int j = 0;
+            for (int i = s.Length - 1; i > 0; i--){
+                if (j >= i){
+                    break;
+                }
+                string temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+                j++;
+            }
+
+            return s;
+        }
+        [TestFixture]
+        public static class ReverseStringSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(new string [] {"a","m","a","n","a","P"," ",":","l","a","n","a","c"," ","a"," ",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"}, ReverseString(new string[] {"A"," ","m","a","n",","," ","a"," ","p","l","a","n",","," ","a"," ","c","a","n","a","l",":"," ","P","a","n","a","m","a"}));
+            }
+        }
+        
     }
 }
