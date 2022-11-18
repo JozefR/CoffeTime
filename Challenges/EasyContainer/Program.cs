@@ -2209,8 +2209,171 @@ namespace EasyContainer
             [Test]
             public static void TestCases()
             {
-                Assert.AreEqual(new int []{1,3,12,0,0}, MoveZeroes1(new int[] {0,1,0,3,12}));
-                Assert.AreEqual(new int []{0}, MoveZeroes1(new int[] {0}));
+                Assert.AreEqual(new int []{1,3,12,0,0}, MoveZeroes(new int[] {0,1,0,3,12}));
+                Assert.AreEqual(new int []{0}, MoveZeroes(new int[] {0}));
+            }
+        }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
+    class ValidSudokuSolution
+    {
+        public static bool IsValidSudoku(char[][] board)
+        {
+            Console.WriteLine(board[0][1]);
+            Console.WriteLine(board[8][1]);
+
+
+            for (int i = 0; i < board.Length; i++)
+            {
+                var validationArray = new int [9];
+                for (int j = 0; j < board[i].Length; j++)
+                {
+                    var row = board[i][j];
+                    if (!char.IsDigit(row))
+                    {
+                        continue;
+                    }
+                    if (validationArray.Contains(row))
+                    {
+                        return false;
+                    }
+                    validationArray[j] = row;
+                }
+            }
+
+            for (int i = 0; i < board.Length; i++)
+            {
+                var validationArray = new int [9];
+                for (int j = 0; j < board.Length; j++)
+                {
+                    var column = board[j][i];
+                    if (!char.IsDigit(column))
+                    {
+                        continue;
+                    }
+                    if (validationArray.Contains(column))
+                    {
+                        return false;
+                    }
+
+                    validationArray[j] = column;
+                }
+            }
+
+            if (IsValidatSquaresOfThrees(0, board) == false)
+            {
+                return false;
+            }
+
+            if (IsValidatSquaresOfThrees(3, board) == false)
+            {
+                return false;
+            }
+
+            if (IsValidatSquaresOfThrees(6, board) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool IsValidatSquaresOfThrees(int startFromColumn, char[][] array)
+        {
+            var validationArray = new int [9];
+            
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = startFromColumn; j < startFromColumn + 3; j++)
+                {
+                    var squareOfThree = array[i][j];
+                    if (!char.IsDigit(squareOfThree))
+                    {
+                        continue;
+                    }
+                    if (validationArray.Contains(squareOfThree))
+                    {
+                        return false;
+                    }
+
+                    validationArray[j] = squareOfThree;
+                }
+
+                if ((i + 1) % 3 == 0)
+                {
+                    validationArray = new int[9];
+                }
+            }
+
+            return true;
+        }
+
+        public static bool IsValidSudoku2(char[][] board)
+        {
+            var validationSet = new HashSet<string>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    char currentVal = board[i][j];
+                    if (currentVal == '.') continue;
+
+                    if (validationSet.Contains($"value {currentVal} at row {i}") ||
+                        validationSet.Contains($"value {currentVal} at column {j}") ||
+                        validationSet.Contains($"value {currentVal} at block {i / 3} - {j / 3}"))
+                    {
+                        return false;
+                    }
+
+                    validationSet.Add($"value {currentVal} at row {i}");
+                    validationSet.Add($"value {currentVal} at column {j}");
+                    validationSet.Add($"value {currentVal} at block {i / 3} - {j / 3}");
+                }
+            }
+
+            return true;
+        }
+
+        [TestFixture]
+        public static class RotateArraySolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(false, IsValidSudoku2(new char[][] { 
+                    new char[]{'5','3','.','.','7','.','.','.','.'},
+                    new char[]{'6','2','.','1','9','5','.','.','.'},
+                    new char[]{'.','9','8','.','.','.','.','6','.'},
+                    new char[]{'8','.','.','.','6','.','.','.','3'},
+                    new char[]{'4','.','.','8','.','3','.','.','1'},
+                    new char[]{'7','.','.','.','2','.','.','.','6'},
+                    new char[]{'.','6','.','.','.','.','2','8','.'},
+                    new char[]{'.','.','.','4','1','9','.','.','5'},
+                    new char[]{'.','.','.','.','8','4','.','7','9'}
+                }));
+                
+                /*
+                [[".",".",".",".",".",".","5",".","."],
+                [".",".",".",".",".",".",".",".","."],
+                [".",".",".",".",".",".",".",".","."],
+                ["9","3",".",".","2",".","4",".","."],
+                [".",".","7",".",".",".","3",".","."],
+                [".",".",".",".",".",".",".",".","."],
+                [".",".",".","3","4",".",".",".","."],
+                [".",".",".",".",".","3",".",".","."],
+                [".",".",".",".",".","5","2",".","."]]*/
+                
+                /*[[".",".",".",".",".",".",".",".","."],
+                [".",".","6",".",".",".",".",".","."],
+                [".",".",".",".","9","4",".",".","6"],
+                [".",".",".","5",".",".",".",".","."],
+                [".","2",".","7","8",".",".",".","3"],
+                ["1",".",".",".",".",".",".","5","."],
+                [".",".",".",".",".",".","6",".","."],
+                [".",".",".","8",".",".",".",".","."],
+                [".",".",".","1",".","8","5",".","."]]*/
             }
         }
     }

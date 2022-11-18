@@ -62,7 +62,8 @@ namespace ParcelDeliveryRates
 
             var repository = new PackageRepository();
             var rates = new RatesService(repository);
-            var deliveryService = new DeliveryService(rates);
+            var validation = new PackageValidation();
+            var deliveryService = new DeliveryService(rates, validation);
             deliveryService.Send(order);
         }    
     }
