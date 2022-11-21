@@ -2393,7 +2393,8 @@ namespace EasyContainer
                 j++;
             }
 
-            return s;
+            char sa = '1';
+            return s;;
         }
         [TestFixture]
         public static class ReverseStringSolutionTests
@@ -2404,6 +2405,41 @@ namespace EasyContainer
                 Assert.AreEqual(new string [] {"a","m","a","n","a","P"," ",":","l","a","n","a","c"," ","a"," ",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"}, ReverseString(new string[] {"A"," ","m","a","n",","," ","a"," ","p","l","a","n",","," ","a"," ","c","a","n","a","l",":"," ","P","a","n","a","m","a"}));
             }
         }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/879/
+    class ReverseIntSolution
+    {
+        public static int Reverse(int x) {
+            string xString = x.ToString();
         
+            string xReversed = string.Empty;
+            for(int i = xString.Length - 1; i >= 0; i--){
+                xReversed += xString[i];
+            }
+        
+            if (x < 0)
+            {
+                xReversed = xReversed.Remove(xReversed.Length - 1);
+                xReversed = xReversed.Insert(0, "-");
+            }
+
+            if (int.TryParse(xReversed, out int result))
+            {
+                return result;
+            }
+
+            return 0;
+        }
+        
+        [TestFixture]
+        public static class ReverseIntSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(-321, Reverse(-123));
+            }
+        }
     }
 }
