@@ -2413,18 +2413,18 @@ namespace EasyContainer
         public static int Reverse(int x) {
             string xString = x.ToString();
         
-            string xReversed = string.Empty;
+            var xReversed = new StringBuilder();
             for(int i = xString.Length - 1; i >= 0; i--){
-                xReversed += xString[i];
+                xReversed.Append(xString[i]);
             }
         
             if (x < 0)
             {
-                xReversed = xReversed.Remove(xReversed.Length - 1);
+                xReversed = xReversed.Remove(0, xReversed.Length - 1);
                 xReversed = xReversed.Insert(0, "-");
             }
 
-            if (int.TryParse(xReversed, out int result))
+            if (int.TryParse(xReversed.ToString(), out int result))
             {
                 return result;
             }
@@ -2441,5 +2441,40 @@ namespace EasyContainer
                 Assert.AreEqual(-321, Reverse(-123));
             }
         }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/879/
+    class FirstUniqueCharacterInAStringSolution
+    {
+        public static int FirstUniqChar(string s) {
+            var dictionary = new Dictionary<char, int>();
+        
+            for (int i = 0; i < s.Length; i++){
+                if (dictionary.ContainsKey(s[i])){
+                    dictionary[s[i]] += 1;
+                } else{
+                    dictionary[s[i]] = 1;
+                }
+            }
+        
+            foreach(var item in dictionary){
+                if (item.Value == 1){
+                    return s.IndexOf(item.Key); 
+                }
+            }
+
+            return -1;
+        }
+                
+        [TestFixture]
+        public static class FirstUniqueCharacterInAStringTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(8, FirstUniqChar("dddccdbba"));
+            }
+        }
+        
     }
 }
