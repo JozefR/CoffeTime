@@ -2404,6 +2404,42 @@ namespace EasyContainer
                 Assert.AreEqual(new string [] {"a","m","a","n","a","P"," ",":","l","a","n","a","c"," ","a"," ",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"}, ReverseString(new string[] {"A"," ","m","a","n",","," ","a"," ","p","l","a","n",","," ","a"," ","c","a","n","a","l",":"," ","P","a","n","a","m","a"}));
             }
         }
+    }
+    
+    // https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/879/
+    class ReverseIntegerSolution
+    {
+        public static int Reverse(int x) {
+            if (x < -2147483648 && x > 2147483647)
+            {
+                return 0;        
+            }
+
+            string y = x.ToString();
+            string reversed = string.Empty;
+            for (int i = y.Length - 1; i >= 0; i--){
+                reversed += y[i].ToString();
+            }
+
+            if (x < 0)
+            {
+                reversed = reversed.Remove(reversed.Length - 1);
+                reversed = reversed.Insert(0, "-");
+            }
+            
+            return int.Parse(reversed);
+        }
+    
         
+        [TestFixture]
+        public static class ReverseIntegerSolutionTests
+        {
+            [Test]
+            public static void TestCases()
+            {
+                Assert.AreEqual(321, Reverse(1534236469));
+                Assert.AreEqual(-321, Reverse(-123));
+            }
+        }
     }
 }
